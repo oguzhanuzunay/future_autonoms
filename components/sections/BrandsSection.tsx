@@ -118,7 +118,11 @@ const BrandItem = ({ brand, index, containerWidth }: BrandItemProps) => {
   const { activeIndex, setActiveIndex } = useContext(ActiveCardContext);
   const [isNearCenter, setIsNearCenter] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768);
+  }, []);
 
   useEffect(() => {
     const checkPosition = () => {
@@ -220,7 +224,11 @@ const BrandsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768);
+  }, []);
 
   useEffect(() => {
     if (containerRef.current) {

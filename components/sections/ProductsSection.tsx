@@ -327,20 +327,22 @@ const ProductCard = ({ product }: { product: Product }) => {
 
 export default function ProductsSection() {
   useEffect(() => {
-    const style = document.createElement('style');
-    style.textContent = `
-      .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-      }
-      .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-    `;
-    document.head.appendChild(style);
-    return () => {
-      document.head.removeChild(style);
-    };
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const style = document.createElement('style');
+      style.textContent = `
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `;
+      document.head.appendChild(style);
+      return () => {
+        document.head.removeChild(style);
+      };
+    }
   }, []);
 
   return (
