@@ -251,6 +251,12 @@ export default function FeaturesSection() {
     show: { opacity: 1, y: 0 },
   };
 
+  const handleScrollToCta = () => {
+    if (typeof window !== 'undefined') {
+      document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="features"
@@ -472,7 +478,7 @@ export default function FeaturesSection() {
           </div>
 
           <Button
-            onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={handleScrollToCta}
             className="bg-[#6B8AFF] hover:bg-[#6B8AFF]/90 text-white text-lg px-8 py-6 rounded-xl group"
           >
             Hemen Ücretsiz Deneyin

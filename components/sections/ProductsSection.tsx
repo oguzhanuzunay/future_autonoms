@@ -31,6 +31,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface Product {
   id: string;
@@ -325,6 +326,23 @@ const ProductCard = ({ product }: { product: Product }) => {
 };
 
 export default function ProductsSection() {
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Animasyonlu Arka Plan */}
@@ -428,16 +446,3 @@ export default function ProductsSection() {
     </section>
   );
 }
-
-// Scrollbar gizleme için utility class
-const style = document.createElement('style');
-style.textContent = `
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-`;
-document.head.appendChild(style);
