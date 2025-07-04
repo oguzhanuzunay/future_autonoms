@@ -14,24 +14,21 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { motion } from 'framer-motion';
 import {
-  Award,
-  BarChart,
-  CheckCircle2,
-  Clock,
-  Database,
-  Flame,
-  Gift,
-  Globe,
-  Heart,
-  HeartHandshake,
+  ArrowRight,
+  BarChart3,
+  Brain,
+  Calculator,
+  Cog,
+  Cpu,
   Info,
-  Search,
+  LineChart,
+  Network,
+  Percent,
+  Shield,
   Sparkles,
   TrendingUp,
-  Users,
   Zap,
 } from 'lucide-react';
-import { useEffect } from 'react';
 
 interface Product {
   id: string;
@@ -43,11 +40,6 @@ interface Product {
     icon: any;
   }>;
   benefits: string[];
-  price: {
-    amount: string;
-    period: string;
-    discount?: string;
-  };
   cta: string;
   badge?: string;
   popularity: number;
@@ -55,178 +47,211 @@ interface Product {
 
 const products: Product[] = [
   {
-    id: 'sales-agent',
-    title: 'AI Satış Ekibi',
-    description: 'Satış süreçlerinizi otomatikleştirin ve dönüşüm oranlarınızı 3X artırın.',
+    id: 'enterprise',
+    title: 'Kurumsal AI Dönüşümü',
+    description: "Şirketinizin DNA'sına uygun, uçtan uca AI dönüşüm süreci.",
     features: [
       {
-        text: '7/24 Aktif Satış Ekibi',
-        icon: Users,
-        highlight: 'Hiç Durmayan Satış - Ayda 10.000+ Lead İşleme',
+        text: 'DNA Bazlı Metodoloji',
+        icon: Brain,
+        highlight: '%285 Verimlilik Artışı - Şirketinize Özel Yaklaşım',
       },
       {
-        text: 'Akıllı Lead Skorlama',
-        icon: TrendingUp,
-        highlight: '%40 Daha İyi Dönüşüm - Doğru Müşteriye Odaklanın',
+        text: 'Süreç Optimizasyonu',
+        icon: Cog,
+        highlight: '%42 Maliyet Tasarrufu - Otomatik İş Akışları',
       },
       {
-        text: 'Otomatik Takip Sistemi',
-        icon: CheckCircle2,
-        highlight: 'Sıfır Lead Kaybı - %99.9 Takip Oranı',
+        text: 'Adaptif Entegrasyon',
+        icon: Network,
+        highlight: '6 Ay İçinde Tam Adaptasyon - Kesintisiz Geçiş',
       },
       {
-        text: 'Kişiselleştirilmiş Teklifler',
-        icon: HeartHandshake,
-        highlight: '2X Daha Fazla Kabul - Müşteriye Özel Fiyatlandırma',
+        text: 'Performans Analizi',
+        icon: LineChart,
+        highlight: 'Gerçek Zamanlı Metrikler - ROI Takibi',
       },
     ],
     benefits: [
-      'İlk ay %50 indirim fırsatı',
-      'Ücretsiz CRM entegrasyonu',
-      '30 gün koşulsuz iade garantisi',
-      'Özel onboarding desteği',
+      'Ücretsiz ROI Analizi',
+      '6 Ay Başarı Garantisi',
+      '%100 Adaptasyon Desteği',
+      'Sürekli Optimizasyon',
     ],
-    price: {
-      amount: '2,999',
-      period: 'ay',
-      discount: '5,998',
-    },
-    cta: 'Hemen Deneyin',
+    cta: 'Teklif Alın',
     badge: 'En Popüler',
     popularity: 95,
   },
   {
-    id: 'marketing-team',
-    title: 'AI Pazarlama Ekibi',
-    description: "Pazarlama stratejilerinizi AI ile güçlendirin ve ROI'nizi 2X'e çıkarın.",
+    id: 'sales-agent',
+    title: 'DN.Sales™ Agent',
+    description: 'Satış süreçlerinizi 7/24 yöneten, dönüşüm odaklı AI satış temsilcisi.',
     features: [
       {
-        text: 'Otomatik İçerik Üretimi',
+        text: 'Çok Dilli İletişim',
+        icon: Network,
+        highlight: '20+ Dil Desteği - Küresel Satış İmkanı',
+      },
+      {
+        text: 'Akıllı Takip Sistemi',
+        icon: Brain,
+        highlight: '%99.9 Takip Oranı - Sıfır Lead Kaybı',
+      },
+      {
+        text: 'Duygu Analizi',
         icon: Sparkles,
-        highlight: '10X Daha Hızlı - Günde 50+ Özgün İçerik',
+        highlight: '%92 Doğruluk - Kişiselleştirilmiş İletişim',
       },
       {
-        text: 'Kampanya Optimizasyonu',
-        icon: TrendingUp,
-        highlight: '%60 Daha İyi Sonuç - Gerçek Zamanlı Optimizasyon',
-      },
-      {
-        text: 'Rakip Analizi',
-        icon: Award,
-        highlight: 'Gerçek Zamanlı Takip - 100+ Metrik Analizi',
-      },
-      {
-        text: 'A/B Test Otomasyonu',
-        icon: CheckCircle2,
-        highlight: 'Sürekli İyileştirme - %30 Daha İyi Dönüşüm',
+        text: 'Otomatik Raporlama',
+        icon: BarChart3,
+        highlight: 'Gerçek Zamanlı Dashboard - Satış Öngörüleri',
       },
     ],
     benefits: [
-      'İlk ay ücretsiz danışmanlık',
-      'Sınırsız revizyon hakkı',
-      'Performans garantisi',
-      'Haftalık analiz raporları',
+      'Ücretsiz CRM Entegrasyonu',
+      'Kişiselleştirilmiş Eğitim',
+      'A/B Test Desteği',
+      'Performans Garantisi',
     ],
-    price: {
-      amount: '3,499',
-      period: 'ay',
-      discount: '6,998',
-    },
-    cta: 'Şimdi Başlayın',
+    cta: 'Demo İzle',
     badge: 'Yeni',
+    popularity: 90,
+  },
+  {
+    id: 'support-agent',
+    title: 'DN.Support™ Agent',
+    description: 'Müşteri hizmetlerinizi 7/24 yöneten, çözüm odaklı AI destek temsilcisi.',
+    features: [
+      {
+        text: 'Anlık Çözüm Üretme',
+        icon: Zap,
+        highlight: '2 Saniye Yanıt - %89 İlk Kontakta Çözüm',
+      },
+      {
+        text: 'Çok Kanallı Destek',
+        icon: Network,
+        highlight: 'Tüm Platformlarda - Kesintisiz Hizmet',
+      },
+      {
+        text: 'Öğrenen Sistem',
+        icon: Brain,
+        highlight: 'Sürekli Gelişim - Artan Başarı Oranı',
+      },
+      {
+        text: 'Proaktif Destek',
+        icon: Shield,
+        highlight: '%75 Sorun Önleme - Öngörülü Çözümler',
+      },
+    ],
+    benefits: [
+      'Ücretsiz Ticket Sistemi',
+      'Özelleştirilmiş Yanıtlar',
+      'Dil Desteği',
+      'Memnuniyet Garantisi',
+    ],
+    cta: 'Hemen Deneyin',
+    popularity: 88,
+  },
+  {
+    id: 'process',
+    title: 'DN.Process™ Agent',
+    description: 'İş süreçlerinizi optimize eden ve otomatikleştiren AI süreç analisti.',
+    features: [
+      {
+        text: 'Süreç Analizi',
+        icon: BarChart3,
+        highlight: '%92 Hata Azalması - Otomatik Tespit',
+      },
+      {
+        text: 'Akıllı Otomasyon',
+        icon: Cpu,
+        highlight: '4.2x Hız Artışı - 24/7 Operasyon',
+      },
+      {
+        text: 'Kaynak Optimizasyonu',
+        icon: Calculator,
+        highlight: '%35 Kaynak Tasarrufu - Akıllı Dağıtım',
+      },
+      {
+        text: 'Verimlilik Takibi',
+        icon: BarChart3,
+        highlight: 'Anlık Metrikler - Sürekli İyileştirme',
+      },
+    ],
+    benefits: [
+      'Detaylı Süreç Analizi',
+      'Kişiselleştirilmiş Çözümler',
+      'Teknik Destek Garantisi',
+      'Aylık Performans Raporu',
+    ],
+    cta: 'Analiz Başlatın',
     popularity: 85,
   },
   {
-    id: 'customer-service',
-    title: 'AI Müşteri Hizmetleri',
-    description: 'Müşteri memnuniyetini %95e çıkarın ve maliyetleri %60 düşürün.',
+    id: 'finance-agent',
+    title: 'DN.Finance™ Agent',
+    description: 'Finansal süreçlerinizi yöneten ve optimize eden AI finans uzmanı.',
     features: [
-      { text: '7/24 Müşteri Desteği', icon: Clock, highlight: 'Anında Yanıt - 2 Saniye Ortalama' },
-      { text: 'Çok Dilli Destek', icon: Globe, highlight: '20+ Dil Desteği - Otomatik Çeviri' },
-      { text: 'Duygu Analizi', icon: Heart, highlight: '%90 Doğruluk - Proaktif Müdahale' },
-      { text: 'Otomatik Çözüm Önerileri', icon: Zap, highlight: '%80 Self-Servis Çözüm Oranı' },
-    ],
-    benefits: [
-      'Ücretsiz chatbot kurulumu',
-      'Özel eğitim desteği',
-      'API entegrasyonu',
-      'Kişiselleştirilmiş yanıtlar',
-    ],
-    price: {
-      amount: '2,799',
-      period: 'ay',
-      discount: '5,598',
-    },
-    cta: 'Hemen Başlayın',
-    popularity: 80,
-  },
-  {
-    id: 'social-media',
-    title: 'AI Sosyal Medya Ekibi',
-    description: 'Sosyal medya varlığınızı güçlendirin ve etkileşiminizi 5X artırın.',
-    features: [
-      { text: '7/24 İçerik Üretimi', icon: Clock, highlight: 'Kesintisiz İçerik - Günde 30+ Post' },
       {
-        text: 'Trend Analizi',
-        icon: Flame,
-        highlight: 'Viral İçerik Garantisi - %90 Trend Yakalama',
+        text: 'Finansal Analiz',
+        icon: Calculator,
+        highlight: '%99.9 Doğruluk - Gerçek Zamanlı Takip',
       },
       {
-        text: 'Etkileşim Yönetimi',
-        icon: HeartHandshake,
-        highlight: '%80 Daha Fazla Engagement - Akıllı Yanıtlar',
+        text: 'Risk Yönetimi',
+        icon: Shield,
+        highlight: '%92 Risk Tespiti - Proaktif Önlemler',
       },
       {
-        text: 'Performans Raporları',
+        text: 'Nakit Akışı Optimizasyonu',
         icon: TrendingUp,
-        highlight: 'Gerçek Zamanlı Analiz - 50+ Metrik',
+        highlight: '%40 Daha İyi Tahminler - Akıllı Planlama',
+      },
+      {
+        text: 'Bütçe Kontrolü',
+        icon: BarChart3,
+        highlight: '%25 Tasarruf - Otomatik Optimizasyon',
       },
     ],
     benefits: [
-      'İlk ay içerik paketi hediye',
-      'Ücretsiz görsel tasarım',
-      'Rakip analiz raporu',
-      'Hashtag optimizasyonu',
+      'Ücretsiz Finansal Analiz',
+      'Entegrasyon Desteği',
+      'Aylık Raporlama',
+      'Performans Garantisi',
     ],
-    price: {
-      amount: '2,499',
-      period: 'ay',
-      discount: '4,998',
-    },
-    cta: 'Hemen Katılın',
-    popularity: 75,
+    cta: 'Analiz İsteyin',
+    popularity: 82,
   },
   {
-    id: 'hr-team',
-    title: 'AI İK Ekibi',
-    description: 'İşe alım süreçlerinizi otomatikleştirin ve en iyi yetenekleri bulun.',
+    id: 'hr-agent',
+    title: 'DN.HR™ Agent',
+    description: 'İK süreçlerinizi yöneten ve optimize eden AI insan kaynakları uzmanı.',
     features: [
-      { text: 'Akıllı CV Tarama', icon: Search, highlight: '%90 Doğruluk - 1000+ CV/Saat' },
       {
-        text: 'Otomatik Mülakat',
-        icon: Users,
-        highlight: '24/7 İlk Görüşme - %70 Zaman Tasarrufu',
+        text: 'Aday Değerlendirme',
+        icon: Brain,
+        highlight: '%95 İsabet - Doğru Yetenek Seçimi',
       },
-      { text: 'Yetenek Havuzu', icon: Database, highlight: 'Akıllı Eşleştirme - %85 İsabet' },
       {
-        text: 'Performans Takibi',
-        icon: BarChart,
-        highlight: 'Objektif Değerlendirme - 360° Analiz',
+        text: 'Performans Analizi',
+        icon: BarChart3,
+        highlight: '360° Değerlendirme - Objektif Ölçüm',
+      },
+      {
+        text: 'Eğitim Yönetimi',
+        icon: Sparkles,
+        highlight: 'Kişiselleştirilmiş Gelişim - Sürekli İlerleme',
+      },
+      {
+        text: 'Çalışan Deneyimi',
+        icon: Shield,
+        highlight: '%45 Daha İyi Memnuniyet - Proaktif Yaklaşım',
       },
     ],
-    benefits: [
-      'Ücretsiz ATS entegrasyonu',
-      'Özel mülakat şablonları',
-      'Yetenek havuzu analizi',
-      'Aylık İK raporu',
-    ],
-    price: {
-      amount: '3,299',
-      period: 'ay',
-      discount: '6,598',
-    },
-    cta: 'Şimdi Deneyin',
-    popularity: 70,
+    benefits: ['Ücretsiz İK Analizi', 'ATS Entegrasyonu', 'Eğitim Desteği', 'Adaptasyon Garantisi'],
+    cta: 'Demo Talep Et',
+    popularity: 80,
   },
 ];
 
@@ -238,10 +263,10 @@ const ProductCard = ({ product }: { product: Product }) => {
       transition={{ duration: 0.5 }}
       className="relative"
     >
-      <Card className="relative h-full border-2 hover:border-primary/50 transition-all duration-300">
+      <Card className="relative h-full border-2 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 bg-card/80 backdrop-blur-sm">
         {product.badge && (
           <Badge
-            className="absolute -top-3 -right-3 bg-primary text-primary-foreground px-4 py-1"
+            className="absolute -top-3 -right-3 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white px-4 py-1"
             variant="default"
           >
             {product.badge}
@@ -253,7 +278,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Info className="h-4 w-4 text-muted-foreground" />
+                  <Info className="h-4 w-4 text-purple-400" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="max-w-xs">{product.description}</p>
@@ -261,7 +286,9 @@ const ProductCard = ({ product }: { product: Product }) => {
               </Tooltip>
             </TooltipProvider>
           </CardTitle>
-          <CardDescription className="min-h-[3rem]">{product.description}</CardDescription>
+          <CardDescription className="min-h-[3rem] text-foreground/80">
+            {product.description}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Özellikler */}
@@ -270,15 +297,15 @@ const ProductCard = ({ product }: { product: Product }) => {
               <HoverCard key={index}>
                 <HoverCardTrigger asChild>
                   <div className="flex items-center gap-3 cursor-help">
-                    <feature.icon className="h-5 w-5 text-primary" />
-                    <span className="text-sm">{feature.text}</span>
+                    <feature.icon className="h-5 w-5 text-purple-400" />
+                    <span className="text-sm text-foreground/80">{feature.text}</span>
                   </div>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-80">
+                <HoverCardContent className="w-80 bg-card/80 backdrop-blur-sm border-purple-500/20">
                   <div className="flex justify-between space-x-4">
                     <div>
                       <h4 className="text-sm font-semibold">{feature.text}</h4>
-                      <p className="text-sm text-primary">{feature.highlight}</p>
+                      <p className="text-sm text-purple-400">{feature.highlight}</p>
                     </div>
                   </div>
                 </HoverCardContent>
@@ -286,27 +313,14 @@ const ProductCard = ({ product }: { product: Product }) => {
             ))}
           </div>
 
-          {/* Fiyatlandırma */}
-          <div className="text-center pt-4">
-            {product.price.discount && (
-              <span className="text-sm text-muted-foreground line-through">
-                ₺{product.price.discount}
-              </span>
-            )}
-            <div className="flex items-center justify-center gap-2">
-              <span className="text-4xl font-bold text-primary">₺{product.price.amount}</span>
-              <span className="text-muted-foreground">/{product.price.period}</span>
-            </div>
-          </div>
-
           {/* Faydalar */}
           <div className="space-y-2 pt-4">
             {product.benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 text-sm text-muted-foreground"
+                className="flex items-center gap-2 text-sm text-foreground/60"
               >
-                <Gift className="h-4 w-4 text-primary" />
+                <Shield className="h-4 w-4 text-purple-400" />
                 <span>{benefit}</span>
               </div>
             ))}
@@ -314,10 +328,11 @@ const ProductCard = ({ product }: { product: Product }) => {
         </CardContent>
         <CardFooter className="pt-6">
           <Button
-            className="w-full h-12 text-lg font-medium hover:scale-[1.02] transition-transform"
+            className="w-full h-12 text-lg font-medium hover:scale-[1.02] transition-transform bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white"
             size="lg"
           >
             {product.cta}
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </CardFooter>
       </Card>
@@ -326,30 +341,11 @@ const ProductCard = ({ product }: { product: Product }) => {
 };
 
 export default function ProductsSection() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-      const style = document.createElement('style');
-      style.textContent = `
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `;
-      document.head.appendChild(style);
-      return () => {
-        document.head.removeChild(style);
-      };
-    }
-  }, []);
-
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Animasyonlu Arka Plan */}
+    <section className="py-20 relative overflow-hidden bg-background/95">
+      {/* Gradient Background */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="w-[500px] h-[500px] bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5 rounded-full blur-3xl animate-pulse" />
       </div>
 
       <div className="container mx-auto px-4 relative">
@@ -361,89 +357,67 @@ export default function ProductsSection() {
         >
           <Badge
             variant="secondary"
-            className="mb-4"
+            className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
           >
-            🚀 Özel Lansman Fırsatı
+            🚀 DN.AI™ Çözümleri
           </Badge>
           <h2 className="text-4xl font-bold mb-4">
-            AI Ekibinizi Seçin ve{' '}
-            <span className="bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
-              Hemen Büyümeye Başlayın
+            Şirketiniz İçin{' '}
+            <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Doğru AI Çözümü
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            500+ şirket AI ekiplerimizle çalışıyor ve{' '}
-            <span className="font-semibold text-foreground">ortalama %40 büyüme</span> elde ediyor.
-            Üstelik şimdi <span className="font-semibold text-foreground">%50 indirim</span>{' '}
-            fırsatıyla!
+          <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
+            Test sonuçlarımıza göre, DN.AI™ metodolojisi ile şirketler{' '}
+            <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
+            ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
+            ediyor.
           </p>
         </motion.div>
 
-        {/* Ürün Kartları Grid/Scroll Container */}
-        <div className="relative">
-          {/* Kaydırma İşaretleri - Sadece Mobilde */}
-          <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 md:hidden">
-            <div className="w-4 h-12 flex flex-col justify-center items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/20" />
-            </div>
-          </div>
-
-          {/* Kartlar Container */}
-          <div
-            className="
-              grid grid-cols-1 gap-6 
-              sm:grid-cols-2 
-              lg:grid-cols-3 
-              xl:grid-cols-4
-              md:grid-cols-2
-              overflow-x-auto
-              pb-6
-              snap-x
-              snap-mandatory
-              scrollbar-hide
-              -mx-4
-              px-4
-              md:mx-0
-              md:px-0
-              md:overflow-x-visible
-              scroll-smooth
-              relative
-            "
-          >
-            {/* Kartların Gölge Efekti - Sadece Mobilde */}
-            <div className="absolute right-0 top-0 bottom-6 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
-
-            {products.map((product, index) => (
-              <div
-                key={product.id}
-                className="
-                  snap-center
-                  min-w-[calc(100vw-2rem)]
-                  sm:min-w-[calc(50vw-2rem)]
-                  md:min-w-0
-                  first:pl-4
-                  last:pr-4
-                  md:first:pl-0
-                  md:last:pr-0
-                  transform
-                  transition-transform
-                  duration-300
-                  hover:translate-y-[-4px]
-                  hover:translate-x-0
-                "
-              >
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>
+        {/* Ürün Kartları Grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
         </div>
 
-        {/* Mobil Kaydırma İpucu */}
-        <div className="mt-6 text-center text-sm text-muted-foreground md:hidden">
-          <span className="inline-block animate-bounce">👆</span> Daha fazla seçenek için kaydırın
-        </div>
+        {/* Alt CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mt-16"
+        >
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <Badge
+              variant="outline"
+              className="border-green-500/30 text-green-400"
+            >
+              <Calculator className="w-3 h-3 mr-1" />
+              Ücretsiz ROI Analizi
+            </Badge>
+            <Badge
+              variant="outline"
+              className="border-blue-500/30 text-blue-400"
+            >
+              <Shield className="w-3 h-3 mr-1" />6 Ay Garanti
+            </Badge>
+            <Badge
+              variant="outline"
+              className="border-purple-500/30 text-purple-300"
+            >
+              <Percent className="w-3 h-3 mr-1" />
+              %100 Adaptasyon
+            </Badge>
+          </div>
+          <p className="text-foreground/60 text-sm">
+            Şirketinize en uygun çözüm için uzman ekibimiz 24 saat içinde size ulaşsın
+          </p>
+        </motion.div>
       </div>
     </section>
   );

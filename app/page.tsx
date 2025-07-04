@@ -26,7 +26,7 @@ export default function Home() {
       <FeaturesSection />
       <BrandsSection />
       <CTASection />
-      <ProductsSection />
+       <ProductsSection /> 
       <FooterSection />
     </main>
   );

@@ -5,7 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
-import { ArrowRight, Award, Star, TrendingUp, Users } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  Calculator,
+  DollarSign,
+  Percent,
+  Shield,
+  Target,
+  TrendingUp,
+} from 'lucide-react';
 import Image from 'next/image';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
@@ -24,50 +33,172 @@ interface BrandItemProps {
 
 const brands = [
   {
-    name: 'Microsoft',
-    logo: '/brands/microsoft.svg',
-    stats: '45% ROI increase',
-    testimonial: 'Future Autonoms transformed our AI implementation process.',
+    name: 'Koç Holding',
+    logo: '/brands/koc.svg',
+    stats: '285% Verimlilik Artışı',
+    testimonial: "DN.AI™ ile şirket DNA'mıza uygun AI dönüşümü gerçekleştirdik.",
   },
   {
-    name: 'Google',
-    logo: '/brands/google.svg',
-    stats: '3x faster deployment',
-    testimonial: 'Exceptional results in half the time.',
+    name: 'Sabancı Holding',
+    logo: '/brands/sabanci.svg',
+    stats: '6 Ayda Tam Entegrasyon',
+    testimonial: 'DNA bazlı yaklaşım sayesinde kalıcı dönüşüm sağladık.',
   },
   {
-    name: 'Amazon',
-    logo: '/brands/amazon.svg',
-    stats: '2M$ cost savings',
-    testimonial: 'Revolutionary approach to enterprise AI.',
+    name: 'Eczacıbaşı',
+    logo: '/brands/eczacibasi.svg',
+    stats: '12.5M₺ Maliyet Tasarrufu',
+    testimonial: 'Sürdürülebilir AI dönüşümünde çığır açan yaklaşım.',
   },
   {
-    name: 'Facebook',
-    logo: '/brands/facebook.svg',
-    stats: '99.9% accuracy',
-    testimonial: 'Best-in-class AI solutions.',
+    name: 'Anadolu Grubu',
+    logo: '/brands/anadolu.svg',
+    stats: '%98.5 Adaptasyon Oranı',
+    testimonial: 'Şirket kültürümüze mükemmel uyum sağladı.',
   },
   {
-    name: 'Netflix',
-    logo: '/brands/netflix.svg',
-    stats: '80% automation',
-    testimonial: 'Game-changing AI implementation.',
+    name: 'Turkcell',
+    logo: '/brands/turkcell.svg',
+    stats: '%92 Süreç Otomasyonu',
+    testimonial: 'DNA temelli dönüşüm ile tam başarı.',
   },
   {
-    name: 'Slack',
-    logo: '/brands/slack.svg',
-    stats: '5x productivity',
-    testimonial: 'Transformed our workflow completely.',
+    name: 'Yapı Kredi',
+    logo: '/brands/yapikredi.svg',
+    stats: '4.2x ROI Artışı',
+    testimonial: 'Adaptif yaklaşım ile kusursuz entegrasyon.',
   },
 ];
 
 const infiniteBrands = [...brands, ...brands];
 
+const testResults = [
+  {
+    name: 'Üretim Sektörü',
+    logo: '/tests/manufacturing.svg',
+    stats: '312% Verimlilik Artışı',
+    testimonial: 'Test sürecinde üretim hatları optimizasyonunda rekor sonuçlar.',
+  },
+  {
+    name: 'Finans Sektörü',
+    logo: '/tests/finance.svg',
+    stats: '8.4dk → 47sn',
+    testimonial: 'Müşteri hizmetleri yanıt süresinde çığır açan iyileştirme.',
+  },
+  {
+    name: 'Perakende Sektörü',
+    logo: '/tests/retail.svg',
+    stats: '%94.8 Doğruluk',
+    testimonial: 'Stok yönetimi ve talep tahminlemede yapay zeka başarısı.',
+  },
+  {
+    name: 'Lojistik Sektörü',
+    logo: '/tests/logistics.svg',
+    stats: '-%42 Maliyet',
+    testimonial: 'Rota optimizasyonu ve kaynak planlamada maksimum verim.',
+  },
+  {
+    name: 'E-ticaret Sektörü',
+    logo: '/tests/ecommerce.svg',
+    stats: '5.2x Dönüşüm',
+    testimonial: 'Kişiselleştirilmiş müşteri deneyiminde çarpıcı sonuçlar.',
+  },
+  {
+    name: 'Hizmet Sektörü',
+    logo: '/tests/service.svg',
+    stats: '+288% Verim',
+    testimonial: 'İş süreçleri otomasyonunda devrim niteliğinde gelişme.',
+  },
+];
+
 const metrics = [
-  { value: '500+', label: 'Enterprise Clients', icon: Users },
-  { value: '98%', label: 'Success Rate', icon: TrendingUp },
-  { value: '15+', label: 'Industry Awards', icon: Award },
-  { value: '4.9/5', label: 'Client Satisfaction', icon: Star },
+  {
+    value: '285%',
+    label: 'Verimlilik Artışı',
+    icon: TrendingUp,
+    description: 'Operasyonel süreçlerde iyileştirme',
+  },
+  {
+    value: '42%',
+    label: 'Maliyet Azalışı',
+    icon: DollarSign,
+    description: 'İşletme giderlerinde düşüş',
+  },
+  {
+    value: '3.8x',
+    label: 'ROI',
+    icon: BarChart3,
+    description: '12 ay içinde yatırım getirisi',
+  },
+  {
+    value: '94%',
+    label: 'Adaptasyon',
+    icon: Target,
+    description: 'Çalışan adaptasyon oranı',
+  },
+];
+
+const businessImpacts = [
+  {
+    category: 'Finansal Etki',
+    metrics: [
+      {
+        title: 'Operasyonel Maliyet',
+        reduction: '-42%',
+        detail: 'İlk 6 ayda',
+      },
+      {
+        title: 'Yatırım Geri Dönüşü',
+        reduction: '3.8x',
+        detail: '12 ay içinde',
+      },
+      {
+        title: 'Gelir Artışı',
+        reduction: '+65%',
+        detail: 'Yıllık ortalama',
+      },
+    ],
+  },
+  {
+    category: 'Operasyonel Verimlilik',
+    metrics: [
+      {
+        title: 'Süreç Hızı',
+        reduction: '4.2x',
+        detail: 'Daha hızlı işlem',
+      },
+      {
+        title: 'Hata Oranı',
+        reduction: '-92%',
+        detail: 'Azalma',
+      },
+      {
+        title: 'Kaynak Kullanımı',
+        reduction: '-35%',
+        detail: 'Optimizasyon',
+      },
+    ],
+  },
+  {
+    category: 'İş Gücü Verimliliği',
+    metrics: [
+      {
+        title: 'Çalışan Verimliliği',
+        reduction: '+285%',
+        detail: 'Artış',
+      },
+      {
+        title: 'Adaptasyon Süresi',
+        reduction: '-65%',
+        detail: 'Daha hızlı',
+      },
+      {
+        title: 'İş Memnuniyeti',
+        reduction: '+88%',
+        detail: 'Artış',
+      },
+    ],
+  },
 ];
 
 // Context for managing active card
@@ -237,9 +368,9 @@ const BrandsSection = () => {
   }, []);
 
   return (
-    <section className="relative py-16 sm:py-24 sm:pt-40 bg-background/95">
+    <section className="relative py-16 sm:py-24 bg-background/95">
       <div className="mx-auto max-w-[90rem] px-6 lg:px-8">
-        {/* Header Section with Better Contrast */}
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -249,47 +380,96 @@ const BrandsSection = () => {
         >
           <Badge
             variant="secondary"
-            className="mb-4 bg-[#6B8AFF]/10 text-[#6B8AFF] hover:bg-[#6B8AFF]/20"
+            className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
           >
-            Limited Partnership Slots Available
+            Kanıtlanmış İş Sonuçları
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground mb-6">
-            Trusted by{' '}
-            <span className="bg-gradient-to-r from-[#6B8AFF] to-[#6B8AFF]/50 bg-clip-text text-transparent">
-              Industry Leaders
-            </span>
+            DN.AI™ ile{' '}
+            <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              İş Sonuçlarınızı
+            </span>{' '}
+            Dönüştürün
           </h2>
           <p className="text-lg leading-8 text-foreground/80">
-            Join the ranks of forward-thinking enterprises that have transformed their operations
-            with Future Autonoms AI solutions.
+            Test sonuçlarımız gösteriyor ki, DN.AI™ metodolojisi ile şirketler{' '}
+            <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
+            ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
+            ediyor.
           </p>
         </motion.div>
 
-        {/* Metrics Section - Mobilde margin azaltıldı */}
+        {/* Key Metrics Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mx-auto mb-28 md:mb-28 mb-10 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4"
+          className="mx-auto mb-20 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4"
         >
-          {metrics.map((metric, index) => {
-            const Icon = metric.icon;
-            return (
-              <Card
-                key={metric.label}
-                className="p-6 text-center bg-card/95 border-[#6B8AFF]/10 hover:border-[#6B8AFF]/30 transition-all duration-300"
-              >
-                <Icon className="h-8 w-8 mx-auto mb-3 text-[#6B8AFF]" />
-                <div className="text-3xl font-bold text-[#6B8AFF] mb-2">{metric.value}</div>
-                <div className="text-sm font-medium text-foreground/70">{metric.label}</div>
-              </Card>
-            );
-          })}
+          {metrics.map((metric) => (
+            <Card
+              key={metric.label}
+              className="p-6 text-center bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
+            >
+              <metric.icon className="h-8 w-8 mx-auto mb-3 text-purple-400" />
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-2">
+                {metric.value}
+              </div>
+              <div className="text-sm font-medium text-white mb-2">{metric.label}</div>
+              <div className="text-xs text-gray-400">{metric.description}</div>
+            </Card>
+          ))}
         </motion.div>
 
+        {/* Business Impact Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mx-auto max-w-7xl mb-20"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold text-white mb-4">Detaylı İş Etki Analizi</h3>
+            <p className="text-gray-400">Test sonuçlarına dayalı beklenen iş sonuçları</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {businessImpacts.map((impact, idx) => (
+              <Card
+                key={impact.category}
+                className="p-6 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5 border-purple-500/20"
+              >
+                <h4 className="text-lg font-semibold text-white mb-4">{impact.category}</h4>
+                <div className="space-y-4">
+                  {impact.metrics.map((metric) => (
+                    <div
+                      key={metric.title}
+                      className="flex items-center justify-between"
+                    >
+                      <div>
+                        <p className="text-sm text-gray-300">{metric.title}</p>
+                        <p className="text-xs text-gray-400">{metric.detail}</p>
+                      </div>
+                      <div className="text-lg font-bold text-purple-300">{metric.reduction}</div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Brands Carousel Section */}
+        
+        <div className="text-center mb-12">
+          <h3 className="text-2xl font-bold text-white mb-4">Güvenilir Markalar</h3>
+          <p className="text-gray-400">DN.AI™'yi tercih eden öncü şirketler</p>
+        </div>
+
         <ActiveCardContext.Provider value={{ activeIndex, setActiveIndex }}>
-          {/* Mobile Info Display - Metrics ve Brands arasında */}
+          {/* Mobile Info Display */}
           {isMobile && activeIndex !== null && (
             <MobileBrandInfo
               brand={infiniteBrands[activeIndex]}
@@ -297,10 +477,10 @@ const BrandsSection = () => {
             />
           )}
 
-          {/* Brands Carousel - Mobilde margin azaltıldı */}
-          <div
+          {/* Brands Carousel */}
+          {/* <div
             ref={containerRef}
-            className="relative h-28 bg-card/30 rounded-2xl border border-[#6B8AFF]/10 my-16 md:my-16 my-8"
+            className="relative h-28 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-cyan-500/5 rounded-2xl border border-purple-500/20 my-16"
           >
             <div className="absolute inset-0 flex items-center overflow-x-hidden">
               <motion.div
@@ -323,10 +503,11 @@ const BrandsSection = () => {
                 ))}
               </motion.div>
             </div>
-          </div>
+          </div> */}
         </ActiveCardContext.Provider>
 
-        {/* CTA Section with Better Contrast */}
+        {/* Enhanced CTA Section */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -334,15 +515,38 @@ const BrandsSection = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mx-auto mt-16 text-center"
         >
+          <div className="mb-8 flex items-center justify-center space-x-2 flex-wrap gap-2">
+            <Badge
+              variant="outline"
+              className="border-green-500/30 text-green-400"
+            >
+              <Calculator className="w-3 h-3 mr-1" />
+              Ücretsiz ROI Hesaplama
+            </Badge>
+            <Badge
+              variant="outline"
+              className="border-blue-500/30 text-blue-400"
+            >
+              <Shield className="w-3 h-3 mr-1" />6 Ay Başarı Garantisi
+            </Badge>
+            <Badge
+              variant="outline"
+              className="border-purple-500/30 text-purple-300"
+            >
+              <Percent className="w-3 h-3 mr-1" />
+              %100 Adaptasyon Desteği
+            </Badge>
+          </div>
+
           <Button
             size="lg"
-            className="bg-[#6B8AFF] hover:bg-[#6B8AFF]/90 text-white font-semibold text-lg px-8 py-6 h-auto group shadow-[0_0_15px_rgba(107,138,255,0.3)]"
+            className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white font-semibold text-lg px-8 py-6 h-auto group shadow-lg shadow-purple-500/25"
           >
-            Join Industry Leaders
+            Ücretsiz ROI Analizi Alın
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <p className="mt-4 text-sm font-medium text-foreground/70">
-            Limited partnership opportunities available. Schedule your consultation today.
+          <p className="mt-4 text-sm text-gray-400">
+            Şirketinize özel potansiyel kazanımları hesaplayalım.
           </p>
         </motion.div>
       </div>

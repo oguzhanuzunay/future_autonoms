@@ -4,22 +4,21 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const navigation = {
   solutions: [
-    { name: 'AI Satış Ekibi', href: '/solutions/sales' },
-    { name: 'AI Pazarlama Ekibi', href: '/solutions/marketing' },
-    { name: 'AI Müşteri Hizmetleri', href: '/solutions/customer-service' },
-    { name: 'AI İK Ekibi', href: '/solutions/hr' },
-    { name: 'AI Sosyal Medya Ekibi', href: '/solutions/social-media' },
+    { name: 'Kurumsal AI Dönüşümü', href: '/solutions/enterprise' },
+    { name: 'AI Süreç Optimizasyonu', href: '/solutions/process' },
+    { name: 'AI Verimlilik Artışı', href: '/solutions/productivity' },
+    { name: 'AI Maliyet Yönetimi', href: '/solutions/cost' },
+    { name: 'AI Adaptasyon Desteği', href: '/solutions/adoption' },
   ],
   company: [
-    { name: 'Hakkımızda', href: '/about' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Kariyer', href: '/careers' },
-    { name: 'Basın', href: '/press' },
+    { name: 'Metodoloji', href: '/methodology' },
+    { name: 'Test Sonuçları', href: '/results' },
+    { name: 'Başarı Hikayeleri', href: '/success-stories' },
+    { name: 'AR-GE Merkezi', href: '/rd-center' },
     { name: 'İletişim', href: '/contact' },
   ],
   legal: [
@@ -31,7 +30,7 @@ const navigation = {
   social: [
     {
       name: 'Twitter',
-      href: 'https://twitter.com/futureautonomstr',
+      href: 'https://twitter.com/dnai',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -44,7 +43,7 @@ const navigation = {
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com/company/futureautonomstr',
+      href: 'https://linkedin.com/company/dnai',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -57,7 +56,7 @@ const navigation = {
     },
     {
       name: 'Instagram',
-      href: 'https://instagram.com/futureautonomstr',
+      href: 'https://instagram.com/dnai',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -73,15 +72,15 @@ const navigation = {
 
 const FooterSection = () => {
   return (
-    <footer className="bg-[#0D0D0D] relative overflow-hidden">
-      {/* Animasyonlu Arka Plan */}
+    <footer className="bg-background/95 relative overflow-hidden">
+      {/* Gradient Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(107,138,255,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.05),rgba(59,130,246,0.05),rgba(34,211,238,0.05))]" />
       </div>
 
       <div className="mx-auto max-w-7xl relative">
-        {/* Üst Kısım - Bülten ve İletişim */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 py-12 border-b border-primary/10">
+        {/* Newsletter Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 py-12 border-b border-purple-500/10">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -89,49 +88,50 @@ const FooterSection = () => {
               transition={{ duration: 0.5 }}
             >
               <Badge
-                variant="outline"
-                className="mb-4 border-[#6B8AFF] text-[#6B8AFF]"
+                variant="secondary"
+                className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
               >
-                Güncel Kalın
+                AI Dünyasında Öncü
               </Badge>
               <h3 className="text-2xl font-bold mb-4">
-                AI dünyasındaki son gelişmelerden haberdar olun
+                DN.AI™ ile geleceği{' '}
+                <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                  şekillendirin
+                </span>
               </h3>
-              <p className="text-muted-foreground mb-6">
-                Haftalık bültenimize katılın, AI teknolojilerindeki son gelişmeleri ve özel
-                fırsatları kaçırmayın.
+              <p className="text-foreground/80 mb-6">
+                Haftalık bültenimize katılın, yapay zeka dönüşümündeki son gelişmeleri ve başarı
+                hikayelerini ilk siz öğrenin.
               </p>
               <div className="flex gap-2">
                 <Input
                   type="email"
-                  placeholder="E-posta adresiniz"
-                  className="max-w-sm"
+                  placeholder="Kurumsal e-posta adresiniz"
+                  className="max-w-sm bg-card border-purple-500/20 focus:border-purple-500/40"
                 />
-                <Button>Katıl</Button>
+                <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white">
+                  Katıl
+                </Button>
               </div>
             </motion.div>
           </div>
 
           <div className="flex flex-col justify-center items-start md:items-end">
             <div className="flex flex-col items-start md:items-end">
-              <Image
-                src="/images/logo/logo.png"
-                alt="Future Autonoms Logo"
-                width={180}
-                height={40}
-                className="mb-4 invert"
-              />
-              <p className="text-muted-foreground text-sm mb-2">info@futureautonomstr.com</p>
-              <p className="text-muted-foreground text-sm">+90 (555) 123 45 67</p>
+              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-4">
+                DN.AI™
+              </div>
+              <p className="text-foreground/80 text-sm mb-2">info@dn.ai</p>
+              <p className="text-foreground/80 text-sm">+90 (555) 123 45 67</p>
             </div>
           </div>
         </div>
 
-        {/* Orta Kısım - Navigasyon */}
+        {/* Navigation */}
         <div className="px-6 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-sm font-semibold mb-6 text-primary">Çözümler</h3>
+              <h3 className="text-sm font-semibold mb-6 text-purple-300">Çözümler</h3>
               <ul
                 role="list"
                 className="space-y-4"
@@ -140,7 +140,7 @@ const FooterSection = () => {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -149,7 +149,7 @@ const FooterSection = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-6 text-primary">Şirket</h3>
+              <h3 className="text-sm font-semibold mb-6 text-purple-300">Şirket</h3>
               <ul
                 role="list"
                 className="space-y-4"
@@ -158,7 +158,7 @@ const FooterSection = () => {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -167,7 +167,7 @@ const FooterSection = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-6 text-primary">Yasal</h3>
+              <h3 className="text-sm font-semibold mb-6 text-purple-300">Yasal</h3>
               <ul
                 role="list"
                 className="space-y-4"
@@ -176,7 +176,7 @@ const FooterSection = () => {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -185,7 +185,7 @@ const FooterSection = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-6 text-primary">Sosyal Medya</h3>
+              <h3 className="text-sm font-semibold mb-6 text-purple-300">Sosyal Medya</h3>
               <div className="flex space-x-4">
                 {navigation.social.map((item) => (
                   <Link
@@ -193,7 +193,7 @@ const FooterSection = () => {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-foreground/60 hover:text-purple-300 transition-colors"
                   >
                     <span className="sr-only">{item.name}</span>
                     <item.icon
@@ -207,23 +207,23 @@ const FooterSection = () => {
           </div>
         </div>
 
-        {/* Alt Kısım - Telif Hakkı */}
-        <div className="border-t border-primary/10 px-6 py-6">
+        {/* Copyright */}
+        <div className="border-t border-purple-500/10 px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Future Autonoms. Tüm hakları saklıdır.
+            <p className="text-sm text-foreground/60">
+              &copy; {new Date().getFullYear()} DN.AI™. Tüm hakları saklıdır.
             </p>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 text-sm text-foreground/60">
               <Link
                 href="/sitemap"
-                className="hover:text-primary transition-colors"
+                className="hover:text-purple-300 transition-colors"
               >
                 Site Haritası
               </Link>
               <span>•</span>
               <Link
                 href="/accessibility"
-                className="hover:text-primary transition-colors"
+                className="hover:text-purple-300 transition-colors"
               >
                 Erişilebilirlik
               </Link>
