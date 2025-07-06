@@ -171,7 +171,7 @@ const HeroSection = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <span className="cursor-help underline decoration-purple-500 decoration-dotted underline-offset-4 hover:text-purple-300 transition-colors">
-                  AI Dönüşümü
+                  DN.AI Dönüşümü
                 </span>
               </TooltipTrigger>
               <TooltipContent
