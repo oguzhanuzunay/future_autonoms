@@ -8,17 +8,13 @@ import Link from 'next/link';
 
 const navigation = {
   solutions: [
-    { name: 'Kurumsal AI Dönüşümü', href: '/solutions/enterprise' },
-    { name: 'AI Süreç Optimizasyonu', href: '/solutions/process' },
-    { name: 'AI Verimlilik Artışı', href: '/solutions/productivity' },
-    { name: 'AI Maliyet Yönetimi', href: '/solutions/cost' },
-    { name: 'AI Adaptasyon Desteği', href: '/solutions/adoption' },
+    { name: 'AI Süreç Optimizasyonu', href: '/#solutions' },
+    { name: 'AI Verimlilik Artışı', href: '/#solutions' },
+    { name: 'AI Maliyet Yönetimi', href: '/#solutions' },
   ],
   company: [
-    { name: 'Metodoloji', href: '/methodology' },
-    { name: 'Test Sonuçları', href: '/results' },
-    { name: 'Başarı Hikayeleri', href: '/success-stories' },
-    { name: 'AR-GE Merkezi', href: '/rd-center' },
+    { name: 'Hakkımızda', href: '/#about' },
+    { name: 'Çözümler', href: '/#solutions' },
     { name: 'İletişim', href: '/contact' },
   ],
   legal: [
@@ -30,7 +26,7 @@ const navigation = {
   social: [
     {
       name: 'Twitter',
-      href: 'https://twitter.com/dnai',
+      href: 'https://twitter.com/futureautonoms',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -43,7 +39,7 @@ const navigation = {
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com/company/dnai',
+      href: 'https://linkedin.com/company/futureautonoms',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -56,7 +52,7 @@ const navigation = {
     },
     {
       name: 'Instagram',
-      href: 'https://instagram.com/dnai',
+      href: 'https://instagram.com/futureautonoms',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg
           fill="currentColor"
@@ -94,7 +90,7 @@ const FooterSection = () => {
                 AI Dünyasında Öncü
               </Badge>
               <h3 className="text-2xl font-bold mb-4">
-                DN.AI™ ile geleceği{' '}
+                Future Autonoms ile geleceği{' '}
                 <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                   şekillendirin
                 </span>
@@ -119,10 +115,10 @@ const FooterSection = () => {
           <div className="flex flex-col justify-center items-start md:items-end">
             <div className="flex flex-col items-start md:items-end">
               <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-4">
-                DN.AI™
+                Future Autonoms
               </div>
-              <p className="text-foreground/80 text-sm mb-2">info@dn.ai</p>
-              <p className="text-foreground/80 text-sm">+90 (555) 123 45 67</p>
+              <p className="text-foreground/80 text-sm mb-2">info@futureautonoms.com</p>
+              <p className="text-foreground/80 text-sm">+90 (850) 840 74 19</p>
             </div>
           </div>
         </div>
@@ -211,7 +207,7 @@ const FooterSection = () => {
         <div className="border-t border-purple-500/10 px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-foreground/60">
-              &copy; {new Date().getFullYear()} DN.AI™. Tüm hakları saklıdır.
+              &copy; {new Date().getFullYear()} Future Autonoms. Tüm hakları saklıdır.
             </p>
             <div className="flex items-center gap-4 text-sm text-foreground/60">
               <Link

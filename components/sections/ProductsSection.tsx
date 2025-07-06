@@ -359,7 +359,7 @@ export default function ProductsSection() {
             variant="secondary"
             className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
           >
-            🚀 DN.AI™ Çözümleri
+            🚀 Future Autonoms DN.AI™ Çözümleri
           </Badge>
           <h2 className="text-4xl font-bold mb-4">
             Şirketiniz İçin{' '}
@@ -368,7 +368,7 @@ export default function ProductsSection() {
             </span>
           </h2>
           <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
-            Test sonuçlarımıza göre, DN.AI™ metodolojisi ile şirketler{' '}
+            Test sonuçlarımıza göre, Future Autonoms'un DN.AI™ metodolojisi ile şirketler{' '}
             <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
             ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
             ediyor.

@@ -36,7 +36,8 @@ const brands = [
     name: 'Koç Holding',
     logo: '/brands/koc.svg',
     stats: '285% Verimlilik Artışı',
-    testimonial: "DN.AI™ ile şirket DNA'mıza uygun AI dönüşümü gerçekleştirdik.",
+    testimonial:
+      "Future Autonoms'un DN.AI™ metodolojisi ile şirket DNA'mıza uygun AI dönüşümü gerçekleştirdik.",
   },
   {
     name: 'Sabancı Holding',
@@ -462,10 +463,10 @@ const BrandsSection = () => {
         </motion.div>
 
         {/* Brands Carousel Section */}
-        
+
         <div className="text-center mb-12">
           <h3 className="text-2xl font-bold text-white mb-4">Güvenilir Markalar</h3>
-          <p className="text-gray-400">DN.AI™'yi tercih eden öncü şirketler</p>
+          <p className="text-gray-400">Future Autonoms'u tercih eden öncü şirketler</p>
         </div>
 
         <ActiveCardContext.Provider value={{ activeIndex, setActiveIndex }}>

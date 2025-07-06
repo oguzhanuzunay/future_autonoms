@@ -290,15 +290,15 @@ export default function FeaturesSection() {
               className="mb-4 border-purple-500/50 text-purple-300 bg-purple-500/10"
             >
               <Dna className="mr-1 h-3 w-3" />
-              <span>DN.AI™ - Adaptif AI Dönüşüm Metodolojisi</span>
+              <span>Future Autonoms DN.AI™ - Adaptif AI Dönüşüm Metodolojisi</span>
             </Badge>
 
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              DN.AI™{' '}
+              Future Autonoms DN.AI™{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 Yaklaşımı
-              </span>
-            </h2>
+            </span>
+          </h2>
 
             <div className="text-lg font-semibold text-purple-300 mb-6">
               Şirketinizin DNA'sına İşleyen Akıllı Dönüşüm Metodolojisi
@@ -308,21 +308,23 @@ export default function FeaturesSection() {
               <span className="text-gray-400">Standart uygulamalar</span>{' '}
               <span className="text-gray-400 italic">giriş seviyesi</span>{' '}
               <span className="text-gray-400">çözümler sunarken,</span>{' '}
-              <span className="text-purple-300 font-semibold">DN.AI™ metodolojimiz</span>{' '}
+              <span className="text-purple-300 font-semibold">
+                Future Autonoms DN.AI™ metodolojimiz
+              </span>{' '}
               <span className="text-white">şirketinizin DNA'sına işleyerek</span>{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 kalıcı ve sürdürülebilir bir dönüşüm
               </span>{' '}
               <span className="text-white">sağlar.</span>
-            </p>
-          </motion.div>
+          </p>
+        </motion.div>
 
           {/* DN.AI™ Process Grid */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-16">
             {transformationProcess.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -403,18 +405,18 @@ export default function FeaturesSection() {
                         {service.stats.value}
                       </div>
                       <div className="text-sm text-gray-400">{service.stats.label}</div>
-                    </div>
+                </div>
                     <ul className="space-y-3 mb-6">
                       {service.benefits.map((benefit, idx) => (
-                        <li
-                          key={idx}
+                    <li
+                      key={idx}
                           className="flex items-center text-gray-300"
-                        >
+                    >
                           <CheckCircle className="w-5 h-5 text-purple-400 mr-2 flex-shrink-0" />
                           <span className="text-sm">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    </li>
+                  ))}
+                </ul>
                     <div className="space-y-3 pt-4 border-t border-purple-500/10">
                       <div className="flex items-center justify-center text-sm text-gray-400">
                         <Users className="w-4 h-4 mr-2 text-purple-400" />
@@ -429,7 +431,7 @@ export default function FeaturesSection() {
                         </Badge>
                       </div>
                     </div>
-                  </Card>
+              </Card>
                 </motion.div>
               ))}
             </motion.div>
@@ -484,8 +486,8 @@ export default function FeaturesSection() {
                               >
                                 #{tag}
                               </span>
-                            ))}
-                          </div>
+          ))}
+        </div>
                         </div>
                       </Card>
                     </motion.div>
@@ -512,19 +514,21 @@ export default function FeaturesSection() {
               className="mb-4 border-purple-500/50 text-purple-300 bg-purple-500/10"
             >
               <Dna className="mr-1 h-3 w-3" />
-              <span>DN.AI™ - Adaptif AI Dönüşüm Metodolojisi</span>
+              <span>Future Autonoms DN.AI™ - Adaptif AI Dönüşüm Metodolojisi</span>
             </Badge>
             <h3 className="text-3xl font-bold text-white mb-4">
               Sürdürülebilir{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-                DN.AI™ Yaklaşımı
+                Future Autonoms DN.AI™ Yaklaşımı
               </span>
             </h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
               <span className="text-gray-400">Standart uygulamalar</span>{' '}
               <span className="text-gray-400 italic">giriş seviyesi</span>{' '}
               <span className="text-gray-400">çözümler sunarken,</span>{' '}
-              <span className="text-purple-300 font-semibold">DN.AI™ metodolojimiz</span>{' '}
+              <span className="text-purple-300 font-semibold">
+                Future Autonoms DN.AI™ metodolojimiz
+              </span>{' '}
               <span className="text-white">şirketinizin DNA'sına işleyerek</span>{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 kalıcı ve sürdürülebilir bir dönüşüm
@@ -576,7 +580,7 @@ export default function FeaturesSection() {
             >
               <h4 className="text-xl font-semibold text-purple-400 mb-6 flex items-center">
                 <Dna className="w-5 h-5 mr-2" />
-                DN.AI™: Adaptif Dönüşüm Sistemi
+                Future Autonoms DN.AI™: Adaptif Dönüşüm Sistemi
               </h4>
               <ul className="space-y-4">
                 {comparisonPoints.map((point, index) => (
@@ -612,15 +616,15 @@ export default function FeaturesSection() {
             className="text-center mt-12"
           >
             <p className="text-lg text-purple-300 font-semibold mb-6">
-              DN.AI™ ile sürdürülebilir dönüşüm yolculuğunuza başlayın
+              Future Autonoms DN.AI™ ile sürdürülebilir dönüşüm yolculuğunuza başlayın
             </p>
             <Button
               onClick={handleScrollToCta}
-              className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl group shadow-lg shadow-purple-500/25"
+              className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl group shadow-lg shadow-purple-500/25 text-sm sm:text-base w-full sm:w-auto text-center"
             >
-              DN.AI™ Dönüşüm Sürecini Başlatın
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              <span className="block sm:inline">AI Dönüşümünü Başlat</span>
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform hidden sm:inline-block" />
+          </Button>
           </motion.div>
         </motion.div>
       </div>

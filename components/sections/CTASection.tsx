@@ -87,8 +87,8 @@ const CTASection = () => {
               </span>
             </h2>
             <p className="text-lg leading-8 text-foreground/80">
-              <span className="font-semibold text-purple-300">İlk 5 şirkete özel</span>, DN.AI™
-              metodolojisi ile{' '}
+              <span className="font-semibold text-purple-300">İlk 5 şirkete özel</span>, Future
+              Autonoms'un DN.AI™ metodolojisi ile{' '}
               <span className="font-semibold text-purple-300">%285'e varan verimlilik artışı</span>{' '}
               potansiyelinizi hesaplayalım.
             </p>
@@ -208,7 +208,7 @@ const CTASection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center text-sm text-foreground/80 mt-6"
           >
-            Test sonuçlarımıza göre, DN.AI™ metodolojisi ile şirketler{' '}
+            Test sonuçlarımıza göre, Future Autonoms'un DN.AI™ metodolojisi ile şirketler{' '}
             <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
             ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
             ediyor

@@ -16,18 +16,41 @@ export default function Home() {
     AOS.init({
       duration: 1000,
       once: true,
+      offset: 100, // Offset (in px) from the top of the page when calculating scroll position
     });
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-between w-full overflow-x-hidden">
       <Navigation />
-      <HeroSection />
-      <FeaturesSection />
-      <BrandsSection />
-      <CTASection />
-       <ProductsSection /> 
-      <FooterSection />
+      <div className="w-full">
+        <HeroSection />
+        <section
+          id="features"
+          className="w-full"
+        >
+          <FeaturesSection />
+        </section>
+        <section
+          id="brands"
+          className="w-full"
+        >
+          <BrandsSection />
+        </section>
+        <section
+          id="contact"
+          className="w-full"
+        >
+          <CTASection />
+        </section>
+        <section
+          id="products"
+          className="w-full"
+        >
+          <ProductsSection />
+        </section>
+        <FooterSection />
+      </div>
     </main>
   );
 }
