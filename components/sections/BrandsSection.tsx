@@ -416,7 +416,7 @@ const BrandsSection = () => {
               <metric.icon className="h-8 w-8 mx-auto mb-3 text-purple-400" />
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-2">
                 {metric.value}
-              </div>
+        </div>
               <div className="text-sm font-medium text-white mb-2">{metric.label}</div>
               <div className="text-xs text-gray-400">{metric.description}</div>
             </Card>
@@ -537,7 +537,7 @@ const BrandsSection = () => {
               <Percent className="w-3 h-3 mr-1" />
               %100 Adaptasyon Desteği
             </Badge>
-          </div>
+        </div>
 
           <Button
             size="lg"

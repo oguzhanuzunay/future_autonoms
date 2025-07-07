@@ -12,7 +12,8 @@ import { toast } from 'sonner';
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     companyEmail: '',
     phone: '',
   });
@@ -20,7 +21,8 @@ const CTASection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.companyEmail || !formData.phone) return;
+    if (!formData.firstName || !formData.lastName || !formData.companyEmail || !formData.phone)
+      return;
 
     setLoading(true);
     try {
@@ -31,6 +33,7 @@ const CTASection = () => {
         },
         body: JSON.stringify({
           ...formData,
+          fullName: `${formData.firstName} ${formData.lastName}`,
           type: 'corporate',
         }),
       });
@@ -40,7 +43,8 @@ const CTASection = () => {
           'Tebrikler! 🎉 Şirketinize özel ROI analizi için uzman ekibimiz 24 saat içinde size ulaşacak.',
         );
         setFormData({
-          fullName: '',
+          firstName: '',
+          lastName: '',
           companyEmail: '',
           phone: '',
         });
@@ -113,22 +117,41 @@ const CTASection = () => {
               onSubmit={handleSubmit}
               className="space-y-5"
             >
-              <div>
-                <Label
-                  htmlFor="fullName"
-                  className="text-base"
-                >
-                  Ad Soyad
-                </Label>
-                <Input
-                  type="text"
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  required
-                  placeholder="Ad Soyad"
-                  className="mt-2 h-12 bg-card border-purple-500/20 focus:border-purple-500/40"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label
+                    htmlFor="firstName"
+                    className="text-base"
+                  >
+                    Ad
+                  </Label>
+                  <Input
+                    type="text"
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    required
+                    placeholder="Adınız"
+                    className="mt-2 h-12 bg-card border-purple-500/20 focus:border-purple-500/40"
+                  />
+                </div>
+                <div>
+                  <Label
+                    htmlFor="lastName"
+                    className="text-base"
+                  >
+                    Soyad
+                  </Label>
+                  <Input
+                    type="text"
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    required
+                    placeholder="Soyadınız"
+                    className="mt-2 h-12 bg-card border-purple-500/20 focus:border-purple-500/40"
+                  />
+                </div>
               </div>
               <div>
                 <Label
