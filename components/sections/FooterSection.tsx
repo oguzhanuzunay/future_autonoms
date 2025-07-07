@@ -2,26 +2,162 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
+
+const legalContent = {
+  kvkk: {
+    title: 'KVKK Aydınlatma Metni',
+    content: `Future Autonoms olarak kişisel verilerinizin güvenliği ve gizliliği konusuna önem veriyoruz. 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, kişisel verileriniz aşağıda açıklanan kapsamda işlenebilecektir.
+
+    Kişisel Verilerin İşlenme Amacı:
+    • Ürün ve hizmetlerimizin sunulması
+    • Müşteri ilişkilerinin yönetimi
+    • Yasal yükümlülüklerimizin yerine getirilmesi
+    • İş geliştirme ve analiz çalışmaları
+    
+    Kişisel Verilerinizin Aktarılması:
+    Kişisel verileriniz, yasal yükümlülüklerimiz ve iş süreçlerimizin gerektirdiği ölçüde, yurt içi ve yurt dışındaki iş ortaklarımıza, tedarikçilerimize ve yasal mercilere aktarılabilir.
+    
+    Haklarınız:
+    KVKK'nın 11. maddesi kapsamında;
+    • Kişisel verilerinizin işlenip işlenmediğini öğrenme
+    • İşlenen kişisel verileriniz hakkında bilgi talep etme
+    • Kişisel verilerinizin işlenme amacını öğrenme
+    • Kişisel verilerinizin yurt içi veya yurt dışına aktarılıp aktarılmadığını öğrenme
+    • Eksik veya yanlış işlenen kişisel verilerinizin düzeltilmesini isteme
+    • Kişisel verilerinizin silinmesini veya yok edilmesini talep etme
+    haklarına sahipsiniz.`,
+  },
+  privacy: {
+    title: 'Gizlilik Politikası',
+    content: `Future Autonoms Gizlilik Politikası
+
+    Bu gizlilik politikası, Future Autonoms'un web sitesi ve hizmetleri aracılığıyla toplanan bilgilerin nasıl kullanıldığını ve korunduğunu açıklar.
+
+    Toplanan Bilgiler:
+    • Kimlik bilgileri
+    • İletişim bilgileri
+    • Kullanım verileri
+    • Teknik veriler
+
+    Bilgilerin Kullanımı:
+    • Hizmetlerimizin sağlanması ve iyileştirilmesi
+    • İletişim ve destek
+    • Yasal yükümlülüklerin yerine getirilmesi
+    • Güvenlik ve dolandırıcılığın önlenmesi
+
+    Çerezler ve Takip Teknolojileri:
+    Web sitemizde çerezler ve benzer takip teknolojileri kullanılmaktadır. Bu teknolojiler, site kullanımını analiz etmek ve kullanıcı deneyimini iyileştirmek için kullanılır.
+
+    Güvenlik:
+    Kişisel verilerinizin güvenliğini sağlamak için endüstri standardı güvenlik önlemleri kullanıyoruz.`,
+  },
+  terms: {
+    title: 'Kullanım Koşulları',
+    content: `Future Autonoms Kullanım Koşulları
+
+    Bu kullanım koşulları, Future Autonoms'un hizmetlerini kullanırken uymanız gereken kuralları ve şartları belirler.
+
+    Hizmet Kullanımı:
+    • Hizmetlerimizi yasal ve etik kurallara uygun şekilde kullanmalısınız
+    • Hesap güvenliğinizden siz sorumlusunuz
+    • Hizmetlerimizi kötüye kullanmak yasaktır
+
+    Fikri Mülkiyet:
+    • Tüm içerik ve markalar Future Autonoms'a aittir
+    • İzinsiz kullanım ve kopyalama yasaktır
+
+    Sorumluluk Reddi:
+    • Hizmetler "olduğu gibi" sunulmaktadır
+    • Kesintisiz hizmet garantisi verilmez
+
+    Değişiklikler:
+    • Koşullar önceden haber verilmeksizin değiştirilebilir
+    • Değişiklikler web sitesinde yayınlanacaktır`,
+  },
+  contact: {
+    title: 'İletişim Bilgileri',
+    content: `Future Autonoms İletişim
+
+    Adres:
+    İstanbul, Türkiye
+
+    E-posta:
+    info@futureautonoms.com
+
+    Telefon:
+    +90 (XXX) XXX XX XX
+
+    Sosyal Medya:
+    LinkedIn: Future Autonoms
+    Twitter: @FutureAutonoms
+    Instagram: @futureautonoms
+
+    Çalışma Saatleri:
+    Pazartesi - Cuma: 09:00 - 18:00
+    
+    Size en kısa sürede dönüş yapacağız.`,
+  },
+};
+
+const LegalDialog = ({
+  title,
+  content,
+  trigger,
+}: {
+  title: string;
+  content: string;
+  trigger: string;
+}) => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button
+        variant="link"
+        className="text-foreground/60 hover:text-foreground/80"
+      >
+        {trigger}
+      </Button>
+    </DialogTrigger>
+    <DialogContent className="max-w-2xl">
+      <DialogHeader>
+        <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+          {title}
+        </DialogTitle>
+      </DialogHeader>
+      <ScrollArea className="h-[60vh] mt-4 pr-4">
+        <div className="text-foreground/80 whitespace-pre-line">{content}</div>
+      </ScrollArea>
+    </DialogContent>
+  </Dialog>
+);
 
 const navigation = {
   solutions: [
-    { name: 'AI Süreç Optimizasyonu', href: '/#solutions' },
-    { name: 'AI Verimlilik Artışı', href: '/#solutions' },
-    { name: 'AI Maliyet Yönetimi', href: '/#solutions' },
+    { name: 'DN.AI™ Çözümleri', href: '#products' },
+    { name: 'Kurumsal AI Dönüşümü', href: '#products' },
+    { name: 'DN.Sales™ Agent', href: '#products' },
+    { name: 'DN.Support™ Agent', href: '#products' },
   ],
   company: [
-    { name: 'Hakkımızda', href: '/#about' },
-    { name: 'Çözümler', href: '/#solutions' },
-    { name: 'İletişim', href: '/contact' },
+    { name: 'Hakkımızda', href: '#about' },
+    { name: 'Referanslar', href: '#testimonials' },
+    { name: 'Blog', href: '/blog' },
   ],
   legal: [
-    { name: 'Gizlilik Politikası', href: '/privacy' },
-    { name: 'Kullanım Şartları', href: '/terms' },
-    { name: 'KVKK', href: '/kvkk' },
-    { name: 'Çerez Politikası', href: '/cookies' },
+    { name: 'KVKK', content: 'kvkk' as keyof typeof legalContent },
+    { name: 'Gizlilik Politikası', content: 'privacy' as keyof typeof legalContent },
+    { name: 'Kullanım Koşulları', content: 'terms' as keyof typeof legalContent },
   ],
   social: [
     {
@@ -114,8 +250,14 @@ const FooterSection = () => {
 
           <div className="flex flex-col justify-center items-start md:items-end">
             <div className="flex flex-col items-start md:items-end">
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-4">
-                Future Autonoms
+              <div className="text-2xl font-bold mb-4">
+                <Image
+                  src="/images/logo/logo.png"
+                  alt="Future Autonoms"
+                  width={200}
+                  height={40}
+                  className="invert"
+                />
               </div>
               <p className="text-foreground/80 text-sm mb-2">info@futureautonoms.com</p>
               <p className="text-foreground/80 text-sm">+90 (850) 840 74 19</p>
@@ -170,12 +312,11 @@ const FooterSection = () => {
               >
                 {navigation.legal.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                    <LegalDialog
+                      title={legalContent[item.content].title}
+                      content={legalContent[item.content].content}
+                      trigger={item.name}
+                    />
                   </li>
                 ))}
               </ul>

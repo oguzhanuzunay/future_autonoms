@@ -3,9 +3,11 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 import {
   ArrowRight,
   Award,
@@ -25,7 +27,13 @@ import type { Container, Engine } from 'tsparticles-engine';
 import { loadSlim } from 'tsparticles-slim';
 
 const HeroSection = () => {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    wantAIChat: false,
+  });
   const [loading, setLoading] = useState(false);
 
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -38,7 +46,7 @@ const HeroSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) return;
 
     setLoading(true);
     try {
@@ -48,14 +56,20 @@ const HeroSection = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
+          ...formData,
           type: 'individual',
         }),
       });
 
       if (response.ok) {
         toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
-        setEmail('');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          wantAIChat: false,
+        });
       } else {
         throw new Error('Bir hata oluştu');
       }
@@ -268,43 +282,141 @@ const HeroSection = () => {
           data-aos-delay="200"
           className="mx-auto mt-10 flex max-w-md flex-col items-center gap-4"
         >
-          <div className="w-full space-y-2">
-            <div className="flex items-center justify-between">
+          <div className="w-full space-y-4">
+            <div className="flex justify-between gap-4">
+              <div className="flex-1 space-y-2">
+                <Label
+                  htmlFor="firstName"
+                  className="text-gray-300"
+                >
+                  Ad
+                </Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="Adınız"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))}
+                  required
+                  className={cn(
+                    'mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
+                    'focus:border-purple-500/50 transition-colors',
+                    'hover:bg-white/[0.12]',
+                  )}
+                />
+              </div>
+              <div className="flex-1 space-y-2">
+                <Label
+                  htmlFor="lastName"
+                  className="text-gray-300"
+                >
+                  Soyad
+                </Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Soyadınız"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))}
+                  required
+                  className={cn(
+                    'mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
+                    'focus:border-purple-500/50 transition-colors',
+                    'hover:bg-white/[0.12]',
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label
+                  htmlFor="email"
+                  className="text-gray-300"
+                >
+                  E-posta
+                </Label>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Badge
+                        variant="outline"
+                        className="text-xs border-purple-500/30 text-purple-300"
+                      >
+                        VIP Öncelik Listesi
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>İlk başvuranlar özel fiyat ve öncelikli hizmet alır</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+              <Input
+                id="email"
+                type="email"
+                placeholder="ornek@sirket.com"
+                value={formData.email}
+                onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                required
+                className={cn(
+                  'mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
+                  'focus:border-purple-500/50 transition-colors',
+                  'hover:bg-white/[0.12]',
+                )}
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label
-                htmlFor="email"
+                htmlFor="phone"
                 className="text-gray-300"
               >
-                E-posta adresiniz
+                Telefon
               </Label>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <Badge
-                      variant="outline"
-                      className="text-xs border-purple-500/30 text-purple-300"
-                    >
-                      VIP Öncelik Listesi
-                    </Badge>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>İlk başvuranlar özel fiyat ve öncelikli hizmet alır</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="+90 (5XX) XXX XX XX"
+                value={formData.phone}
+                onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                required
+                className={cn(
+                  'mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
+                  'focus:border-purple-500/50 transition-colors',
+                  'hover:bg-white/[0.12]',
+                )}
+              />
             </div>
-            <Input
-              id="email"
-              type="email"
-              placeholder="sirket@sirket.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400 focus:border-purple-500/50"
-            />
+
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="aiChat"
+                checked={formData.wantAIChat}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, wantAIChat: checked as boolean }))
+                }
+                className="border-purple-500/30 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
+              />
+              <label
+                htmlFor="aiChat"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300 cursor-pointer"
+              >
+                DN.AI™ asistanı ile görüşmek istiyorum
+              </label>
+            </div>
           </div>
+
           <Button
             type="submit"
-            className="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 px-8 py-3 text-white transition-all hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 hover:scale-105 shadow-lg shadow-purple-500/25"
+            className={cn(
+              'group relative w-full overflow-hidden rounded-lg',
+              'bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600',
+              'px-8 py-3 text-white transition-all',
+              'hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 hover:scale-105',
+              'shadow-lg shadow-purple-500/25',
+              'disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100',
+            )}
             disabled={loading}
           >
             <span className="relative flex items-center justify-center">
@@ -318,6 +430,7 @@ const HeroSection = () => {
               )}
             </span>
           </Button>
+
           <div className="text-center space-y-2">
             <p className="text-xs text-gray-400 flex items-center justify-center">
               <Check className="mr-1 h-3 w-3 text-green-400" />

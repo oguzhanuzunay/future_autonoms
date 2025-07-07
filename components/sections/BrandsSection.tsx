@@ -464,10 +464,10 @@ const BrandsSection = () => {
 
         {/* Brands Carousel Section */}
 
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h3 className="text-2xl font-bold text-white mb-4">Güvenilir Markalar</h3>
           <p className="text-gray-400">Future Autonoms'u tercih eden öncü şirketler</p>
-        </div>
+        </div> */}
 
         <ActiveCardContext.Provider value={{ activeIndex, setActiveIndex }}>
           {/* Mobile Info Display */}
@@ -500,8 +500,8 @@ const BrandsSection = () => {
                     brand={brand}
                     index={index}
                     containerWidth={containerWidth}
-                  />
-                ))}
+            />
+          ))}
               </motion.div>
             </div>
           </div> */}
@@ -541,6 +541,9 @@ const BrandsSection = () => {
 
           <Button
             size="lg"
+            onClick={() =>
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+            }
             className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white font-semibold text-lg px-8 py-6 h-auto group shadow-lg shadow-purple-500/25"
           >
             Ücretsiz ROI Analizi Alın

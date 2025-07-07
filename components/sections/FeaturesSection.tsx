@@ -3,13 +3,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'framer-motion';
 import {
@@ -261,7 +254,7 @@ export default function FeaturesSection() {
 
   const handleScrollToCta = () => {
     if (typeof window !== 'undefined') {
-      document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -290,41 +283,41 @@ export default function FeaturesSection() {
               className="mb-4 border-purple-500/50 text-purple-300 bg-purple-500/10"
             >
               <Dna className="mr-1 h-3 w-3" />
-              <span>Future Autonoms DN.AI™ - Adaptif AI Dönüşüm Metodolojisi</span>
+              <span>Yapay Zeka ile İş Süreçlerinizi %300'e Kadar Optimize Edin</span>
             </Badge>
 
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Future Autonoms DN.AI™{' '}
+              Geleceğin İş Gücü{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-                Yaklaşımı
-            </span>
-          </h2>
+                Şimdi Hazır
+              </span>
+            </h2>
 
             <div className="text-lg font-semibold text-purple-300 mb-6">
-              Şirketinizin DNA'sına İşleyen Akıllı Dönüşüm Metodolojisi
+              7/24 Çalışan AI Asistanlarıyla İşletmenizi Zirveye Taşıyın
             </div>
 
             <p className="text-gray-300 max-w-2xl mx-auto mb-12">
-              <span className="text-gray-400">Standart uygulamalar</span>{' '}
-              <span className="text-gray-400 italic">giriş seviyesi</span>{' '}
-              <span className="text-gray-400">çözümler sunarken,</span>{' '}
+              <span className="text-gray-400">Geleneksel çözümler</span>{' '}
+              <span className="text-gray-400 italic">verimsiz ve yavaş</span>{' '}
+              <span className="text-gray-400">kalırken,</span>{' '}
               <span className="text-purple-300 font-semibold">
-                Future Autonoms DN.AI™ metodolojimiz
+                Future Autonoms DN.AI™ teknolojimiz
               </span>{' '}
-              <span className="text-white">şirketinizin DNA'sına işleyerek</span>{' '}
+              <span className="text-white">işletmenizi dönüştürerek</span>{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold">
-                kalıcı ve sürdürülebilir bir dönüşüm
+                rekabet avantajı
               </span>{' '}
               <span className="text-white">sağlar.</span>
-          </p>
-        </motion.div>
+            </p>
+          </motion.div>
 
           {/* DN.AI™ Process Grid */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-16">
             {transformationProcess.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -365,18 +358,12 @@ export default function FeaturesSection() {
           defaultValue="services"
           className="mb-16"
         >
-          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-2 bg-black/40">
+          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-1 bg-black/40">
             <TabsTrigger
               value="services"
               className="data-[state=active]:bg-purple-500/10 data-[state=active]:text-purple-300"
             >
               Hizmetlerimiz
-            </TabsTrigger>
-            <TabsTrigger
-              value="testimonials"
-              className="data-[state=active]:bg-purple-500/10 data-[state=active]:text-purple-300"
-            >
-              Başarı Hikayeleri
             </TabsTrigger>
           </TabsList>
 
@@ -405,18 +392,18 @@ export default function FeaturesSection() {
                         {service.stats.value}
                       </div>
                       <div className="text-sm text-gray-400">{service.stats.label}</div>
-                </div>
+                    </div>
                     <ul className="space-y-3 mb-6">
                       {service.benefits.map((benefit, idx) => (
-                    <li
-                      key={idx}
+                        <li
+                          key={idx}
                           className="flex items-center text-gray-300"
-                    >
+                        >
                           <CheckCircle className="w-5 h-5 text-purple-400 mr-2 flex-shrink-0" />
                           <span className="text-sm">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+                        </li>
+                      ))}
+                    </ul>
                     <div className="space-y-3 pt-4 border-t border-purple-500/10">
                       <div className="flex items-center justify-center text-sm text-gray-400">
                         <Users className="w-4 h-4 mr-2 text-purple-400" />
@@ -431,72 +418,10 @@ export default function FeaturesSection() {
                         </Badge>
                       </div>
                     </div>
-              </Card>
+                  </Card>
                 </motion.div>
               ))}
             </motion.div>
-          </TabsContent>
-
-          <TabsContent value="testimonials">
-            <Carousel className="w-full max-w-5xl mx-auto">
-              <CarouselContent>
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Card className="p-8 bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-sm border-purple-500/20">
-                        <div className="flex flex-col items-center text-center">
-                          <Badge
-                            variant="outline"
-                            className="mb-4 text-purple-300 border-purple-500/30 bg-purple-500/10"
-                          >
-                            {testimonial.industry}
-                          </Badge>
-                          <div className="flex gap-2 mb-6 flex-wrap justify-center">
-                            <Badge
-                              variant="secondary"
-                              className="bg-purple-500/10 text-purple-300"
-                            >
-                              {testimonial.stats}
-                            </Badge>
-                            {testimonial.extraStats.map((stat, idx) => (
-                              <Badge
-                                key={idx}
-                                variant="secondary"
-                                className="bg-purple-500/5 text-purple-300"
-                              >
-                                {stat}
-                              </Badge>
-                            ))}
-                          </div>
-                          <p className="text-xl text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
-                          <div className="mt-4">
-                            <p className="font-semibold text-white">{testimonial.name}</p>
-                            <p className="text-purple-300">{testimonial.title}</p>
-                            <p className="text-sm text-gray-400">{testimonial.company}</p>
-                          </div>
-                          <div className="flex gap-2 mt-4 flex-wrap justify-center">
-                            {testimonial.tags.map((tag, idx) => (
-                              <span
-                                key={idx}
-                                className="text-xs px-2 py-1 rounded-full bg-purple-500/5 text-purple-300"
-                              >
-                                #{tag}
-                              </span>
-          ))}
-        </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="bg-black/40 text-purple-300 hover:bg-purple-500/10 border-purple-500/20" />
-              <CarouselNext className="bg-black/40 text-purple-300 hover:bg-purple-500/10 border-purple-500/20" />
-            </Carousel>
           </TabsContent>
         </Tabs>
 
@@ -624,7 +549,7 @@ export default function FeaturesSection() {
             >
               <span className="block sm:inline">AI Dönüşümünü Başlat</span>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform hidden sm:inline-block" />
-          </Button>
+            </Button>
           </motion.div>
         </motion.div>
       </div>
