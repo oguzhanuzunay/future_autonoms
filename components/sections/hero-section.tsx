@@ -8,15 +8,15 @@ import { Label } from '@/components/ui/label';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import {
-    ArrowRight,
-    Award,
-    BarChart3,
-    Brain,
-    Check,
-    Clock,
-    Rocket,
-    Shield,
-    Target,
+  ArrowRight,
+  Award,
+  BarChart3,
+  Brain,
+  Check,
+  Clock,
+  Rocket,
+  Shield,
+  Target,
 } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
@@ -386,7 +386,7 @@ const HeroSection = () => {
                   'mt-2 w-full bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
                   'focus:border-purple-500/50 transition-colors',
                   'hover:bg-white/[0.12] rounded-md px-3 py-2 text-sm',
-                  'focus:outline-none focus:ring-2 focus:ring-purple-500/20'
+                  'focus:outline-none focus:ring-2 focus:ring-purple-500/20',
                 )}
                 buttonClass="phone-input-button"
                 dropdownClass="phone-input-dropdown"
@@ -396,10 +396,9 @@ const HeroSection = () => {
                 searchNotFound="Ülke Bulunamadı"
               />
             </div>
+          </div>
 
-            {/* Removing AI Chat checkbox section */}
-
-            <Button
+          <Button
             type="submit"
             className={cn(
               'group relative w-full overflow-hidden rounded-lg',
