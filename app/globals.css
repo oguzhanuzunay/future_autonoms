@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-:root {
+  :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -124,4 +124,50 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Phone Input Custom Styles */
+.PhoneInput {
+  --PhoneInputCountryFlag-borderColor: theme('colors.purple.500');
+  --PhoneInputCountrySelectArrow-color: theme('colors.white');
+  --PhoneInputCountrySelect-backgroundColor: theme('colors.black');
+}
+
+.PhoneInputCountry {
+  background: transparent;
+  border-right: 1px solid theme('colors.purple.500' / 30%);
+  padding-right: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.PhoneInputCountrySelect {
+  color: theme('colors.white');
+  background: theme('colors.black');
+}
+
+.PhoneInputCountrySelect option {
+  color: theme('colors.black');
+  background: theme('colors.white');
+}
+
+.PhoneInputInput {
+  background: transparent !important;
+  border: none !important;
+  color: theme('colors.white') !important;
+  outline: none !important;
+}
+
+.PhoneInputInput::placeholder {
+  color: theme('colors.gray.400');
+}
+
+/* Hide spinners for number input */
+.PhoneInputInput::-webkit-outer-spin-button,
+.PhoneInputInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.PhoneInputInput[type='number'] {
+  -moz-appearance: textfield;
 }

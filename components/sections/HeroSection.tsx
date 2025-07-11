@@ -3,7 +3,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -22,6 +21,8 @@ import {
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import Particles from 'react-particles';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { toast } from 'sonner';
 import type { Container, Engine } from 'tsparticles-engine';
 import { loadSlim } from 'tsparticles-slim';
@@ -31,8 +32,7 @@ const HeroSection = () => {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
-    wantAIChat: false,
+    phone: '+90', // Default to Turkey
   });
   const [loading, setLoading] = useState(false);
 
@@ -48,15 +48,19 @@ const HeroSection = () => {
     e.preventDefault();
     if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) return;
 
+    // Remove any spaces or special characters from phone number
+    const cleanPhone = formData.phone.replace(/\D/g, '');
+
     setLoading(true);
     try {
-      const response = await fetch('https://n8n.netfera.com/webhook-test/form-lead', {
+      const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
+          phone: cleanPhone, // Send clean phone number
           type: 'individual',
         }),
       });
@@ -67,8 +71,7 @@ const HeroSection = () => {
           firstName: '',
           lastName: '',
           email: '',
-          phone: '',
-          wantAIChat: false,
+          phone: '+90',
         });
       } else {
         throw new Error('Bir hata oluştu');
@@ -374,37 +377,27 @@ const HeroSection = () => {
               >
                 Telefon
               </Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="+90 (5XX) XXX XX XX"
+              <PhoneInput
+                international
+                defaultCountry="TR"
                 value={formData.phone}
-                onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
-                required
+                onChange={(value) => setFormData((prev) => ({ ...prev, phone: value || '' }))}
                 className={cn(
-                  'mt-2 bg-white/10 border-purple-500/30 text-white placeholder:text-gray-400',
+                  'mt-2 flex h-10 w-full rounded-md border bg-white/10 px-3 py-2',
+                  'border-purple-500/30 text-white placeholder:text-gray-400',
                   'focus:border-purple-500/50 transition-colors',
                   'hover:bg-white/[0.12]',
+                  '[&_.PhoneInputCountry]:!text-white [&_.PhoneInputCountrySelect]:!text-white',
+                  '[&_.PhoneInputCountrySelect]:!bg-black/50 [&_.PhoneInputCountrySelect_option]:!text-black',
+                  '[&_.PhoneInputCountrySelectArrow]:!border-white',
+                  '[&_.PhoneInputInput]:!bg-transparent [&_.PhoneInputInput]:!border-0 [&_.PhoneInputInput]:!text-white',
+                  '[&_.PhoneInputInput]:!p-0 [&_.PhoneInputInput]:!outline-none',
                 )}
+                required
               />
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="aiChat"
-                checked={formData.wantAIChat}
-                onCheckedChange={(checked) =>
-                  setFormData((prev) => ({ ...prev, wantAIChat: checked as boolean }))
-                }
-                className="border-purple-500/30 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
-              />
-              <label
-                htmlFor="aiChat"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300 cursor-pointer"
-              >
-                DN.AI™ asistanı ile görüşmek istiyorum
-              </label>
-            </div>
+            {/* Removing AI Chat checkbox section */}
           </div>
 
           <Button

@@ -8,6 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calculator, LineChart, Percent, Shield } from 'lucide-react';
 import { useState } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { toast } from 'sonner';
 
 const CTASection = () => {
@@ -15,7 +17,7 @@ const CTASection = () => {
     firstName: '',
     lastName: '',
     companyEmail: '',
-    phone: '',
+    phone: '+90', // Default to Turkey
   });
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +25,9 @@ const CTASection = () => {
     e.preventDefault();
     if (!formData.firstName || !formData.lastName || !formData.companyEmail || !formData.phone)
       return;
+
+    // Remove any spaces or special characters from phone number
+    const cleanPhone = formData.phone.replace(/\D/g, '');
 
     setLoading(true);
     try {
@@ -33,6 +38,7 @@ const CTASection = () => {
         },
         body: JSON.stringify({
           ...formData,
+          phone: cleanPhone, // Send clean phone number
           fullName: `${formData.firstName} ${formData.lastName}`,
           type: 'corporate',
         }),
@@ -46,7 +52,7 @@ const CTASection = () => {
           firstName: '',
           lastName: '',
           companyEmail: '',
-          phone: '',
+          phone: '+90',
         });
       } else {
         throw new Error('Bir hata oluştu');
@@ -177,14 +183,13 @@ const CTASection = () => {
                 >
                   Telefon
                 </Label>
-                <Input
-                  type="tel"
-                  id="phone"
+                <PhoneInput
+                  international
+                  defaultCountry="TR"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(value) => setFormData((prev) => ({ ...prev, phone: value || '' }))}
+                  className="mt-2 flex h-12 w-full rounded-md border bg-card border-purple-500/20 focus:border-purple-500/40 [&_.PhoneInputCountry]:!border-r-purple-500/20 [&_.PhoneInputCountry]:!pr-3 [&_.PhoneInputCountry]:!mr-3"
                   required
-                  placeholder="5XX XXX XX XX"
-                  className="mt-2 h-12 bg-card border-purple-500/20 focus:border-purple-500/40"
                 />
               </div>
 
