@@ -18,6 +18,7 @@ import {
   BarChart3,
   Brain,
   Calculator,
+  Clock,
   Cog,
   Cpu,
   Info,
@@ -318,6 +319,42 @@ const products: Product[] = [
     cta: 'Asistanınızı Tanıyın',
     badge: 'Yeni',
     popularity: 85,
+  },
+  {
+    id: 'survey-agent',
+    title: 'DN.Survey™ Agent',
+    description: 'Müşteri deneyimini sürekli iyileştiren, proaktif AI geri bildirim sistemi.',
+    features: [
+      {
+        text: 'Akıllı Zamanlama',
+        icon: Clock,
+        highlight: '%92 Görüşme Tamamlanma - Optimum Zamanlı Aramalar',
+      },
+      {
+        text: 'Akıllı Soru Yönetimi',
+        icon: Brain,
+        highlight: 'Dinamik Soru Akışı - Kişiselleştirilmiş Görüşme',
+      },
+      {
+        text: 'Otomatik İçgörü',
+        icon: Sparkles,
+        highlight: '24 Saat İçinde Actionable Insights',
+      },
+      {
+        text: 'Ürün Geliştirme Entegrasyonu',
+        icon: Cpu,
+        highlight: '%40 Daha Hızlı İyileştirme - Direkt Feedback Loop',
+      },
+    ],
+    benefits: [
+      'Ücretsiz Deneme Sürümü',
+      'CRM/ERP Entegrasyonu',
+      'Özelleştirilmiş Raporlar',
+      'Sürekli Optimizasyon',
+    ],
+    cta: 'Hemen Başlayın',
+    badge: 'Yeni',
+    popularity: 88,
   },
 ];
 
