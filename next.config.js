@@ -9,6 +9,20 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/panel',
+        has: [
+          {
+            type: 'host',
+            value: 'panel.localhost:3000',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

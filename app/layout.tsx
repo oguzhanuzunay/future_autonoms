@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata = {
   title: 'Future Autonoms | Enterprise AI Transformation Platform',
@@ -26,14 +27,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ClerkProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
