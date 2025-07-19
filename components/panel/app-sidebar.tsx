@@ -227,6 +227,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuButton>
           </SidebarMenuItem>
 
+          {/* KPI Tracker */}
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/panel/kpi'}
+            >
+              <Link href="/panel/kpi">
+                <BarChart3 className="size-4 text-purple-500" />
+                <span>KPI Tracker</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
           {/* Agent Sections */}
           {agentSections.map((section) => (
             <Collapsible
