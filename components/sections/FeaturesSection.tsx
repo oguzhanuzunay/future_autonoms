@@ -543,7 +543,7 @@ export default function FeaturesSection() {
             <p className="text-lg text-purple-300 font-semibold mb-6">
               Future Autonoms DN.AI™ ile sürdürülebilir dönüşüm yolculuğunuza başlayın
             </p>
-            <Button
+          <Button
               onClick={handleScrollToCta}
               className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl group shadow-lg shadow-purple-500/25 text-sm sm:text-base w-full sm:w-auto text-center"
           >

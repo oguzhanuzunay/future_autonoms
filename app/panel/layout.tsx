@@ -1,0 +1,35 @@
+'use client';
+
+import { AppSidebar } from '@/components/panel/app-sidebar';
+import { Button } from '@/components/ui/button';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { UserButton } from '@clerk/nextjs';
+import { Menu } from 'lucide-react';
+
+export default function PanelLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      <div className="flex h-screen w-full bg-background">
+        <AppSidebar />
+        <SidebarInset className="flex-1">
+          <header className="flex h-16 shrink-0 items-center justify-between border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="lg:hidden"
+              >
+                <Menu className="h-4 w-4" />
+              </Button>
+              <h1 className="text-xl font-semibold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                DN.AI™ Control Panel
+              </h1>
+            </div>
+            <UserButton afterSignOutUrl="/" />
+          </header>
+          <main className="flex-1 overflow-auto p-6">{children}</main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
+  );
+}

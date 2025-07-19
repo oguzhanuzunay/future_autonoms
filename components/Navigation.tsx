@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import {
   Sheet,
   SheetClose,
@@ -121,6 +122,43 @@ export function Navigation() {
 
           {/* CTA Buttons */}
           <div className="flex items-center space-x-3">
+            {/* Panel Access Button for Authenticated Users */}
+            <SignedIn>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                >
+                  <Link href="/panel">
+                    <Bot className="mr-2 h-4 w-4" />
+                    Control Panel
+                  </Link>
+                </Button>
+              </motion.div>
+            </SignedIn>
+
+            {/* Sign In Button for Non-Authenticated Users */}
+            <SignedOut>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <SignInButton mode="modal">
+                  <Button
+                    variant="outline"
+                    className="border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                  >
+                    <Bot className="mr-2 h-4 w-4" />
+                    Panel Girişi
+                  </Button>
+                </SignInButton>
+              </motion.div>
+            </SignedOut>
+
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -199,6 +237,37 @@ export function Navigation() {
 
                 {/* Mobile CTA Buttons */}
                 <div className="space-y-3 pt-4">
+                  {/* Panel Access for Authenticated Users */}
+                  <SignedIn>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                      >
+                        <Link href="/panel">
+                          <Bot className="mr-2 h-4 w-4" />
+                          Control Panel
+                        </Link>
+                      </Button>
+                    </SheetClose>
+                  </SignedIn>
+
+                  {/* Sign In for Non-Authenticated Users */}
+                  <SignedOut>
+                    <SheetClose asChild>
+                      <SignInButton mode="modal">
+                        <Button
+                          variant="outline"
+                          className="w-full border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                        >
+                          <Bot className="mr-2 h-4 w-4" />
+                          Panel Girişi
+                        </Button>
+                      </SignInButton>
+                    </SheetClose>
+                  </SignedOut>
+
                   <SheetClose asChild>
                     <Button
                       asChild
