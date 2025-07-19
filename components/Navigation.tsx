@@ -127,6 +127,21 @@ export function Navigation() {
             >
               <Button
                 asChild
+                variant="ghost"
+                className="border border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5 text-violet-500"
+              >
+                <Link href="/panel">
+                  <Menu className="mr-2 h-4 w-4" />
+                  Panel
+                </Link>
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                asChild
                 variant="outline"
                 className="border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
               >
@@ -199,6 +214,18 @@ export function Navigation() {
 
                 {/* Mobile CTA Buttons */}
                 <div className="space-y-3 pt-4">
+                  <SheetClose asChild>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="w-full border border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5 text-violet-500"
+                    >
+                      <Link href="/panel">
+                        <Menu className="mr-2 h-4 w-4" />
+                        Panel
+                      </Link>
+                    </Button>
+                  </SheetClose>
                   <SheetClose asChild>
                     <Button
                       asChild
