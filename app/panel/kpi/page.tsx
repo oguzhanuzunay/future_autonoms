@@ -184,13 +184,13 @@ export default function KPITrackerPage() {
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
-        return <Crown className="h-5 w-5 text-yellow-500" />;
+        return <Crown className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500" />;
       case 2:
-        return <Medal className="h-5 w-5 text-gray-400" />;
+        return <Medal className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />;
       case 3:
-        return <Trophy className="h-5 w-5 text-amber-600" />;
+        return <Trophy className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />;
       default:
-        return <Star className="h-5 w-5 text-gray-500" />;
+        return <Star className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />;
     }
   };
 
@@ -210,558 +210,601 @@ export default function KPITrackerPage() {
   };
 
   return (
-    <div className="space-y-6 p-6 max-w-[1400px] mx-auto">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            KPI Dashboard
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            Kişisel AI performansınız ve departman karşılaştırmaları
-          </p>
+    <div className="min-h-screen bg-background">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+        {/* Mobile Header */}
+        <div className="flex flex-col space-y-3 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="space-y-1">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                KPI Dashboard
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Kişisel AI performansınız ve departman karşılaştırmaları
+              </p>
+            </div>
+
+            <Select
+              value={timeRange}
+              onValueChange={setTimeRange}
+            >
+              <SelectTrigger className="w-full sm:w-[140px] h-10 sm:h-9">
+                <Calendar className="h-4 w-4 mr-2 shrink-0" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="weekly">Haftalık</SelectItem>
+                <SelectItem value="monthly">Aylık</SelectItem>
+                <SelectItem value="quarterly">Çeyreklik</SelectItem>
+                <SelectItem value="yearly">Yıllık</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        <Select
-          value={timeRange}
-          onValueChange={setTimeRange}
+        {/* Mobile-First Tabs */}
+        <Tabs
+          defaultValue="personal"
+          className="space-y-4 sm:space-y-6"
         >
-          <SelectTrigger className="w-[140px]">
-            <Calendar className="h-4 w-4 mr-2" />
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="weekly">Haftalık</SelectItem>
-            <SelectItem value="monthly">Aylık</SelectItem>
-            <SelectItem value="quarterly">Çeyreklik</SelectItem>
-            <SelectItem value="yearly">Yıllık</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+          <TabsList className="grid w-full grid-cols-3 h-auto p-1">
+            <TabsTrigger
+              value="personal"
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm"
+            >
+              <User className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+              <span className="text-center">Kişisel AI</span>
+            </TabsTrigger>
+            <TabsTrigger
+              value="department"
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm"
+            >
+              <Building2 className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+              <span className="text-center">Departman</span>
+            </TabsTrigger>
+            <TabsTrigger
+              value="leaderboard"
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm"
+            >
+              <Trophy className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+              <span className="text-center">Sıralama</span>
+            </TabsTrigger>
+          </TabsList>
 
-      {/* Ana Tabs */}
-      <Tabs
-        defaultValue="personal"
-        className="space-y-6"
-      >
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger
+          {/* Kişisel AI Kullanımı */}
+          <TabsContent
             value="personal"
-            className="flex items-center gap-2"
+            className="space-y-4 sm:space-y-6"
           >
-            <User className="h-4 w-4" />
-            Kişisel AI Kullanımı
-          </TabsTrigger>
-          <TabsTrigger
-            value="department"
-            className="flex items-center gap-2"
-          >
-            <Building2 className="h-4 w-4" />
-            Departman KPI'ları
-          </TabsTrigger>
-          <TabsTrigger
-            value="leaderboard"
-            className="flex items-center gap-2"
-          >
-            <Trophy className="h-4 w-4" />
-            Departman Sıralaması
-          </TabsTrigger>
-        </TabsList>
-
-        {/* Kişisel AI Kullanımı */}
-        <TabsContent
-          value="personal"
-          className="space-y-6"
-        >
-          {/* Kişisel Özet */}
-          <Card className="border-border/50 bg-gradient-to-r from-purple-500/10 to-blue-500/10">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <Bot className="h-6 w-6 text-purple-500" />
-                    {user?.firstName}'in AI Performansı
-                  </CardTitle>
-                  <CardDescription className="mt-1">
-                    {getTimeRangeText(timeRange)} AI kullanım istatistikleri
-                  </CardDescription>
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold">
-                    {Math.round(
-                      currentPersonalKPIs.reduce(
-                        (acc, kpi) => acc + (kpi.value / kpi.target) * 100,
-                        0,
-                      ) / currentPersonalKPIs.length,
-                    )}
-                    %
+            {/* Kişisel Özet */}
+            <Card className="border-border/50 bg-gradient-to-r from-purple-500/10 to-blue-500/10">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="flex items-center gap-3 flex-1">
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 shadow-lg">
+                      <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-lg sm:text-xl font-bold truncate">
+                        {user?.firstName}'in AI Performansı
+                      </h2>
+                      <p className="text-sm text-muted-foreground">
+                        {getTimeRangeText(timeRange)} AI kullanım istatistikleri
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">Genel Başarı</p>
-                </div>
-              </div>
-            </CardHeader>
-          </Card>
-
-          {/* Kişisel KPI'lar */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {currentPersonalKPIs.map((kpi, index) => (
-              <Card
-                key={index}
-                className="border-border/50 bg-card/50 hover:shadow-lg transition-all duration-300"
-              >
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">{kpi.name}</CardTitle>
-                    <Badge
-                      variant={kpi.trend === 'up' ? 'default' : 'secondary'}
-                      className={
-                        kpi.trend === 'up'
-                          ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                          : ''
-                      }
-                    >
-                      {kpi.trend === 'up' ? (
-                        <ArrowUp className="h-3 w-3 mr-1" />
-                      ) : (
-                        <ArrowDown className="h-3 w-3 mr-1" />
+                  <div className="text-center sm:text-right">
+                    <div className="text-2xl sm:text-3xl font-bold">
+                      {Math.round(
+                        currentPersonalKPIs.reduce(
+                          (acc, kpi) => acc + (kpi.value / kpi.target) * 100,
+                          0,
+                        ) / currentPersonalKPIs.length,
                       )}
-                      {Math.abs(kpi.change)}%
-                    </Badge>
+                      %
+                    </div>
+                    <p className="text-sm text-muted-foreground">Genel Başarı</p>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold">
-                      <CountUp
-                        end={kpi.value}
-                        decimals={kpi.unit === 's' || kpi.unit === '%' ? 1 : 0}
-                        separator=","
-                      />
-                      {kpi.unit}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      / {kpi.target.toLocaleString()}
-                      {kpi.unit}
-                    </span>
-                  </div>
-                  <Progress
-                    value={(kpi.value / kpi.target) * 100}
-                    className="h-2"
-                  />
-                  <div className="text-xs text-muted-foreground text-right">
-                    {Math.round((kpi.value / kpi.target) * 100)}% tamamlandı
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* AI Kullanım Analizi */}
-          <div className="grid gap-6 lg:grid-cols-3">
-            <Card className="lg:col-span-2 border-border/50 bg-card/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
-                  Haftalık Trend Analizi
-                </CardTitle>
-                <CardDescription>Kişisel performansınız vs departman ortalaması</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer
-                  width="100%"
-                  height={200}
-                >
-                  <AreaChart data={weeklyTrendData}>
-                    <defs>
-                      <linearGradient
-                        id="colorPersonal"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#8b5cf6"
-                          stopOpacity={0.8}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#8b5cf6"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                      <linearGradient
-                        id="colorDepartment"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#3b82f6"
-                          stopOpacity={0.8}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#3b82f6"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                    </defs>
-                    <XAxis
-                      dataKey="day"
-                      stroke="#666"
-                      fontSize={12}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      fontSize={12}
-                    />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        border: '1px solid #333',
-                        borderRadius: '8px',
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="personal"
-                      stroke="#8b5cf6"
-                      fillOpacity={1}
-                      fill="url(#colorPersonal)"
-                      name="Kişisel"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="department"
-                      stroke="#3b82f6"
-                      fillOpacity={1}
-                      fill="url(#colorDepartment)"
-                      name="Departman"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+                </div>
               </CardContent>
             </Card>
 
-            <Card className="border-border/50 bg-card/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-yellow-500" />
-                  AI Kullanım Dağılımı
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer
-                  width="100%"
-                  height={200}
+            {/* Kişisel KPI'lar - Mobile Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {currentPersonalKPIs.map((kpi, index) => (
+                <Card
+                  key={index}
+                  className="border-border/50 bg-card/50 hover:shadow-md transition-all duration-300"
                 >
-                  <PieChart>
-                    <Pie
-                      data={aiUsageData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={40}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {aiUsageData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={entry.color}
-                        />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="space-y-2 mt-4">
-                  {aiUsageData.map((item) => (
-                    <div
-                      key={item.name}
-                      className="flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{ backgroundColor: item.color }}
-                        />
-                        <span className="text-sm">{item.name}</span>
+                  <CardContent className="p-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-sm sm:text-base font-medium truncate flex-1">
+                          {kpi.name}
+                        </h3>
+                        <Badge
+                          variant={kpi.trend === 'up' ? 'default' : 'secondary'}
+                          className={`text-xs shrink-0 ${
+                            kpi.trend === 'up'
+                              ? 'bg-green-500/10 text-green-500 border-green-500/20'
+                              : ''
+                          }`}
+                        >
+                          {kpi.trend === 'up' ? (
+                            <ArrowUp className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                          ) : (
+                            <ArrowDown className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                          )}
+                          {Math.abs(kpi.change)}%
+                        </Badge>
                       </div>
-                      <span className="text-sm font-medium">{item.value}%</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl sm:text-2xl font-bold">
+                          <CountUp
+                            end={kpi.value}
+                            decimals={kpi.unit === 's' || kpi.unit === '%' ? 1 : 0}
+                            separator=","
+                          />
+                          {kpi.unit}
+                        </span>
+                        <span className="text-xs sm:text-sm text-muted-foreground">
+                          / {kpi.target.toLocaleString()}
+                          {kpi.unit}
+                        </span>
+                      </div>
+                      <Progress
+                        value={(kpi.value / kpi.target) * 100}
+                        className="h-2"
+                      />
+                      <div className="text-xs text-muted-foreground text-right">
+                        {Math.round((kpi.value / kpi.target) * 100)}% tamamlandı
+                      </div>
                     </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* AI Kullanım Analizi - Mobile Optimized */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+              <Card className="lg:col-span-2 border-border/50 bg-card/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
+                    Haftalık Trend Analizi
+                  </CardTitle>
+                  <CardDescription className="text-sm">
+                    Kişisel performansınız vs departman ortalaması
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-3 sm:p-6 pt-0">
+                  <ResponsiveContainer
+                    width="100%"
+                    height={160}
+                  >
+                    <AreaChart data={weeklyTrendData}>
+                      <defs>
+                        <linearGradient
+                          id="colorPersonal"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#8b5cf6"
+                            stopOpacity={0.8}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#8b5cf6"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                        <linearGradient
+                          id="colorDepartment"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#3b82f6"
+                            stopOpacity={0.8}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#3b82f6"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      <XAxis
+                        dataKey="day"
+                        stroke="#666"
+                        fontSize={11}
+                        tickLine={false}
+                        axisLine={false}
+                      />
+                      <YAxis hide />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                          border: '1px solid #333',
+                          borderRadius: '8px',
+                          fontSize: '12px',
+                        }}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="personal"
+                        stroke="#8b5cf6"
+                        fillOpacity={1}
+                        fill="url(#colorPersonal)"
+                        name="Kişisel"
+                        strokeWidth={2}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="department"
+                        stroke="#3b82f6"
+                        fillOpacity={1}
+                        fill="url(#colorDepartment)"
+                        name="Departman"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border/50 bg-card/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                    <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500" />
+                    AI Kullanım Dağılımı
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-3 sm:p-6 pt-0">
+                  <ResponsiveContainer
+                    width="100%"
+                    height={160}
+                  >
+                    <PieChart>
+                      <Pie
+                        data={aiUsageData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={30}
+                        outerRadius={60}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {aiUsageData.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={entry.color}
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                          border: '1px solid #333',
+                          borderRadius: '8px',
+                          fontSize: '12px',
+                        }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="space-y-2 mt-3">
+                    {aiUsageData.map((item) => (
+                      <div
+                        key={item.name}
+                        className="flex items-center justify-between text-xs sm:text-sm"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="w-2 h-2 sm:w-3 sm:h-3 rounded-full"
+                            style={{ backgroundColor: item.color }}
+                          />
+                          <span className="truncate">{item.name}</span>
+                        </div>
+                        <span className="font-medium shrink-0">{item.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Departman KPI'ları */}
+          <TabsContent
+            value="department"
+            className="space-y-4 sm:space-y-6"
+          >
+            {/* Mobile Departman Seçici */}
+            <Card className="border-border/50 bg-card/50">
+              <CardContent className="p-3 sm:p-4">
+                <div className="grid grid-cols-2 sm:flex gap-2">
+                  {Object.entries(departmentKPIs).map(([key, dept]) => (
+                    <Button
+                      key={key}
+                      variant={selectedDepartment === key ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setSelectedDepartment(key)}
+                      className={`flex-1 h-auto p-3 flex flex-col sm:flex-row items-center gap-2 text-xs sm:text-sm ${
+                        selectedDepartment === key ? 'bg-blue-600 hover:bg-blue-700' : ''
+                      }`}
+                    >
+                      <dept.icon className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+                      <span className="text-center sm:text-left truncate">{dept.name}</span>
+                    </Button>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </TabsContent>
 
-        {/* Departman KPI'ları */}
-        <TabsContent
-          value="department"
-          className="space-y-6"
-        >
-          {/* Departman Seçici */}
-          <Card className="border-border/50 bg-card/50">
-            <CardContent className="p-4">
-              <div className="flex gap-2 flex-wrap">
-                {Object.entries(departmentKPIs).map(([key, dept]) => (
-                  <Button
-                    key={key}
-                    variant={selectedDepartment === key ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedDepartment(key)}
-                    className={selectedDepartment === key ? 'bg-blue-600 hover:bg-blue-700' : ''}
-                  >
-                    <dept.icon className="h-4 w-4 mr-2" />
-                    {dept.name}
-                  </Button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Seçili Departman KPI'ları */}
-          <Card
-            className={`border-border/50 bg-gradient-to-r ${currentDepartmentKPIs.color} bg-opacity-10`}
-          >
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`p-3 rounded-lg bg-gradient-to-br ${currentDepartmentKPIs.color}`}
-                  >
-                    <currentDepartmentKPIs.icon className="h-6 w-6 text-white" />
+            {/* Seçili Departman KPI'ları */}
+            <Card
+              className={`border-border/50 bg-gradient-to-r ${currentDepartmentKPIs.color} bg-opacity-10`}
+            >
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="flex items-center gap-3 flex-1">
+                    <div
+                      className={`p-3 sm:p-4 rounded-xl bg-gradient-to-br ${currentDepartmentKPIs.color} shadow-lg`}
+                    >
+                      <currentDepartmentKPIs.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-lg sm:text-xl font-bold truncate">
+                        {currentDepartmentKPIs.name}
+                      </h2>
+                      <p className="text-sm text-muted-foreground">
+                        {getTimeRangeText(timeRange)} performans verileri
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle>{currentDepartmentKPIs.name}</CardTitle>
-                    <CardDescription>
-                      {getTimeRangeText(timeRange)} performans verileri
-                    </CardDescription>
+                  <div className="text-center sm:text-right">
+                    <div className="text-2xl sm:text-3xl font-bold">
+                      {
+                        currentDepartmentKPIs.kpis[
+                          timeRange as keyof typeof currentDepartmentKPIs.kpis
+                        ].score
+                      }
+                      %
+                    </div>
+                    <p className="text-sm text-muted-foreground">Genel Skor</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold">
-                    {
-                      currentDepartmentKPIs.kpis[
-                        timeRange as keyof typeof currentDepartmentKPIs.kpis
-                      ].score
-                    }
-                    %
-                  </div>
-                  <p className="text-sm text-muted-foreground">Genel Skor</p>
-                </div>
-              </div>
-            </CardHeader>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Departman Metrik Kartları */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {selectedDepartment === 'sales' && (
-              <>
-                <Card className="border-border/50 bg-card/50">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Gelir</p>
-                        <div className="text-2xl font-bold">
-                          ₺
-                          <CountUp
-                            end={
-                              currentDepartmentKPIs.kpis[
-                                timeRange as keyof typeof currentDepartmentKPIs.kpis
-                              ].revenue
-                            }
-                            separator=","
-                          />
-                        </div>
-                      </div>
-                      <Target className="h-8 w-8 text-green-500" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="border-border/50 bg-card/50">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Yeni Müşteriler</p>
-                        <div className="text-2xl font-bold">
-                          <CountUp
-                            end={
-                              currentDepartmentKPIs.kpis[
-                                timeRange as keyof typeof currentDepartmentKPIs.kpis
-                              ].leads
-                            }
-                          />
-                        </div>
-                      </div>
-                      <Users className="h-8 w-8 text-blue-500" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="border-border/50 bg-card/50">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Dönüşüm Oranı</p>
-                        <div className="text-2xl font-bold">
-                          <CountUp
-                            end={
-                              currentDepartmentKPIs.kpis[
-                                timeRange as keyof typeof currentDepartmentKPIs.kpis
-                              ].conversion
-                            }
-                            decimals={1}
-                          />
-                          %
-                        </div>
-                      </div>
-                      <TrendingUp className="h-8 w-8 text-purple-500" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="border-border/50 bg-card/50">
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Genel Skor</p>
-                        <div className="text-2xl font-bold">
-                          <CountUp
-                            end={
-                              currentDepartmentKPIs.kpis[
-                                timeRange as keyof typeof currentDepartmentKPIs.kpis
-                              ].score
-                            }
-                            decimals={1}
-                          />
-                          %
-                        </div>
-                      </div>
-                      <Star className="h-8 w-8 text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </>
-            )}
-          </div>
-        </TabsContent>
-
-        {/* Leaderboard */}
-        <TabsContent
-          value="leaderboard"
-          className="space-y-6"
-        >
-          <Card className="border-border/50 bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="h-6 w-6 text-yellow-500" />
-                Departman Sıralaması
-              </CardTitle>
-              <CardDescription>{getTimeRangeText(timeRange)} performans sıralaması</CardDescription>
-            </CardHeader>
-          </Card>
-
-          <div className="space-y-4">
-            {leaderboardData.map((item, index) => (
-              <Card
-                key={index}
-                className={`border-border/50 transition-all duration-300 hover:shadow-lg ${
-                  item.rank === 1
-                    ? 'bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 border-yellow-500/30'
-                    : item.rank === 2
-                    ? 'bg-gradient-to-r from-gray-400/20 to-gray-500/20 border-gray-500/30'
-                    : item.rank === 3
-                    ? 'bg-gradient-to-r from-amber-600/20 to-amber-700/20 border-amber-600/30'
-                    : 'bg-card/50'
-                }`}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        {getRankIcon(item.rank)}
-                        <span className="text-2xl font-bold">#{item.rank}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`p-2 rounded-lg bg-gradient-to-br from-current to-current ${item.color} bg-opacity-10`}
-                        >
-                          <item.icon className={`h-6 w-6 ${item.color}`} />
+            {/* Departman Metrik Kartları - Mobile Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {selectedDepartment === 'sales' && (
+                <>
+                  <Card className="border-border/50 bg-card/50">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex flex-col space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-lg">{item.department}</h3>
-                          <p className="text-sm text-muted-foreground">Departman Performansı</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Gelir</p>
+                          <div className="text-lg sm:text-xl font-bold">
+                            ₺
+                            <CountUp
+                              end={
+                                currentDepartmentKPIs.kpis[
+                                  timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                ].revenue
+                              }
+                              separator=","
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <div className="text-right">
-                        <div className="text-3xl font-bold">{item.score}%</div>
-                        <Badge
-                          variant={item.change > 0 ? 'default' : 'secondary'}
-                          className={
-                            item.change > 0
-                              ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                              : ''
-                          }
-                        >
-                          {item.change > 0 ? (
-                            <ArrowUp className="h-3 w-3 mr-1" />
-                          ) : (
-                            <ArrowDown className="h-3 w-3 mr-1" />
-                          )}
-                          {Math.abs(item.change)}%
-                        </Badge>
+                    </CardContent>
+                  </Card>
+                  <Card className="border-border/50 bg-card/50">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex flex-col space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 shrink-0" />
+                        </div>
+                        <div>
+                          <p className="text-xs sm:text-sm text-muted-foreground">
+                            Yeni Müşteriler
+                          </p>
+                          <div className="text-lg sm:text-xl font-bold">
+                            <CountUp
+                              end={
+                                currentDepartmentKPIs.kpis[
+                                  timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                ].leads
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <Progress
-                        value={item.score}
-                        className="w-32 h-3"
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="border-border/50 bg-card/50">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex flex-col space-y-2">
+                        <div className="flex items-center justify-between">
+                          <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
+                        </div>
+                        <div>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Dönüşüm Oranı</p>
+                          <div className="text-lg sm:text-xl font-bold">
+                            <CountUp
+                              end={
+                                currentDepartmentKPIs.kpis[
+                                  timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                ].conversion
+                              }
+                              decimals={1}
+                            />
+                            %
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="border-border/50 bg-card/50">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex flex-col space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500 shrink-0" />
+                        </div>
+                        <div>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Genel Skor</p>
+                          <div className="text-lg sm:text-xl font-bold">
+                            <CountUp
+                              end={
+                                currentDepartmentKPIs.kpis[
+                                  timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                ].score
+                              }
+                              decimals={1}
+                            />
+                            %
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </>
+              )}
+            </div>
+          </TabsContent>
 
-          {/* Ödül Sistemi */}
-          <Card className="border-border/50 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Medal className="h-6 w-6 text-purple-500" />
-                Bu Ay En Başarılılar
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="text-center p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                  <Crown className="h-8 w-8 mx-auto mb-2 text-yellow-500" />
-                  <p className="font-semibold">🥇 En Yüksek Performans</p>
-                  <p className="text-sm text-muted-foreground">Satış & Pazarlama</p>
-                  <p className="text-lg font-bold">94.2%</p>
+          {/* Leaderboard - Mobile Optimized */}
+          <TabsContent
+            value="leaderboard"
+            className="space-y-4 sm:space-y-6"
+          >
+            <Card className="border-border/50 bg-gradient-to-r from-yellow-500/10 to-orange-500/10">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg">
+                    <Trophy className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-bold">Departman Sıralaması</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {getTimeRangeText(timeRange)} performans sıralaması
+                    </p>
+                  </div>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                  <TrendingUp className="h-8 w-8 mx-auto mb-2 text-blue-500" />
-                  <p className="font-semibold">📈 En Çok Gelişen</p>
-                  <p className="text-sm text-muted-foreground">İnsan Kaynakları</p>
-                  <p className="text-lg font-bold">+2.1%</p>
+              </CardContent>
+            </Card>
+
+            <div className="space-y-3 sm:space-y-4">
+              {leaderboardData.map((item, index) => (
+                <Card
+                  key={index}
+                  className={`border-border/50 transition-all duration-300 hover:shadow-md ${
+                    item.rank === 1
+                      ? 'bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 border-yellow-500/30'
+                      : item.rank === 2
+                      ? 'bg-gradient-to-r from-gray-400/20 to-gray-500/20 border-gray-500/30'
+                      : item.rank === 3
+                      ? 'bg-gradient-to-r from-amber-600/20 to-amber-700/20 border-amber-600/30'
+                      : 'bg-card/50'
+                  }`}
+                >
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className="flex items-center gap-2">
+                          {getRankIcon(item.rank)}
+                          <span className="text-xl sm:text-2xl font-bold">#{item.rank}</span>
+                        </div>
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className={`p-2 rounded-lg bg-current ${item.color} bg-opacity-10`}>
+                            <item.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${item.color}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-base sm:text-lg truncate">
+                              {item.department}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                              Departman Performansı
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6">
+                        <div className="text-center sm:text-right">
+                          <div className="text-2xl sm:text-3xl font-bold">{item.score}%</div>
+                          <Badge
+                            variant={item.change > 0 ? 'default' : 'secondary'}
+                            className={`mt-1 text-xs ${
+                              item.change > 0
+                                ? 'bg-green-500/10 text-green-500 border-green-500/20'
+                                : ''
+                            }`}
+                          >
+                            {item.change > 0 ? (
+                              <ArrowUp className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                            ) : (
+                              <ArrowDown className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                            )}
+                            {Math.abs(item.change)}%
+                          </Badge>
+                        </div>
+                        <Progress
+                          value={item.score}
+                          className="w-20 sm:w-32 h-2 sm:h-3"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Ödül Sistemi - Mobile Grid */}
+            <Card className="border-border/50 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <Medal className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
+                  Bu Ay En Başarılılar
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                  <div className="text-center p-3 sm:p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+                    <Crown className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 text-yellow-500" />
+                    <p className="font-semibold text-sm sm:text-base">🥇 En Yüksek Performans</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Satış & Pazarlama</p>
+                    <p className="text-lg font-bold">94.2%</p>
+                  </div>
+                  <div className="text-center p-3 sm:p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                    <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 text-blue-500" />
+                    <p className="font-semibold text-sm sm:text-base">📈 En Çok Gelişen</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">İnsan Kaynakları</p>
+                    <p className="text-lg font-bold">+2.1%</p>
+                  </div>
+                  <div className="text-center p-3 sm:p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                    <Zap className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 text-green-500" />
+                    <p className="font-semibold text-sm sm:text-base">⚡ En Verimli</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Finans & Operasyon</p>
+                    <p className="text-lg font-bold">87% Otomasyon</p>
+                  </div>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <Zap className="h-8 w-8 mx-auto mb-2 text-green-500" />
-                  <p className="font-semibold">⚡ En Verimli</p>
-                  <p className="text-sm text-muted-foreground">Finans & Operasyon</p>
-                  <p className="text-lg font-bold">87% Otomasyon</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }
