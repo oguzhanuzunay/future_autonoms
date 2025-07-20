@@ -15,141 +15,137 @@ import {
   Bot,
   CheckCircle2,
   Clock,
+  Headphones,
   MessageSquare,
   Pause,
-  Phone,
   Play,
   Settings,
-  Target,
-  TrendingUp,
+  Star,
+  TrendingDown,
   Users,
-  XCircle,
 } from 'lucide-react';
 import CountUp from 'react-countup';
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-// Basit istatistikler
 const agentStats = [
   {
-    title: 'Aktif Görüşmeler',
-    value: 24,
+    title: 'Aktif Destek',
+    value: 18,
     icon: MessageSquare,
     color: 'text-blue-500',
   },
   {
-    title: 'Aylık Dönüşüm',
-    value: 156,
-    icon: Target,
+    title: 'Çözülen Sorun',
+    value: 89,
+    icon: CheckCircle2,
     color: 'text-green-500',
   },
   {
-    title: 'Başarı Oranı',
-    value: 94.2,
-    unit: '%',
-    icon: TrendingUp,
+    title: 'Yanıt Süresi',
+    value: 1.2,
+    unit: 'dk',
+    icon: Clock,
     color: 'text-purple-500',
   },
   {
-    title: 'Ortalama Yanıt',
-    value: 1.2,
-    unit: 's',
-    icon: Clock,
-    color: 'text-cyan-500',
+    title: 'Memnuniyet',
+    value: 4.8,
+    unit: '/5',
+    icon: Star,
+    color: 'text-yellow-500',
   },
 ];
 
-// Son görüşmeler
-const recentCalls = [
+const recentTickets = [
   {
-    id: '1',
-    contact: 'Ahmet Yılmaz',
-    company: 'Tech Corp',
-    status: 'qualified',
-    duration: '4:32',
+    id: '#1234',
+    customer: 'Fatma Özkan',
+    issue: 'Giriş sorunu',
+    status: 'resolved',
+    priority: 'high',
+    time: '1 saat önce',
+  },
+  {
+    id: '#1235',
+    customer: 'Ali Vural',
+    issue: 'Ödeme problemi',
+    status: 'in-progress',
+    priority: 'medium',
     time: '2 saat önce',
   },
   {
-    id: '2',
-    contact: 'Ayşe Kaya',
-    company: 'Design Studio',
-    status: 'follow-up',
-    duration: '2:15',
+    id: '#1236',
+    customer: 'Zehra Kaya',
+    issue: 'Hesap ayarları',
+    status: 'new',
+    priority: 'low',
     time: '3 saat önce',
-  },
-  {
-    id: '3',
-    contact: 'Mehmet Demir',
-    company: 'Retail Plus',
-    status: 'not-interested',
-    duration: '1:08',
-    time: '5 saat önce',
   },
 ];
 
-// Performans verisi
 const performanceData = [
-  { day: 'Pzt', calls: 28, qualified: 12 },
-  { day: 'Sal', calls: 35, qualified: 16 },
-  { day: 'Çar', calls: 42, qualified: 19 },
-  { day: 'Per', calls: 38, qualified: 17 },
-  { day: 'Cum', calls: 45, qualified: 21 },
+  { day: 'Pzt', tickets: 45, resolved: 42 },
+  { day: 'Sal', tickets: 52, resolved: 48 },
+  { day: 'Çar', tickets: 38, resolved: 36 },
+  { day: 'Per', tickets: 41, resolved: 39 },
+  { day: 'Cum', tickets: 36, resolved: 34 },
 ];
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case 'qualified':
+    case 'resolved':
       return 'bg-green-500/10 text-green-500 border-green-500/20';
-    case 'follow-up':
+    case 'in-progress':
+      return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+    case 'new':
       return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-    case 'not-interested':
-      return 'bg-red-500/10 text-red-500 border-red-500/20';
     default:
       return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
   }
 };
 
-const getStatusIcon = (status: string) => {
-  switch (status) {
-    case 'qualified':
-      return <CheckCircle2 className="h-4 w-4" />;
-    case 'follow-up':
-      return <Clock className="h-4 w-4" />;
-    case 'not-interested':
-      return <XCircle className="h-4 w-4" />;
-    default:
-      return <Clock className="h-4 w-4" />;
-  }
-};
-
 const getStatusText = (status: string) => {
   switch (status) {
-    case 'qualified':
-      return 'Nitelikli';
-    case 'follow-up':
-      return 'Takip';
-    case 'not-interested':
-      return 'İlgisiz';
+    case 'resolved':
+      return 'Çözüldü';
+    case 'in-progress':
+      return 'İşlemde';
+    case 'new':
+      return 'Yeni';
     default:
       return 'Bekliyor';
   }
 };
 
-export default function SalesAgentPage() {
+const getPriorityText = (priority: string) => {
+  switch (priority) {
+    case 'high':
+      return 'Yüksek';
+    case 'medium':
+      return 'Orta';
+    case 'low':
+      return 'Düşük';
+    default:
+      return 'Normal';
+  }
+};
+
+export default function SupportAgentPage() {
   return (
     <div className="space-y-6 p-6 max-w-[1200px] mx-auto">
-      {/* Basit Header */}
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
             <Bot className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">DN.Sales™ Agent</h1>
-            <p className="text-muted-foreground">AI Satış Temsilcisi</p>
+            <h1 className="text-2xl font-bold">DN.Support™ Agent</h1>
+            <p className="text-muted-foreground">AI Müşteri Destek Temsilcisi</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="bg-green-500/10 text-green-500 border-green-500/20">Aktif</Badge>
+          <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">Aktif</Badge>
           <Button
             size="sm"
             variant="outline"
@@ -164,7 +160,7 @@ export default function SalesAgentPage() {
         </div>
       </div>
 
-      {/* Basit İstatistikler */}
+      {/* İstatistikler */}
       <div className="grid gap-4 md:grid-cols-4">
         {agentStats.map((stat) => (
           <Card
@@ -176,7 +172,10 @@ export default function SalesAgentPage() {
                 <div>
                   <p className="text-sm text-muted-foreground">{stat.title}</p>
                   <div className="text-2xl font-bold">
-                    <CountUp end={stat.value} />
+                    <CountUp
+                      end={stat.value}
+                      decimals={stat.unit === 'dk' || stat.unit === '/5' ? 1 : 0}
+                    />
                     {stat.unit}
                   </div>
                 </div>
@@ -193,10 +192,10 @@ export default function SalesAgentPage() {
         <Card className="lg:col-span-2 border-border/50 bg-card/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-blue-500" />
-              Haftalık Performans
+              <TrendingDown className="h-5 w-5 text-blue-500" />
+              Haftalık Destek Performansı
             </CardTitle>
-            <CardDescription>Son 5 günün görüşme ve niteliklendirme verileri</CardDescription>
+            <CardDescription>Son 5 günün ticket ve çözüm verileri</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer
@@ -206,7 +205,7 @@ export default function SalesAgentPage() {
               <AreaChart data={performanceData}>
                 <defs>
                   <linearGradient
-                    id="colorCalls"
+                    id="colorTickets"
                     x1="0"
                     y1="0"
                     x2="0"
@@ -224,7 +223,7 @@ export default function SalesAgentPage() {
                     />
                   </linearGradient>
                   <linearGradient
-                    id="colorQualified"
+                    id="colorResolved"
                     x1="0"
                     y1="0"
                     x2="0"
@@ -260,19 +259,19 @@ export default function SalesAgentPage() {
                 />
                 <Area
                   type="monotone"
-                  dataKey="calls"
+                  dataKey="tickets"
                   stroke="#3b82f6"
                   fillOpacity={1}
-                  fill="url(#colorCalls)"
-                  name="Görüşme"
+                  fill="url(#colorTickets)"
+                  name="Ticket"
                 />
                 <Area
                   type="monotone"
-                  dataKey="qualified"
+                  dataKey="resolved"
                   stroke="#10b981"
                   fillOpacity={1}
-                  fill="url(#colorQualified)"
-                  name="Nitelikli"
+                  fill="url(#colorResolved)"
+                  name="Çözülen"
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -293,7 +292,7 @@ export default function SalesAgentPage() {
               variant="outline"
             >
               <Play className="h-4 w-4" />
-              Yeni Görüşme Başlat
+              Yeni Ticket Oluştur
             </Button>
             <Button
               className="w-full justify-start gap-2"
@@ -306,58 +305,57 @@ export default function SalesAgentPage() {
               className="w-full justify-start gap-2"
               variant="outline"
             >
-              <Phone className="h-4 w-4" />
-              Arama Geçmişi
+              <Headphones className="h-4 w-4" />
+              Canlı Destek
             </Button>
             <Button
               className="w-full justify-start gap-2"
               variant="outline"
             >
-              <Target className="h-4 w-4" />
-              Hedefler
+              <Star className="h-4 w-4" />
+              Bilgi Bankası
             </Button>
           </CardContent>
         </Card>
       </div>
 
-      {/* Son Görüşmeler */}
+      {/* Son Ticket'lar */}
       <Card className="border-border/50 bg-card/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Phone className="h-5 w-5 text-green-500" />
-            Son Görüşmeler
+            <MessageSquare className="h-5 w-5 text-blue-500" />
+            Son Destek Talepleri
           </CardTitle>
-          <CardDescription>En son yapılan satış görüşmeleri</CardDescription>
+          <CardDescription>En son gelen müşteri destek talepleri</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Kişi</TableHead>
-                <TableHead>Şirket</TableHead>
+                <TableHead>Ticket ID</TableHead>
+                <TableHead>Müşteri</TableHead>
+                <TableHead>Sorun</TableHead>
                 <TableHead>Durum</TableHead>
-                <TableHead>Süre</TableHead>
+                <TableHead>Öncelik</TableHead>
                 <TableHead>Zaman</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {recentCalls.map((call) => (
-                <TableRow key={call.id}>
-                  <TableCell className="font-medium">{call.contact}</TableCell>
-                  <TableCell>{call.company}</TableCell>
+              {recentTickets.map((ticket) => (
+                <TableRow key={ticket.id}>
+                  <TableCell className="font-medium">{ticket.id}</TableCell>
+                  <TableCell>{ticket.customer}</TableCell>
+                  <TableCell>{ticket.issue}</TableCell>
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className={getStatusColor(call.status)}
+                      className={getStatusColor(ticket.status)}
                     >
-                      <div className="flex items-center gap-1">
-                        {getStatusIcon(call.status)}
-                        {getStatusText(call.status)}
-                      </div>
+                      {getStatusText(ticket.status)}
                     </Badge>
                   </TableCell>
-                  <TableCell>{call.duration}</TableCell>
-                  <TableCell className="text-muted-foreground">{call.time}</TableCell>
+                  <TableCell>{getPriorityText(ticket.priority)}</TableCell>
+                  <TableCell className="text-muted-foreground">{ticket.time}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
