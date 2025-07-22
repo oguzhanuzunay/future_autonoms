@@ -23,28 +23,78 @@ const CTASection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.companyEmail || !formData.phone)
+    console.log('Form submitted!', formData);
+
+    if (!formData.firstName || !formData.lastName || !formData.companyEmail || !formData.phone) {
+      toast.error('Lütfen tüm alanları doldurun.');
       return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.companyEmail)) {
+      toast.error('Lütfen geçerli bir e-posta adresi girin.');
+      return;
+    }
+
+    // Phone validation (should have at least 10 digits)
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      toast.error('Lütfen geçerli bir telefon numarası girin.');
+      return;
+    }
 
     // Remove any spaces or special characters from phone number
     const cleanPhone = formData.phone.replace(/\D/g, '');
+    console.log('Clean phone:', cleanPhone);
 
     setLoading(true);
     try {
-      const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
+      const payload = {
+        ...formData,
+        phone: cleanPhone, // Send clean phone number
+        fullName: `${formData.firstName} ${formData.lastName}`,
+        type: 'corporate',
+      };
+
+      console.log('Sending payload:', payload);
+
+      // Test endpoint first
+      try {
+        const testResponse = await fetch('https://httpbin.org/post', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        console.log('Test endpoint response:', testResponse.status);
+      } catch (testError) {
+        console.log('Test endpoint failed:', testError);
+      }
+
+      const response = await fetch('https://n8n.netfera.com/webhook-test/form-lead', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          phone: cleanPhone, // Send clean phone number
-          type: 'individual',
-        }),
+        body: JSON.stringify(payload),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
       if (response.ok) {
-        toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
+        const responseData = await response.text();
+        console.log('Response data:', responseData);
+
+        toast.success(
+          'Tebrikler! 🎉 Şirketinize özel ROI analizi için uzman ekibimiz 24 saat içinde size ulaşacak.',
+        );
         setFormData({
           firstName: '',
           lastName: '',
@@ -52,10 +102,15 @@ const CTASection = () => {
           phone: '+90',
         });
       } else {
-        throw new Error('Bir hata oluştu');
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
     } catch (error) {
-      toast.error('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+      console.error('Submit error:', error);
+      toast.error(
+        'Üzgünüz, bir hata oluştu. Lütfen bizi (555) 555-5555 numaralı telefondan arayın.',
+      );
     } finally {
       setLoading(false);
     }
