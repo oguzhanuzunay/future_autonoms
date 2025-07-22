@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import {
   Sheet,
   SheetClose,
@@ -11,6 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
 import { Bot, Calculator, Menu } from 'lucide-react';
 import Image from 'next/image';
@@ -26,6 +26,7 @@ const menuItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const hasClerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   // Scroll handler for navbar background
   useEffect(() => {
@@ -87,7 +88,7 @@ export function Navigation() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center"
-        >
+          >
             <Image
               src="/images/logo/logo.png"
               alt="Future Autonoms"
@@ -107,7 +108,7 @@ export function Navigation() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-          <Link
+              <Link
                 href={item.href}
                 onClick={(e) => handleScroll(e, item.href)}
                 className={cn(
@@ -116,14 +117,53 @@ export function Navigation() {
                 )}
               >
                 {item.label}
-          </Link>
+              </Link>
             </motion.div>
           ))}
 
           {/* CTA Buttons */}
           <div className="flex items-center space-x-3">
-            {/* Panel Access Button for Authenticated Users */}
-            <SignedIn>
+            {hasClerkKey ? (
+              <>
+                {/* Panel Access Button for Authenticated Users */}
+                <SignedIn>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                    >
+                      <Link href="/panel">
+                        <Bot className="mr-2 h-4 w-4" />
+                        Control Panel
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </SignedIn>
+
+                {/* Sign In Button for Non-Authenticated Users */}
+                <SignedOut>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <SignInButton mode="modal">
+                      <Button
+                        variant="outline"
+                        className="border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                      >
+                        <Bot className="mr-2 h-4 w-4" />
+                        Panel Girişi
+                      </Button>
+                    </SignInButton>
+                  </motion.div>
+                </SignedOut>
+              </>
+            ) : (
+              /* Fallback when Clerk is not available */
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -135,29 +175,11 @@ export function Navigation() {
                 >
                   <Link href="/panel">
                     <Bot className="mr-2 h-4 w-4" />
-                    Control Panel
-          </Link>
+                    Panel Girişi
+                  </Link>
                 </Button>
               </motion.div>
-            </SignedIn>
-
-            {/* Sign In Button for Non-Authenticated Users */}
-            <SignedOut>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <SignInButton mode="modal">
-                  <Button
-                    variant="outline"
-                    className="border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
-                  >
-                    <Bot className="mr-2 h-4 w-4" />
-                    Panel Girişi
-                  </Button>
-                </SignInButton>
-              </motion.div>
-            </SignedOut>
+            )}
 
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -171,7 +193,7 @@ export function Navigation() {
                 <Link href="#contact">
                   <Calculator className="mr-2 h-4 w-4" />
                   Ücretsiz Analiz
-            </Link>
+                </Link>
               </Button>
             </motion.div>
             <motion.div
@@ -189,7 +211,7 @@ export function Navigation() {
                 <Link href="#contact">
                   <Bot className="mr-2 h-4 w-4" />
                   Hemen Başlayın
-            </Link>
+                </Link>
               </Button>
             </motion.div>
           </div>
@@ -237,8 +259,41 @@ export function Navigation() {
 
                 {/* Mobile CTA Buttons */}
                 <div className="space-y-3 pt-4">
-                  {/* Panel Access for Authenticated Users */}
-                  <SignedIn>
+                  {hasClerkKey ? (
+                    <>
+                      {/* Panel Access for Authenticated Users */}
+                      <SignedIn>
+                        <SheetClose asChild>
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="w-full border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                          >
+                            <Link href="/panel">
+                              <Bot className="mr-2 h-4 w-4" />
+                              Control Panel
+                            </Link>
+                          </Button>
+                        </SheetClose>
+                      </SignedIn>
+
+                      {/* Sign In for Non-Authenticated Users */}
+                      <SignedOut>
+                        <SheetClose asChild>
+                          <SignInButton mode="modal">
+                            <Button
+                              variant="outline"
+                              className="w-full border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
+                            >
+                              <Bot className="mr-2 h-4 w-4" />
+                              Panel Girişi
+                            </Button>
+                          </SignInButton>
+                        </SheetClose>
+                      </SignedOut>
+                    </>
+                  ) : (
+                    /* Fallback when Clerk is not available */
                     <SheetClose asChild>
                       <Button
                         asChild
@@ -247,26 +302,11 @@ export function Navigation() {
                       >
                         <Link href="/panel">
                           <Bot className="mr-2 h-4 w-4" />
-                          Control Panel
+                          Panel Girişi
                         </Link>
                       </Button>
                     </SheetClose>
-                  </SignedIn>
-
-                  {/* Sign In for Non-Authenticated Users */}
-                  <SignedOut>
-                    <SheetClose asChild>
-                      <SignInButton mode="modal">
-                        <Button
-                          variant="outline"
-                          className="w-full border-purple-500/20 hover:border-purple-500/40 hover:bg-purple-500/5 text-purple-500"
-                        >
-                          <Bot className="mr-2 h-4 w-4" />
-                          Panel Girişi
-                        </Button>
-                      </SignInButton>
-                    </SheetClose>
-                  </SignedOut>
+                  )}
 
                   <SheetClose asChild>
                     <Button
@@ -296,7 +336,7 @@ export function Navigation() {
             </SheetContent>
           </Sheet>
         </div>
-    </nav>
+      </nav>
     </header>
   );
 }
