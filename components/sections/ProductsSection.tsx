@@ -560,22 +560,20 @@ const ProductCard = ({ product }: { product: Product }) => {
             </div>
           </CardContent>
 
-          {/* CTA Button */}
-          <div className="p-4 pt-0">
-            <Button
-              onClick={() =>
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-              }
-              className={`w-full ${
-                product.id === 'enterprise'
-                  ? 'bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white font-semibold shadow-lg shadow-purple-500/25'
-                  : 'bg-gradient-to-r from-purple-500/80 via-blue-500/80 to-cyan-500/80 hover:from-purple-600 hover:via-blue-600 hover:to-cyan-600 text-white'
-              } transition-all duration-300 group`}
-            >
-              {product.cta}
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
+          {/* CTA Button - sadece enterprise için */}
+          {product.id === 'enterprise' && (
+            <div className="p-4 pt-0">
+              <Button
+                onClick={() =>
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="w-full bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white font-semibold shadow-lg shadow-purple-500/25 transition-all duration-300 group"
+              >
+                {product.cta}
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          )}
         </Card>
       </div>
     </motion.div>
