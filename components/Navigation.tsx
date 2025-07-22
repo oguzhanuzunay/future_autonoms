@@ -1,5 +1,6 @@
 'use client';
 
+import { AlertBanner } from '@/components/ui/alert-banner';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -10,7 +11,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Bot, Calculator, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,18 +26,6 @@ const menuItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // AI İstatistik Haberleri
-  const aiNews = [
-    "🔥 AI pazarı 2025'te 47 milyar USD | %88 pazarlamacı günlük AI kullanıyor | %79 şirket AI Agent entegrasyonu tamamladı",
-    "⚡ Salesforce AI Agent'ları %66 talep otomasyonu sağlıyor | %84 destek sorgusu otomatik çözülüyor",
-    '🚀 IBM AIOps Agent ile false pozitifler %40 azaldı | MTTR %30 iyileşti | 200+ kurumsal müşteri',
-    "💼 Yöneticilerin %88'i AI yatırımlarını artırıyor | Mass General %60 belgeleme süresini kısalttı",
-    "📊 KOBİ'lerin %75'i AI ile büyük şirketlerle rekabet ediyor | Adobe reklamda %40 maliyet düşürdü",
-    "🎯 2028'de şirketlerin %38'inde AI Agent'lar takım üyesi olacak | Docket %83 operasyonel maliyet tasarrufu",
-  ];
 
   // Scroll handler for navbar background
   useEffect(() => {
@@ -46,17 +35,6 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // News rotation
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length);
-    }, 4000); // Her 4 saniyede bir değişir
-
-    return () => clearInterval(interval);
-  }, [aiNews.length, isPaused]);
 
   // Intersection Observer for active section
   useEffect(() => {
@@ -93,71 +71,7 @@ export function Navigation() {
 
   return (
     <>
-      {/* AI İstatistik Alert Banner */}
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 w-full z-[60] overflow-hidden"
-      >
-        {/* Animasyonlu Geçişli Arka Plan */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600"
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          style={{
-            backgroundSize: '200% 200%',
-          }}
-        />
-
-        {/* İçerik */}
-        <div
-          className="relative z-10 py-2 px-4"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="container mx-auto text-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentNewsIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="text-xs sm:text-sm font-medium text-white"
-              >
-                <strong>CANLI VERİ:</strong> {aiNews[currentNewsIndex]}
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Progress Bar */}
-            <div className="mt-1 w-full max-w-md mx-auto">
-              <div className="h-0.5 bg-white/20 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-white rounded-full"
-                  initial={{ width: '0%' }}
-                  animate={{
-                    width: isPaused ? `${((currentNewsIndex + 1) / aiNews.length) * 100}%` : '100%',
-                  }}
-                  transition={{
-                    duration: isPaused ? 0.3 : 4,
-                    ease: isPaused ? 'easeOut' : 'linear',
-                    repeat: isPaused ? 0 : Infinity,
-                    repeatDelay: 0.5,
-                  }}
-                  key={`progress-${currentNewsIndex}`}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+      <AlertBanner />
 
       <header
         className={cn(
