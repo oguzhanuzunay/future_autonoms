@@ -59,28 +59,10 @@ const CTASection = () => {
 
       console.log('Sending payload:', payload);
 
-      // Test endpoint first
-      try {
-        const testResponse = await fetch('https://httpbin.org/post', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
-        console.log('Test endpoint response:', testResponse.status);
-      } catch (testError) {
-        console.log('Test endpoint failed:', testError);
-      }
-
-      const response = await fetch('https://n8n.netfera.com/webhook-test/form-lead', {
+      const response = await fetch('/api/submit-form', {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
         body: JSON.stringify(payload),
       });
@@ -89,22 +71,26 @@ const CTASection = () => {
       console.log('Response ok:', response.ok);
 
       if (response.ok) {
-        const responseData = await response.text();
+        const responseData = await response.json();
         console.log('Response data:', responseData);
 
-        toast.success(
-          'Tebrikler! 🎉 Şirketinize özel ROI analizi için uzman ekibimiz 24 saat içinde size ulaşacak.',
-        );
-        setFormData({
-          firstName: '',
-          lastName: '',
-          companyEmail: '',
-          phone: '+90',
-        });
+        if (responseData.success) {
+          toast.success(
+            'Tebrikler! 🎉 Şirketinize özel ROI analizi için uzman ekibimiz 24 saat içinde size ulaşacak.',
+          );
+          setFormData({
+            firstName: '',
+            lastName: '',
+            companyEmail: '',
+            phone: '+90',
+          });
+        } else {
+          throw new Error(responseData.error || 'Submission failed');
+        }
       } else {
-        const errorText = await response.text();
-        console.error('Error response:', errorText);
-        throw new Error(`HTTP ${response.status}: ${errorText}`);
+        const errorData = await response.json();
+        console.error('Error response:', errorData);
+        throw new Error(`HTTP ${response.status}: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Submit error:', error);

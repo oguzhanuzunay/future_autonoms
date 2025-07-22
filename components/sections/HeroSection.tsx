@@ -53,7 +53,7 @@ const HeroSection = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
+      const response = await fetch('/api/submit-hero-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,15 +66,21 @@ const HeroSection = () => {
       });
 
       if (response.ok) {
-        toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '+90',
-        });
+        const responseData = await response.json();
+        if (responseData.success) {
+          toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '+90',
+          });
+        } else {
+          throw new Error(responseData.error || 'Submission failed');
+        }
       } else {
-        throw new Error('Bir hata oluştu');
+        const errorData = await response.json();
+        throw new Error(`HTTP ${response.status}: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
       toast.error('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
