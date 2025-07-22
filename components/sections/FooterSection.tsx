@@ -375,7 +375,17 @@ const FooterSection = () => {
                 >
                   PwC AI Survey
                 </button>
-                <div>Capgemini Reports</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.capgemini.com/research/generative-ai-in-organizations/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Capgemini Reports
+                </button>
               </div>
               <div className="space-y-1">
                 <div className="font-medium text-purple-400">Teknoloji Medyası</div>
@@ -462,8 +472,28 @@ const FooterSection = () => {
                 >
                   Darktrace Security
                 </button>
-                <div>Cybersecurity Reports</div>
-                <div>Medical AI Cases</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.cybersecurityinsiders.com/ai-security-research/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Cybersecurity Reports
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Medical AI Cases
+                </button>
               </div>
             </div>
             <p className="mt-4 text-xs text-foreground/50">
