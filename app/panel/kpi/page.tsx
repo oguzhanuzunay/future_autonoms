@@ -595,14 +595,46 @@ export default function KPITrackerPage() {
                           <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
                         </div>
                         <div>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Gelir</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground">
+                            {selectedDepartment === 'sales'
+                              ? 'Gelir'
+                              : selectedDepartment === 'support'
+                              ? 'Çözülen Ticket'
+                              : selectedDepartment === 'hr'
+                              ? 'İşe Alımlar'
+                              : 'Tasarruf'}
+                          </p>
                           <div className="text-lg sm:text-xl font-bold">
-                            ₺
+                            {selectedDepartment === 'sales'
+                              ? '₺'
+                              : selectedDepartment === 'finance'
+                              ? '₺'
+                              : ''}
                             <CountUp
                               end={
-                                currentDepartmentKPIs.kpis[
-                                  timeRange as keyof typeof currentDepartmentKPIs.kpis
-                                ].revenue
+                                selectedDepartment === 'sales'
+                                  ? (
+                                      currentDepartmentKPIs.kpis[
+                                        timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                      ] as any
+                                    ).revenue
+                                  : selectedDepartment === 'support'
+                                  ? (
+                                      currentDepartmentKPIs.kpis[
+                                        timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                      ] as any
+                                    ).resolved
+                                  : selectedDepartment === 'hr'
+                                  ? (
+                                      currentDepartmentKPIs.kpis[
+                                        timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                      ] as any
+                                    ).hires
+                                  : (
+                                      currentDepartmentKPIs.kpis[
+                                        timeRange as keyof typeof currentDepartmentKPIs.kpis
+                                      ] as any
+                                    ).savings
                               }
                               separator=","
                             />
