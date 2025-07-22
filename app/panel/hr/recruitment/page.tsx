@@ -15,17 +15,19 @@ import {
 import {
   ArrowDown,
   ArrowUp,
+  Award,
+  Calendar,
   Clock,
-  DollarSign,
+  Edit,
   Eye,
   FileText,
   Filter,
-  Mail,
-  Phone,
   Plus,
+  Search,
   Star,
   Target,
   TrendingUp,
+  UserCheck,
   Users,
 } from 'lucide-react';
 import CountUp from 'react-countup';
@@ -41,68 +43,71 @@ import {
   YAxis,
 } from 'recharts';
 
-// Lead performance data
-const leadData = [
-  { day: 'Pzt', new: 12, qualified: 8, converted: 3, revenue: 45000 },
-  { day: 'Sal', new: 18, qualified: 14, converted: 5, revenue: 75000 },
-  { day: 'Çar', new: 15, qualified: 11, converted: 4, revenue: 60000 },
-  { day: 'Per', new: 22, qualified: 16, converted: 7, revenue: 105000 },
-  { day: 'Cum', new: 19, qualified: 13, converted: 6, revenue: 90000 },
-  { day: 'Cmt', new: 8, qualified: 6, converted: 2, revenue: 30000 },
-  { day: 'Paz', new: 5, qualified: 3, converted: 1, revenue: 15000 },
+// Recruitment data
+const recruitmentData = [
+  { month: 'Oca', applied: 45, interviewed: 18, hired: 6 },
+  { month: 'Şub', applied: 52, interviewed: 22, hired: 8 },
+  { month: 'Mar', applied: 38, interviewed: 16, hired: 5 },
+  { month: 'Nis', applied: 67, interviewed: 28, hired: 10 },
+  { month: 'May', applied: 59, interviewed: 25, hired: 9 },
+  { month: 'Haz', applied: 71, interviewed: 31, hired: 12 },
 ];
 
-const leadSourceData = [
-  { name: 'Web Sitesi', value: 35, color: '#10b981' },
-  { name: 'Sosyal Medya', value: 28, color: '#3b82f6' },
-  { name: 'Referans', value: 20, color: '#8b5cf6' },
-  { name: 'E-posta', value: 17, color: '#f59e0b' },
+const positionData = [
+  { name: 'Geliştirici', value: 40, color: '#3b82f6' },
+  { name: 'Satış', value: 25, color: '#10b981' },
+  { name: 'Pazarlama', value: 20, color: '#8b5cf6' },
+  { name: 'Destek', value: 15, color: '#f59e0b' },
 ];
 
-const recentLeads = [
+const candidates = [
   {
-    id: 'LD001',
-    name: 'Mehmet Kaya',
-    company: 'TechCorp',
-    source: 'Website',
-    status: 'qualified',
-    value: 25000,
-    lastContact: '2 saat önce',
-    score: 85,
+    id: 'CND001',
+    name: 'Emre Kaya',
+    position: 'Senior Frontend Developer',
+    experience: '5 yıl',
+    status: 'interview_scheduled',
+    score: 92,
+    appliedDate: '2024-06-15',
+    interviewDate: '2024-06-20',
+    recruiter: 'Ahmet Yılmaz',
   },
   {
-    id: 'LD002',
-    name: 'Ayşe Demir',
-    company: 'DigitalPro',
-    source: 'Social Media',
-    status: 'new',
-    value: 18000,
-    lastContact: '4 saat önce',
-    score: 72,
+    id: 'CND002',
+    name: 'Selin Özkan',
+    position: 'Marketing Manager',
+    experience: '3 yıl',
+    status: 'under_review',
+    score: 87,
+    appliedDate: '2024-06-14',
+    interviewDate: null,
+    recruiter: 'Fatma Kaya',
   },
   {
-    id: 'LD003',
-    name: 'Ali Yılmaz',
-    company: 'StartupX',
-    source: 'Referral',
-    status: 'contacted',
-    value: 35000,
-    lastContact: '1 gün önce',
-    score: 91,
+    id: 'CND003',
+    name: 'Burak Demir',
+    position: 'Sales Representative',
+    experience: '2 yıl',
+    status: 'offer_sent',
+    score: 89,
+    appliedDate: '2024-06-10',
+    interviewDate: '2024-06-18',
+    recruiter: 'Mehmet Demir',
   },
   {
-    id: 'LD004',
-    name: 'Zehra Özkan',
-    company: 'BusinessHub',
-    source: 'Email',
-    status: 'converted',
-    value: 42000,
-    lastContact: '2 gün önce',
-    score: 96,
+    id: 'CND004',
+    name: 'Aylin Yılmaz',
+    position: 'Customer Support Lead',
+    experience: '4 yıl',
+    status: 'hired',
+    score: 95,
+    appliedDate: '2024-05-28',
+    interviewDate: '2024-06-05',
+    recruiter: 'Ayşe Özkan',
   },
 ];
 
-export default function LeadsPage() {
+export default function RecruitmentPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
@@ -110,11 +115,11 @@ export default function LeadsPage() {
         <div className="flex flex-col space-y-3 sm:space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-1">
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Lead Management
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+                Recruitment
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground">
-                Müşteri adayları yönetimi ve konversiyon takibi
+                İşe alım süreci yönetimi ve aday takip sistemi
               </p>
             </div>
 
@@ -129,10 +134,10 @@ export default function LeadsPage() {
               </Button>
               <Button
                 size="sm"
-                className="h-9 bg-green-600 hover:bg-green-700 text-xs sm:text-sm"
+                className="h-9 bg-violet-600 hover:bg-violet-700 text-xs sm:text-sm"
               >
                 <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Yeni Lead
+                Aday Ekle
               </Button>
             </div>
           </div>
@@ -147,20 +152,17 @@ export default function LeadsPage() {
                   <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 shrink-0" />
                   <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20 text-xs">
                     <ArrowUp className="h-2 w-2 mr-1" />
-                    12.3%
+                    23.5%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Toplam Lead</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Aktif Başvuru</p>
                   <div className="text-lg sm:text-xl font-bold">
-                    <CountUp
-                      end={1247}
-                      separator=","
-                    />
+                    <CountUp end={127} />
                   </div>
                 </div>
                 <Progress
-                  value={78}
+                  value={84}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -171,24 +173,48 @@ export default function LeadsPage() {
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between">
-                  <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
                   <Badge className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
                     <ArrowUp className="h-2 w-2 mr-1" />
-                    8.7%
+                    12.8%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Konversiyon Oranı</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Bu Hafta Mülakat</p>
+                  <div className="text-lg sm:text-xl font-bold">
+                    <CountUp end={23} />
+                  </div>
+                </div>
+                <Progress
+                  value={77}
+                  className="h-1.5 sm:h-2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 bg-card/50 hover:shadow-md transition-all duration-300">
+            <CardContent className="p-3 sm:p-4">
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center justify-between">
+                  <UserCheck className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
+                  <Badge className="bg-purple-500/10 text-purple-500 border-purple-500/20 text-xs">
+                    <ArrowUp className="h-2 w-2 mr-1" />
+                    18.2%
+                  </Badge>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">İşe Alım Oranı</p>
                   <div className="text-lg sm:text-xl font-bold">
                     <CountUp
-                      end={24.8}
+                      end={16.8}
                       decimals={1}
                     />
                     %
                   </div>
                 </div>
                 <Progress
-                  value={25}
+                  value={17}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -199,52 +225,23 @@ export default function LeadsPage() {
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between">
-                  <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500 shrink-0" />
-                  <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-xs">
-                    <ArrowUp className="h-2 w-2 mr-1" />
-                    15.2%
-                  </Badge>
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Lead Değeri</p>
-                  <div className="text-lg sm:text-xl font-bold">
-                    ₺
-                    <CountUp
-                      end={28500}
-                      separator=","
-                    />
-                  </div>
-                </div>
-                <Progress
-                  value={72}
-                  className="h-1.5 sm:h-2"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-border/50 bg-card/50 hover:shadow-md transition-all duration-300">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex flex-col space-y-2">
-                <div className="flex items-center justify-between">
-                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
-                  <Badge className="bg-purple-500/10 text-purple-500 border-purple-500/20 text-xs">
+                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 shrink-0" />
+                  <Badge className="bg-orange-500/10 text-orange-500 border-orange-500/20 text-xs">
                     <ArrowDown className="h-2 w-2 mr-1" />
-                    18.5%
+                    8.4%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Yanıt Süresi</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Ortalama İşe Alım Süresi
+                  </p>
                   <div className="text-lg sm:text-xl font-bold">
-                    <CountUp
-                      end={2.4}
-                      decimals={1}
-                    />
-                    saat
+                    <CountUp end={18} />
+                    gün
                   </div>
                 </div>
                 <Progress
-                  value={92}
+                  value={82}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -254,15 +251,15 @@ export default function LeadsPage() {
 
         {/* Charts Section - Mobile Optimized */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Lead Performance Chart */}
+          {/* Recruitment Funnel Chart */}
           <Card className="lg:col-span-2 border-border/50 bg-card/50">
             <CardHeader className="pb-3">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
-                Haftalık Lead Performansı
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-violet-500" />6 Aylık İşe Alım
+                Trendi
               </CardTitle>
               <CardDescription className="text-sm">
-                Yeni lead'ler, nitelikli lead'ler ve konversiyonlar
+                Başvuru, mülakat ve işe alım sayıları
               </CardDescription>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
@@ -270,10 +267,10 @@ export default function LeadsPage() {
                 width="100%"
                 height={180}
               >
-                <AreaChart data={leadData}>
+                <AreaChart data={recruitmentData}>
                   <defs>
                     <linearGradient
-                      id="colorNew"
+                      id="colorApplied"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -291,7 +288,7 @@ export default function LeadsPage() {
                       />
                     </linearGradient>
                     <linearGradient
-                      id="colorQualified"
+                      id="colorInterviewed"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -299,17 +296,17 @@ export default function LeadsPage() {
                     >
                       <stop
                         offset="5%"
-                        stopColor="#10b981"
+                        stopColor="#8b5cf6"
                         stopOpacity={0.8}
                       />
                       <stop
                         offset="95%"
-                        stopColor="#10b981"
+                        stopColor="#8b5cf6"
                         stopOpacity={0}
                       />
                     </linearGradient>
                     <linearGradient
-                      id="colorConverted"
+                      id="colorHired"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -317,18 +314,18 @@ export default function LeadsPage() {
                     >
                       <stop
                         offset="5%"
-                        stopColor="#8b5cf6"
+                        stopColor="#10b981"
                         stopOpacity={0.8}
                       />
                       <stop
                         offset="95%"
-                        stopColor="#8b5cf6"
+                        stopColor="#10b981"
                         stopOpacity={0}
                       />
                     </linearGradient>
                   </defs>
                   <XAxis
-                    dataKey="day"
+                    dataKey="month"
                     stroke="#666"
                     fontSize={11}
                     tickLine={false}
@@ -345,29 +342,29 @@ export default function LeadsPage() {
                   />
                   <Area
                     type="monotone"
-                    dataKey="new"
+                    dataKey="applied"
                     stroke="#3b82f6"
                     fillOpacity={1}
-                    fill="url(#colorNew)"
-                    name="Yeni"
+                    fill="url(#colorApplied)"
+                    name="Başvuru"
                     strokeWidth={2}
                   />
                   <Area
                     type="monotone"
-                    dataKey="qualified"
-                    stroke="#10b981"
-                    fillOpacity={1}
-                    fill="url(#colorQualified)"
-                    name="Nitelikli"
-                    strokeWidth={2}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="converted"
+                    dataKey="interviewed"
                     stroke="#8b5cf6"
                     fillOpacity={1}
-                    fill="url(#colorConverted)"
-                    name="Dönüştürülen"
+                    fill="url(#colorInterviewed)"
+                    name="Mülakat"
+                    strokeWidth={2}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="hired"
+                    stroke="#10b981"
+                    fillOpacity={1}
+                    fill="url(#colorHired)"
+                    name="İşe Alınan"
                     strokeWidth={2}
                   />
                 </AreaChart>
@@ -375,12 +372,12 @@ export default function LeadsPage() {
             </CardContent>
           </Card>
 
-          {/* Lead Sources Chart */}
+          {/* Position Distribution Chart */}
           <Card className="border-border/50 bg-card/50">
             <CardHeader className="pb-3">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
-                Lead Kaynakları
+                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
+                Pozisyon Dağılımı
               </CardTitle>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
@@ -390,7 +387,7 @@ export default function LeadsPage() {
               >
                 <PieChart>
                   <Pie
-                    data={leadSourceData}
+                    data={positionData}
                     cx="50%"
                     cy="50%"
                     innerRadius={35}
@@ -398,7 +395,7 @@ export default function LeadsPage() {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {leadSourceData.map((entry, index) => (
+                    {positionData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={entry.color}
@@ -416,7 +413,7 @@ export default function LeadsPage() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="space-y-2 mt-3">
-                {leadSourceData.map((item) => (
+                {positionData.map((item) => (
                   <div
                     key={item.name}
                     className="flex items-center justify-between text-xs sm:text-sm"
@@ -436,11 +433,11 @@ export default function LeadsPage() {
           </Card>
         </div>
 
-        {/* Quick Actions - Mobile Optimized */}
+        {/* Quick Actions */}
         <Card className="border-border/50 bg-card/50">
           <CardHeader className="pb-3">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
+              <Award className="h-4 w-4 sm:h-5 sm:w-5 text-violet-500" />
               Hızlı İşlemler
             </CardTitle>
           </CardHeader>
@@ -452,23 +449,23 @@ export default function LeadsPage() {
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
                 <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Lead Ekle
+                Aday Ekle
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Toplu Arama
+                <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                Mülakat Planla
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                E-posta Gönder
+                <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                Aday Ara
               </Button>
               <Button
                 variant="outline"
@@ -476,77 +473,69 @@ export default function LeadsPage() {
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
                 <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Rapor Oluştur
+                Rapor Al
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Recent Leads - Mobile Optimized */}
+        {/* Candidate List */}
         <Card className="border-border/50 bg-card/50">
           <CardHeader className="pb-3">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
-              Son Lead'ler
+              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
+              Aday Listesi
             </CardTitle>
-            <CardDescription className="text-sm">En son eklenen müşteri adayları</CardDescription>
+            <CardDescription className="text-sm">
+              Aktif başvuru sahipleri ve durumları
+            </CardDescription>
           </CardHeader>
           <CardContent className="p-3 sm:p-6 pt-0">
             {/* Mobile View */}
             <div className="space-y-3 sm:hidden">
-              {recentLeads.map((lead) => (
+              {candidates.map((candidate) => (
                 <div
-                  key={lead.id}
+                  key={candidate.id}
                   className="p-3 rounded-lg border border-border/50 bg-background/50"
                 >
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <p className="text-sm font-medium">{lead.name}</p>
-                        <Badge
-                          variant="outline"
-                          className="text-xs"
-                        >
-                          {lead.company}
-                        </Badge>
+                        <p className="text-sm font-medium">{candidate.name}</p>
+                        <div className="flex items-center gap-1">
+                          <Star className="h-3 w-3 text-yellow-500" />
+                          <span className="text-xs">{candidate.score}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Badge
-                          variant="outline"
-                          className="text-xs"
-                        >
-                          {lead.source}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          ₺{lead.value.toLocaleString()}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Star className="h-3 w-3 text-yellow-500" />
-                        <span>Skor: {lead.score}</span>
+                      <p className="text-sm truncate mb-1">{candidate.position}</p>
+                      <div className="flex gap-2 text-xs text-muted-foreground mb-1">
+                        <span>Deneyim: {candidate.experience}</span>
                         <span>•</span>
-                        <span>{lead.lastContact}</span>
+                        <span>Başvuru: {candidate.appliedDate}</span>
                       </div>
+                      <p className="text-xs text-muted-foreground">
+                        Sorumlu: {candidate.recruiter}
+                      </p>
                     </div>
                     <Badge
-                      variant={lead.status === 'converted' ? 'default' : 'secondary'}
+                      variant={candidate.status === 'hired' ? 'default' : 'secondary'}
                       className={`text-xs shrink-0 ${
-                        lead.status === 'converted'
+                        candidate.status === 'hired'
                           ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                          : lead.status === 'qualified'
+                          : candidate.status === 'offer_sent'
                           ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                          : lead.status === 'contacted'
-                          ? 'bg-orange-500/10 text-orange-500 border-orange-500/20'
-                          : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
+                          : candidate.status === 'interview_scheduled'
+                          ? 'bg-purple-500/10 text-purple-500 border-purple-500/20'
+                          : 'bg-orange-500/10 text-orange-500 border-orange-500/20'
                       }`}
                     >
-                      {lead.status === 'converted'
-                        ? 'Dönüştürüldü'
-                        : lead.status === 'qualified'
-                        ? 'Nitelikli'
-                        : lead.status === 'contacted'
-                        ? 'İletişim Kuruldu'
-                        : 'Yeni'}
+                      {candidate.status === 'hired'
+                        ? 'İşe Alındı'
+                        : candidate.status === 'offer_sent'
+                        ? 'Teklif Gönderildi'
+                        : candidate.status === 'interview_scheduled'
+                        ? 'Mülakat Planlandı'
+                        : 'İnceleme Altında'}
                     </Badge>
                   </div>
                 </div>
@@ -558,57 +547,54 @@ export default function LeadsPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Lead ID</TableHead>
-                    <TableHead>Ad/Şirket</TableHead>
-                    <TableHead>Kaynak</TableHead>
-                    <TableHead>Değer</TableHead>
+                    <TableHead>Aday ID</TableHead>
+                    <TableHead>Ad Soyad</TableHead>
+                    <TableHead>Pozisyon</TableHead>
+                    <TableHead>Deneyim</TableHead>
                     <TableHead>Skor</TableHead>
-                    <TableHead>Son İletişim</TableHead>
+                    <TableHead>Başvuru Tarihi</TableHead>
+                    <TableHead>Mülakat Tarihi</TableHead>
+                    <TableHead>Sorumlu</TableHead>
                     <TableHead>Durum</TableHead>
                     <TableHead>İşlem</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {recentLeads.map((lead) => (
-                    <TableRow key={lead.id}>
-                      <TableCell className="font-medium">{lead.id}</TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium">{lead.name}</p>
-                          <p className="text-sm text-muted-foreground">{lead.company}</p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{lead.source}</Badge>
-                      </TableCell>
-                      <TableCell>₺{lead.value.toLocaleString()}</TableCell>
+                  {candidates.map((candidate) => (
+                    <TableRow key={candidate.id}>
+                      <TableCell className="font-medium">{candidate.id}</TableCell>
+                      <TableCell>{candidate.name}</TableCell>
+                      <TableCell>{candidate.position}</TableCell>
+                      <TableCell>{candidate.experience}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
                           <Star className="h-3 w-3 text-yellow-500" />
-                          <span>{lead.score}</span>
+                          <span>{candidate.score}</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-muted-foreground">{lead.lastContact}</TableCell>
+                      <TableCell>{candidate.appliedDate}</TableCell>
+                      <TableCell>{candidate.interviewDate || 'Planlanmadı'}</TableCell>
+                      <TableCell>{candidate.recruiter}</TableCell>
                       <TableCell>
                         <Badge
-                          variant={lead.status === 'converted' ? 'default' : 'secondary'}
+                          variant={candidate.status === 'hired' ? 'default' : 'secondary'}
                           className={
-                            lead.status === 'converted'
+                            candidate.status === 'hired'
                               ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                              : lead.status === 'qualified'
+                              : candidate.status === 'offer_sent'
                               ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                              : lead.status === 'contacted'
-                              ? 'bg-orange-500/10 text-orange-500 border-orange-500/20'
-                              : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
+                              : candidate.status === 'interview_scheduled'
+                              ? 'bg-purple-500/10 text-purple-500 border-purple-500/20'
+                              : 'bg-orange-500/10 text-orange-500 border-orange-500/20'
                           }
                         >
-                          {lead.status === 'converted'
-                            ? 'Dönüştürüldü'
-                            : lead.status === 'qualified'
-                            ? 'Nitelikli'
-                            : lead.status === 'contacted'
-                            ? 'İletişim Kuruldu'
-                            : 'Yeni'}
+                          {candidate.status === 'hired'
+                            ? 'İşe Alındı'
+                            : candidate.status === 'offer_sent'
+                            ? 'Teklif Gönderildi'
+                            : candidate.status === 'interview_scheduled'
+                            ? 'Mülakat Planlandı'
+                            : 'İnceleme Altında'}
                         </Badge>
                       </TableCell>
                       <TableCell>
@@ -625,14 +611,14 @@ export default function LeadsPage() {
                             variant="ghost"
                             className="h-7 w-7 p-0"
                           >
-                            <Phone className="h-3 w-3" />
+                            <Edit className="h-3 w-3" />
                           </Button>
                           <Button
                             size="sm"
                             variant="ghost"
                             className="h-7 w-7 p-0"
                           >
-                            <Mail className="h-3 w-3" />
+                            <Calendar className="h-3 w-3" />
                           </Button>
                         </div>
                       </TableCell>

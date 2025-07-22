@@ -13,20 +13,20 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import {
-  ArrowDown,
   ArrowUp,
-  Clock,
-  DollarSign,
+  BarChart3,
+  Calendar,
+  Copy,
+  Edit,
   Eye,
-  FileText,
   Filter,
   Mail,
-  Phone,
+  MousePointer,
   Plus,
-  Star,
-  Target,
+  Send,
   TrendingUp,
   Users,
+  Zap,
 } from 'lucide-react';
 import CountUp from 'react-countup';
 import {
@@ -41,68 +41,88 @@ import {
   YAxis,
 } from 'recharts';
 
-// Lead performance data
-const leadData = [
-  { day: 'Pzt', new: 12, qualified: 8, converted: 3, revenue: 45000 },
-  { day: 'Sal', new: 18, qualified: 14, converted: 5, revenue: 75000 },
-  { day: 'Çar', new: 15, qualified: 11, converted: 4, revenue: 60000 },
-  { day: 'Per', new: 22, qualified: 16, converted: 7, revenue: 105000 },
-  { day: 'Cum', new: 19, qualified: 13, converted: 6, revenue: 90000 },
-  { day: 'Cmt', new: 8, qualified: 6, converted: 2, revenue: 30000 },
-  { day: 'Paz', new: 5, qualified: 3, converted: 1, revenue: 15000 },
+// Campaign data
+const campaignPerformance = [
+  { day: 'Pzt', sent: 2450, opened: 1823, clicked: 456, unsubscribed: 12 },
+  { day: 'Sal', sent: 2890, opened: 2145, clicked: 578, unsubscribed: 15 },
+  { day: 'Çar', sent: 2670, opened: 1987, clicked: 523, unsubscribed: 8 },
+  { day: 'Per', sent: 3120, opened: 2342, clicked: 672, unsubscribed: 18 },
+  { day: 'Cum', sent: 2980, opened: 2205, clicked: 618, unsubscribed: 14 },
+  { day: 'Cmt', sent: 1980, opened: 1456, clicked: 378, unsubscribed: 9 },
+  { day: 'Paz', sent: 1560, opened: 1123, clicked: 289, unsubscribed: 6 },
 ];
 
-const leadSourceData = [
-  { name: 'Web Sitesi', value: 35, color: '#10b981' },
-  { name: 'Sosyal Medya', value: 28, color: '#3b82f6' },
-  { name: 'Referans', value: 20, color: '#8b5cf6' },
-  { name: 'E-posta', value: 17, color: '#f59e0b' },
+const campaignTypes = [
+  { name: 'Promosyon', value: 35, color: '#10b981' },
+  { name: 'Haber Bülteni', value: 30, color: '#3b82f6' },
+  { name: 'Ürün Duyurusu', value: 20, color: '#8b5cf6' },
+  { name: 'Hoş Geldin', value: 15, color: '#f59e0b' },
 ];
 
-const recentLeads = [
+const campaigns = [
   {
-    id: 'LD001',
-    name: 'Mehmet Kaya',
-    company: 'TechCorp',
-    source: 'Website',
-    status: 'qualified',
-    value: 25000,
-    lastContact: '2 saat önce',
-    score: 85,
+    id: 'CAM001',
+    name: 'Yaz İndirimleri 2024',
+    type: 'Promosyon',
+    status: 'sent',
+    sent: 12500,
+    opened: 8750,
+    clicked: 1563,
+    unsubscribed: 45,
+    openRate: 70.0,
+    clickRate: 17.9,
+    scheduledDate: '2024-06-15',
+    sentDate: '2024-06-15',
+    subject: "🌞 Yaz İndirimleri Başladı! %50'ye Varan İndirimler",
   },
   {
-    id: 'LD002',
-    name: 'Ayşe Demir',
-    company: 'DigitalPro',
-    source: 'Social Media',
-    status: 'new',
-    value: 18000,
-    lastContact: '4 saat önce',
-    score: 72,
+    id: 'CAM002',
+    name: 'Haftalık Haber Bülteni',
+    type: 'Haber Bülteni',
+    status: 'scheduled',
+    sent: null,
+    opened: null,
+    clicked: null,
+    unsubscribed: null,
+    openRate: null,
+    clickRate: null,
+    scheduledDate: '2024-06-22',
+    sentDate: null,
+    subject: 'Bu Hafta Neler Oldu? Haftalık Özet',
   },
   {
-    id: 'LD003',
-    name: 'Ali Yılmaz',
-    company: 'StartupX',
-    source: 'Referral',
-    status: 'contacted',
-    value: 35000,
-    lastContact: '1 gün önce',
-    score: 91,
+    id: 'CAM003',
+    name: 'Yeni Özellik Duyurusu',
+    type: 'Ürün Duyurusu',
+    status: 'draft',
+    sent: null,
+    opened: null,
+    clicked: null,
+    unsubscribed: null,
+    openRate: null,
+    clickRate: null,
+    scheduledDate: '2024-06-25',
+    sentDate: null,
+    subject: 'Yeni Özellikler Artık Burada!',
   },
   {
-    id: 'LD004',
-    name: 'Zehra Özkan',
-    company: 'BusinessHub',
-    source: 'Email',
-    status: 'converted',
-    value: 42000,
-    lastContact: '2 gün önce',
-    score: 96,
+    id: 'CAM004',
+    name: 'Hoş Geldin Serisi - 1',
+    type: 'Hoş Geldin',
+    status: 'active',
+    sent: 450,
+    opened: 342,
+    clicked: 89,
+    unsubscribed: 3,
+    openRate: 76.0,
+    clickRate: 26.0,
+    scheduledDate: 'Otomatik',
+    sentDate: 'Son 7 gün',
+    subject: 'Hoş Geldiniz! İlk Adımlarınızı Atın',
   },
 ];
 
-export default function LeadsPage() {
+export default function CampaignsPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
@@ -110,11 +130,11 @@ export default function LeadsPage() {
         <div className="flex flex-col space-y-3 sm:space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-1">
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Lead Management
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                Campaign Manager
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground">
-                Müşteri adayları yönetimi ve konversiyon takibi
+                E-posta kampanya yönetimi ve performans analizi
               </p>
             </div>
 
@@ -129,10 +149,10 @@ export default function LeadsPage() {
               </Button>
               <Button
                 size="sm"
-                className="h-9 bg-green-600 hover:bg-green-700 text-xs sm:text-sm"
+                className="h-9 bg-cyan-600 hover:bg-cyan-700 text-xs sm:text-sm"
               >
                 <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Yeni Lead
+                Kampanya Oluştur
               </Button>
             </div>
           </div>
@@ -144,23 +164,23 @@ export default function LeadsPage() {
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between">
-                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 shrink-0" />
+                  <Send className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 shrink-0" />
                   <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20 text-xs">
                     <ArrowUp className="h-2 w-2 mr-1" />
-                    12.3%
+                    15.3%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Toplam Lead</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Bu Hafta Gönderilen</p>
                   <div className="text-lg sm:text-xl font-bold">
                     <CountUp
-                      end={1247}
+                      end={17650}
                       separator=","
                     />
                   </div>
                 </div>
                 <Progress
-                  value={78}
+                  value={88}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -171,24 +191,24 @@ export default function LeadsPage() {
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between">
-                  <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
+                  <Eye className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
                   <Badge className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
                     <ArrowUp className="h-2 w-2 mr-1" />
                     8.7%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Konversiyon Oranı</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Açılma</p>
                   <div className="text-lg sm:text-xl font-bold">
                     <CountUp
-                      end={24.8}
+                      end={73.2}
                       decimals={1}
                     />
                     %
                   </div>
                 </div>
                 <Progress
-                  value={25}
+                  value={73}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -199,52 +219,48 @@ export default function LeadsPage() {
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between">
-                  <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500 shrink-0" />
-                  <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-xs">
-                    <ArrowUp className="h-2 w-2 mr-1" />
-                    15.2%
-                  </Badge>
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Lead Değeri</p>
-                  <div className="text-lg sm:text-xl font-bold">
-                    ₺
-                    <CountUp
-                      end={28500}
-                      separator=","
-                    />
-                  </div>
-                </div>
-                <Progress
-                  value={72}
-                  className="h-1.5 sm:h-2"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-border/50 bg-card/50 hover:shadow-md transition-all duration-300">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex flex-col space-y-2">
-                <div className="flex items-center justify-between">
-                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
+                  <MousePointer className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
                   <Badge className="bg-purple-500/10 text-purple-500 border-purple-500/20 text-xs">
-                    <ArrowDown className="h-2 w-2 mr-1" />
-                    18.5%
+                    <ArrowUp className="h-2 w-2 mr-1" />
+                    12.1%
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Yanıt Süresi</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Ortalama Tıklama</p>
                   <div className="text-lg sm:text-xl font-bold">
                     <CountUp
-                      end={2.4}
+                      end={19.8}
                       decimals={1}
                     />
-                    saat
+                    %
                   </div>
                 </div>
                 <Progress
-                  value={92}
+                  value={20}
+                  className="h-1.5 sm:h-2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 bg-card/50 hover:shadow-md transition-all duration-300">
+            <CardContent className="p-3 sm:p-4">
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center justify-between">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 shrink-0" />
+                  <Badge className="bg-orange-500/10 text-orange-500 border-orange-500/20 text-xs">
+                    <ArrowUp className="h-2 w-2 mr-1" />
+                    6.8%
+                  </Badge>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Aktif Kampanya</p>
+                  <div className="text-lg sm:text-xl font-bold">
+                    <CountUp end={12} />
+                  </div>
+                </div>
+                <Progress
+                  value={75}
                   className="h-1.5 sm:h-2"
                 />
               </div>
@@ -254,15 +270,15 @@ export default function LeadsPage() {
 
         {/* Charts Section - Mobile Optimized */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Lead Performance Chart */}
+          {/* Campaign Performance Chart */}
           <Card className="lg:col-span-2 border-border/50 bg-card/50">
             <CardHeader className="pb-3">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
-                Haftalık Lead Performansı
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-500" />
+                Haftalık Kampanya Performansı
               </CardTitle>
               <CardDescription className="text-sm">
-                Yeni lead'ler, nitelikli lead'ler ve konversiyonlar
+                Gönderilen, açılan, tıklanan e-posta sayıları
               </CardDescription>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
@@ -270,10 +286,10 @@ export default function LeadsPage() {
                 width="100%"
                 height={180}
               >
-                <AreaChart data={leadData}>
+                <AreaChart data={campaignPerformance}>
                   <defs>
                     <linearGradient
-                      id="colorNew"
+                      id="colorSent"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -291,7 +307,7 @@ export default function LeadsPage() {
                       />
                     </linearGradient>
                     <linearGradient
-                      id="colorQualified"
+                      id="colorOpened"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -309,7 +325,7 @@ export default function LeadsPage() {
                       />
                     </linearGradient>
                     <linearGradient
-                      id="colorConverted"
+                      id="colorClicked"
                       x1="0"
                       y1="0"
                       x2="0"
@@ -345,29 +361,29 @@ export default function LeadsPage() {
                   />
                   <Area
                     type="monotone"
-                    dataKey="new"
+                    dataKey="sent"
                     stroke="#3b82f6"
                     fillOpacity={1}
-                    fill="url(#colorNew)"
-                    name="Yeni"
+                    fill="url(#colorSent)"
+                    name="Gönderilen"
                     strokeWidth={2}
                   />
                   <Area
                     type="monotone"
-                    dataKey="qualified"
+                    dataKey="opened"
                     stroke="#10b981"
                     fillOpacity={1}
-                    fill="url(#colorQualified)"
-                    name="Nitelikli"
+                    fill="url(#colorOpened)"
+                    name="Açılan"
                     strokeWidth={2}
                   />
                   <Area
                     type="monotone"
-                    dataKey="converted"
+                    dataKey="clicked"
                     stroke="#8b5cf6"
                     fillOpacity={1}
-                    fill="url(#colorConverted)"
-                    name="Dönüştürülen"
+                    fill="url(#colorClicked)"
+                    name="Tıklanan"
                     strokeWidth={2}
                   />
                 </AreaChart>
@@ -375,12 +391,12 @@ export default function LeadsPage() {
             </CardContent>
           </Card>
 
-          {/* Lead Sources Chart */}
+          {/* Campaign Types Chart */}
           <Card className="border-border/50 bg-card/50">
             <CardHeader className="pb-3">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
-                Lead Kaynakları
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
+                Kampanya Türleri
               </CardTitle>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
@@ -390,7 +406,7 @@ export default function LeadsPage() {
               >
                 <PieChart>
                   <Pie
-                    data={leadSourceData}
+                    data={campaignTypes}
                     cx="50%"
                     cy="50%"
                     innerRadius={35}
@@ -398,7 +414,7 @@ export default function LeadsPage() {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {leadSourceData.map((entry, index) => (
+                    {campaignTypes.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={entry.color}
@@ -416,7 +432,7 @@ export default function LeadsPage() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="space-y-2 mt-3">
-                {leadSourceData.map((item) => (
+                {campaignTypes.map((item) => (
                   <div
                     key={item.name}
                     className="flex items-center justify-between text-xs sm:text-sm"
@@ -436,11 +452,11 @@ export default function LeadsPage() {
           </Card>
         </div>
 
-        {/* Quick Actions - Mobile Optimized */}
+        {/* Quick Actions */}
         <Card className="border-border/50 bg-card/50">
           <CardHeader className="pb-3">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
+              <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-500" />
               Hızlı İşlemler
             </CardTitle>
           </CardHeader>
@@ -452,101 +468,102 @@ export default function LeadsPage() {
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
                 <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Lead Ekle
+                Kampanya Oluştur
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Toplu Arama
+                <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                Şablon Kopyala
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                E-posta Gönder
+                <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                Zamanlama
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="h-10 sm:h-9 text-xs sm:text-sm"
               >
-                <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Rapor Oluştur
+                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                A/B Test
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Recent Leads - Mobile Optimized */}
+        {/* Campaign List */}
         <Card className="border-border/50 bg-card/50">
           <CardHeader className="pb-3">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
-              Son Lead'ler
+              <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
+              Kampanya Listesi
             </CardTitle>
-            <CardDescription className="text-sm">En son eklenen müşteri adayları</CardDescription>
+            <CardDescription className="text-sm">
+              Tüm e-posta kampanyaları ve performansları
+            </CardDescription>
           </CardHeader>
           <CardContent className="p-3 sm:p-6 pt-0">
             {/* Mobile View */}
             <div className="space-y-3 sm:hidden">
-              {recentLeads.map((lead) => (
+              {campaigns.map((campaign) => (
                 <div
-                  key={lead.id}
+                  key={campaign.id}
                   className="p-3 rounded-lg border border-border/50 bg-background/50"
                 >
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <p className="text-sm font-medium">{lead.name}</p>
+                        <p className="text-sm font-medium">{campaign.name}</p>
                         <Badge
                           variant="outline"
                           className="text-xs"
                         >
-                          {lead.company}
+                          {campaign.type}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Badge
-                          variant="outline"
-                          className="text-xs"
-                        >
-                          {lead.source}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          ₺{lead.value.toLocaleString()}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Star className="h-3 w-3 text-yellow-500" />
-                        <span>Skor: {lead.score}</span>
-                        <span>•</span>
-                        <span>{lead.lastContact}</span>
-                      </div>
+                      <p className="text-xs text-muted-foreground truncate mb-2">
+                        {campaign.subject}
+                      </p>
+                      {campaign.sent && (
+                        <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-1">
+                          <span>Gönderilen: {campaign.sent.toLocaleString()}</span>
+                          <span>Açılma: %{campaign.openRate}</span>
+                          <span>Açılan: {campaign.opened.toLocaleString()}</span>
+                          <span>Tıklama: %{campaign.clickRate}</span>
+                        </div>
+                      )}
+                      <p className="text-xs text-muted-foreground">
+                        {campaign.sentDate
+                          ? `Gönderildi: ${campaign.sentDate}`
+                          : `Planlandı: ${campaign.scheduledDate}`}
+                      </p>
                     </div>
                     <Badge
-                      variant={lead.status === 'converted' ? 'default' : 'secondary'}
+                      variant={campaign.status === 'sent' ? 'default' : 'secondary'}
                       className={`text-xs shrink-0 ${
-                        lead.status === 'converted'
+                        campaign.status === 'sent'
                           ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                          : lead.status === 'qualified'
+                          : campaign.status === 'active'
                           ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                          : lead.status === 'contacted'
-                          ? 'bg-orange-500/10 text-orange-500 border-orange-500/20'
+                          : campaign.status === 'scheduled'
+                          ? 'bg-purple-500/10 text-purple-500 border-purple-500/20'
                           : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
                       }`}
                     >
-                      {lead.status === 'converted'
-                        ? 'Dönüştürüldü'
-                        : lead.status === 'qualified'
-                        ? 'Nitelikli'
-                        : lead.status === 'contacted'
-                        ? 'İletişim Kuruldu'
-                        : 'Yeni'}
+                      {campaign.status === 'sent'
+                        ? 'Gönderildi'
+                        : campaign.status === 'active'
+                        ? 'Aktif'
+                        : campaign.status === 'scheduled'
+                        ? 'Planlandı'
+                        : 'Taslak'}
                     </Badge>
                   </div>
                 </div>
@@ -558,58 +575,75 @@ export default function LeadsPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Lead ID</TableHead>
-                    <TableHead>Ad/Şirket</TableHead>
-                    <TableHead>Kaynak</TableHead>
-                    <TableHead>Değer</TableHead>
-                    <TableHead>Skor</TableHead>
-                    <TableHead>Son İletişim</TableHead>
+                    <TableHead>Kampanya</TableHead>
+                    <TableHead>Tür</TableHead>
                     <TableHead>Durum</TableHead>
+                    <TableHead>Gönderilen</TableHead>
+                    <TableHead>Açılma</TableHead>
+                    <TableHead>Tıklama</TableHead>
+                    <TableHead>Tarih</TableHead>
                     <TableHead>İşlem</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {recentLeads.map((lead) => (
-                    <TableRow key={lead.id}>
-                      <TableCell className="font-medium">{lead.id}</TableCell>
+                  {campaigns.map((campaign) => (
+                    <TableRow key={campaign.id}>
                       <TableCell>
                         <div>
-                          <p className="font-medium">{lead.name}</p>
-                          <p className="text-sm text-muted-foreground">{lead.company}</p>
+                          <p className="font-medium">{campaign.name}</p>
+                          <p className="text-sm text-muted-foreground truncate max-w-[200px]">
+                            {campaign.subject}
+                          </p>
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Badge variant="outline">{lead.source}</Badge>
+                        <Badge variant="outline">{campaign.type}</Badge>
                       </TableCell>
-                      <TableCell>₺{lead.value.toLocaleString()}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <Star className="h-3 w-3 text-yellow-500" />
-                          <span>{lead.score}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">{lead.lastContact}</TableCell>
                       <TableCell>
                         <Badge
-                          variant={lead.status === 'converted' ? 'default' : 'secondary'}
+                          variant={campaign.status === 'sent' ? 'default' : 'secondary'}
                           className={
-                            lead.status === 'converted'
+                            campaign.status === 'sent'
                               ? 'bg-green-500/10 text-green-500 border-green-500/20'
-                              : lead.status === 'qualified'
+                              : campaign.status === 'active'
                               ? 'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                              : lead.status === 'contacted'
-                              ? 'bg-orange-500/10 text-orange-500 border-orange-500/20'
+                              : campaign.status === 'scheduled'
+                              ? 'bg-purple-500/10 text-purple-500 border-purple-500/20'
                               : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
                           }
                         >
-                          {lead.status === 'converted'
-                            ? 'Dönüştürüldü'
-                            : lead.status === 'qualified'
-                            ? 'Nitelikli'
-                            : lead.status === 'contacted'
-                            ? 'İletişim Kuruldu'
-                            : 'Yeni'}
+                          {campaign.status === 'sent'
+                            ? 'Gönderildi'
+                            : campaign.status === 'active'
+                            ? 'Aktif'
+                            : campaign.status === 'scheduled'
+                            ? 'Planlandı'
+                            : 'Taslak'}
                         </Badge>
+                      </TableCell>
+                      <TableCell>{campaign.sent ? campaign.sent.toLocaleString() : '-'}</TableCell>
+                      <TableCell>
+                        {campaign.openRate ? (
+                          <div className="flex items-center gap-1">
+                            <Eye className="h-3 w-3 text-green-500" />
+                            <span>{campaign.openRate}%</span>
+                          </div>
+                        ) : (
+                          '-'
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {campaign.clickRate ? (
+                          <div className="flex items-center gap-1">
+                            <MousePointer className="h-3 w-3 text-purple-500" />
+                            <span>{campaign.clickRate}%</span>
+                          </div>
+                        ) : (
+                          '-'
+                        )}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {campaign.sentDate || campaign.scheduledDate}
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-1">
@@ -625,15 +659,17 @@ export default function LeadsPage() {
                             variant="ghost"
                             className="h-7 w-7 p-0"
                           >
-                            <Phone className="h-3 w-3" />
+                            <Edit className="h-3 w-3" />
                           </Button>
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="h-7 w-7 p-0"
-                          >
-                            <Mail className="h-3 w-3" />
-                          </Button>
+                          {campaign.status === 'draft' && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="h-7 w-7 p-0"
+                            >
+                              <Send className="h-3 w-3" />
+                            </Button>
+                          )}
                         </div>
                       </TableCell>
                     </TableRow>

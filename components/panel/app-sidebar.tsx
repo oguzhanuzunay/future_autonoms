@@ -27,7 +27,7 @@ import {
   HeadphonesIcon,
   LayoutDashboard,
   Mail,
-  PollIcon as Survey,
+  PieChart as Survey,
   UserCheck,
   Users,
 } from 'lucide-react';
