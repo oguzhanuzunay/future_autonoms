@@ -31,7 +31,7 @@ const CTASection = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://n8n.netfera.com/webhook-test/form-lead', {
+      const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,15 +39,12 @@ const CTASection = () => {
         body: JSON.stringify({
           ...formData,
           phone: cleanPhone, // Send clean phone number
-          fullName: `${formData.firstName} ${formData.lastName}`,
-          type: 'corporate',
+          type: 'individual',
         }),
       });
 
       if (response.ok) {
-        toast.success(
-          'Tebrikler! 🎉 Şirketinize özel ROI analizi için uzman ekibimiz 24 saat içinde size ulaşacak.',
-        );
+        toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
         setFormData({
           firstName: '',
           lastName: '',
@@ -58,9 +55,7 @@ const CTASection = () => {
         throw new Error('Bir hata oluştu');
       }
     } catch (error) {
-      toast.error(
-        'Üzgünüz, bir hata oluştu. Lütfen bizi (555) 555-5555 numaralı telefondan arayın.',
-      );
+      toast.error('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
     } finally {
       setLoading(false);
     }
