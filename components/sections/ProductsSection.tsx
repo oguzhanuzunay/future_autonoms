@@ -584,7 +584,7 @@ export default function ProductsSection() {
               variant="secondary"
               className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
             >
-              🚀 Future Autonoms DN.AI™ Çözümleri
+              🤖 2028'de Şirketlerin %38'inde AI Agent'lar Takım Üyesi Olacak
             </Badge>
             <h2 className="text-4xl font-bold mb-4">
               Şirketiniz İçin{' '}

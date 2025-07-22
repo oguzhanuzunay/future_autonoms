@@ -69,165 +69,192 @@ export function Navigation() {
   };
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
-          : 'bg-transparent py-4',
-      )}
-    >
-      <nav className="container flex items-center justify-between px-4 md:px-8">
-        <Link
-          href="/"
-          className="flex items-center space-x-2 relative z-50"
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center"
+    <>
+      {/* AI İstatistik Alert Banner */}
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 w-full z-[60] bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white py-2 px-4"
+      >
+        <div className="container mx-auto text-center">
+          <motion.p
+            animate={{
+              opacity: [1, 0.7, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="text-xs sm:text-sm font-medium"
           >
-            <Image
-              src="/images/logo/logo.png"
-              alt="Future Autonoms"
-              width={180}
-              height={40}
-              className="h-10 w-auto dark:invert"
-              priority
-            />
-          </motion.div>
-        </Link>
+            🔥 <strong>CANLI VERİ:</strong> AI pazarı 2025'te 47 milyar USD | %88 pazarlamacı günlük
+            AI kullanıyor | %79 şirket AI Agent entegrasyonu tamamladı
+          </motion.p>
+        </div>
+      </motion.div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          {menuItems.map((item) => (
+      <header
+        className={cn(
+          'fixed w-full z-50 transition-all duration-300',
+          isScrolled
+            ? 'top-8 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
+            : 'top-8 bg-transparent py-4',
+        )}
+      >
+        <nav className="container flex items-center justify-between px-4 md:px-8">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 relative z-50"
+          >
             <motion.div
-              key={item.href}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="flex items-center"
             >
-              <Link
-                href={item.href}
-                onClick={(e) => handleScroll(e, item.href)}
-                className={cn(
-                  'text-sm font-medium transition-colors hover:text-blue-400',
-                  activeSection === item.href.slice(1) ? 'text-blue-500' : 'text-foreground/60',
-                )}
-              >
-                {item.label}
-              </Link>
+              <Image
+                src="/images/logo/logo.png"
+                alt="Future Autonoms"
+                width={180}
+                height={40}
+                className="h-10 w-auto dark:invert"
+                priority
+              />
             </motion.div>
-          ))}
+          </Link>
 
-          {/* CTA Buttons */}
-          <div className="flex items-center space-x-3">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                asChild
-                variant="outline"
-                className="border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
+            {menuItems.map((item) => (
+              <motion.div
+                key={item.href}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Link href="#contact">
-                  <Calculator className="mr-2 h-4 w-4" />
-                  Ücretsiz Analiz
+                <Link
+                  href={item.href}
+                  onClick={(e) => handleScroll(e, item.href)}
+                  className={cn(
+                    'text-sm font-medium transition-colors hover:text-blue-400',
+                    activeSection === item.href.slice(1) ? 'text-blue-500' : 'text-foreground/60',
+                  )}
+                >
+                  {item.label}
                 </Link>
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative group"
-            >
-              {/* Pulse Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse" />
+              </motion.div>
+            ))}
 
-              <Button
-                asChild
-                className="relative bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            {/* CTA Buttons */}
+            <div className="flex items-center space-x-3">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Link href="#contact">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Hemen Başlayın
-                </Link>
-              </Button>
-            </motion.div>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
+                >
+                  <Link href="#contact">
+                    <Calculator className="mr-2 h-4 w-4" />
+                    Ücretsiz Analiz
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group"
+              >
+                {/* Pulse Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse" />
+
+                <Button
+                  asChild
+                  className="relative bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <Link href="#contact">
+                    <Bot className="mr-2 h-4 w-4" />
+                    Hemen Başlayın
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative z-50 hover:bg-blue-500/10"
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative z-50 hover:bg-blue-500/10"
+                >
+                  <Menu className="h-5 w-5 text-foreground/60" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-full max-w-xs bg-background/95 backdrop-blur-lg border-blue-500/10"
               >
-                <Menu className="h-5 w-5 text-foreground/60" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full max-w-xs bg-background/95 backdrop-blur-lg border-blue-500/10"
-            >
-              <SheetHeader>
-                <SheetTitle className="text-left">Menü</SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col space-y-4 mt-8">
-                {menuItems.map((item) => (
-                  <SheetClose
-                    key={item.href}
-                    asChild
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={(e) => handleScroll(e, item.href)}
-                      className={cn(
-                        'text-lg font-medium transition-colors hover:text-blue-400 py-2',
-                        activeSection === item.href.slice(1)
-                          ? 'text-blue-500'
-                          : 'text-foreground/60',
-                      )}
+                <SheetHeader>
+                  <SheetTitle className="text-left">Menü</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col space-y-4 mt-8">
+                  {menuItems.map((item) => (
+                    <SheetClose
+                      key={item.href}
+                      asChild
                     >
-                      {item.label}
-                    </Link>
-                  </SheetClose>
-                ))}
+                      <Link
+                        href={item.href}
+                        onClick={(e) => handleScroll(e, item.href)}
+                        className={cn(
+                          'text-lg font-medium transition-colors hover:text-blue-400 py-2',
+                          activeSection === item.href.slice(1)
+                            ? 'text-blue-500'
+                            : 'text-foreground/60',
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    </SheetClose>
+                  ))}
 
-                {/* Mobile CTA Buttons */}
-                <div className="space-y-3 pt-4">
-                  <SheetClose asChild>
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="w-full border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
-                    >
-                      <Link href="#contact">
-                        <Calculator className="mr-2 h-4 w-4" />
-                        Ücretsiz Analiz
-                      </Link>
-                    </Button>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Button
-                      asChild
-                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg relative group"
-                    >
-                      <Link href="#contact">
-                        <Bot className="mr-2 h-4 w-4" />
-                        Hemen Başlayın
-                      </Link>
-                    </Button>
-                  </SheetClose>
+                  {/* Mobile CTA Buttons */}
+                  <div className="space-y-3 pt-4">
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
+                      >
+                        <Link href="#contact">
+                          <Calculator className="mr-2 h-4 w-4" />
+                          Ücretsiz Analiz
+                        </Link>
+                      </Button>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg relative group"
+                      >
+                        <Link href="#contact">
+                          <Bot className="mr-2 h-4 w-4" />
+                          Hemen Başlayın
+                        </Link>
+                      </Button>
+                    </SheetClose>
+                  </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </nav>
-    </header>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 }

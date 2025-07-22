@@ -94,9 +94,7 @@ const CTASection = () => {
       }
     } catch (error) {
       console.error('Submit error:', error);
-      toast.error(
-        'Üzgünüz, bir hata oluşturun.',
-      );
+      toast.error('Üzgünüz, bir hata oluşturun.');
     } finally {
       setLoading(false);
     }
@@ -124,7 +122,7 @@ const CTASection = () => {
               variant="secondary"
               className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
             >
-              🚀 Özel ROI Analizi
+              💼 Yöneticilerin %88'i AI Yatırımlarını Artırıyor - %79'u AI Agent Kullanıyor
             </Badge>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
               Şirketinizin AI Potansiyelini{' '}
