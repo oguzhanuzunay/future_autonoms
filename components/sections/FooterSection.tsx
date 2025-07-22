@@ -278,9 +278,9 @@ const FooterSection = () => {
               </span>
             </div>
             <p className="text-foreground/80 mb-6 max-w-md">
-              Şirketinizin DNA'sına özel AI dönüşümü ile geleceği şekillendiriyoruz. Kanıtlanmış
-              metodolojimizle %285'e varan verimlilik artışı ve %42 maliyet tasarrufu potansiyeli
-              sunuyoruz.
+              Şirketinizin DNA'sına özel AI dönüşümü ile geleceği şekillendiriyoruz. Salesforce'un
+              %84, IBM'in %40 false pozitif azaltması gibi kanıtlanmış sonuçlarla desteklenen
+              metodolojimizle başarınızı garantiliyoruz.
             </p>
 
             {/* Credibility - Compact Version */}
