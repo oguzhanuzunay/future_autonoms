@@ -26,6 +26,28 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  // AI News carousel state
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+
+  const aiNews = [
+    "🔥 CANLI VERİ: AI pazarı 2025'te 47 milyar USD'ye ulaşacak",
+    "📊 Pazarlamacıların %88'i günlük olarak yapay zeka kullanıyor",
+    "💼 Yöneticilerin %88'i AI yatırımlarını artırmayı planlıyor",
+    "🤖 Şirketlerin %79'u AI agent'larını entegre etmiş durumda",
+    "⚡ 2028'de şirketlerin %38'inde AI agent'lar takım üyesi olacak",
+    "📈 KOBİ'lerin %75'i AI ile büyük şirketlerle rekabet ediyor",
+    "🎯 Salesforce AI Agent'ları %66 talep otomasyonu sağlıyor",
+  ];
+
+  // Auto-rotate news every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [aiNews.length]);
+
   // Scroll handler for navbar background
   useEffect(() => {
     const handleScroll = () => {
@@ -70,37 +92,89 @@ export function Navigation() {
 
   return (
     <>
-      {/* AI İstatistik Alert Banner */}
+      {/* AI İstatistik Alert Banner - Rotating News */}
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 w-full z-[60] bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white py-2 px-4"
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="fixed top-0 w-full z-[60] bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white py-3 px-4 overflow-hidden group cursor-pointer"
+        onMouseEnter={() => setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length)}
       >
-        <div className="container mx-auto text-center">
-          <motion.p
-            animate={{
-              opacity: [1, 0.7, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="text-xs sm:text-sm font-medium"
-          >
-            🔥 <strong>CANLI VERİ:</strong> AI pazarı 2025'te 47 milyar USD | %88 pazarlamacı günlük
-            AI kullanıyor | %79 şirket AI Agent entegrasyonu tamamladı
-          </motion.p>
+        <div className="container mx-auto text-center relative">
+          <div className="relative h-6 overflow-hidden">
+            {aiNews.map((news, index) => (
+              <motion.p
+                key={index}
+                initial={{ y: 50, opacity: 0 }}
+                animate={{
+                  y: index === currentNewsIndex ? 0 : index < currentNewsIndex ? -50 : 50,
+                  opacity: index === currentNewsIndex ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: 'easeInOut',
+                }}
+                className="absolute inset-0 flex items-center justify-center text-xs sm:text-sm font-medium"
+              >
+                {news}
+              </motion.p>
+            ))}
+          </div>
+
+          {/* Progress indicators */}
+          <div className="flex justify-center mt-1 space-x-1">
+            {aiNews.map((_, index) => (
+              <motion.div
+                key={index}
+                className={`h-1 w-6 rounded-full transition-all duration-300 cursor-pointer ${
+                  index === currentNewsIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'
+                }`}
+                animate={{
+                  scaleX: index === currentNewsIndex ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setCurrentNewsIndex(index)}
+                whileHover={{ scaleY: 1.5 }}
+                whileTap={{ scale: 0.9 }}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Enhanced flowing background animation */}
+        <motion.div
+          animate={{
+            x: [-200, 200],
+            opacity: [0.05, 0.25, 0.05],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/20"
+          style={{ transform: 'skewX(-12deg)' }}
+        />
+
+        {/* Additional shimmer effect on hover */}
+        <motion.div
+          initial={{ x: '-100%' }}
+          animate={{ x: '100%' }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        />
       </motion.div>
 
       <header
         className={cn(
           'fixed w-full z-50 transition-all duration-300',
           isScrolled
-            ? 'top-8 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
-            : 'top-8 bg-transparent py-4',
+            ? 'top-12 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
+            : 'top-12 bg-transparent py-4',
         )}
       >
         <nav className="container flex items-center justify-between px-4 md:px-8">
