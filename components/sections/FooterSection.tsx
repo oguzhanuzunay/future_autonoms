@@ -353,25 +353,115 @@ const FooterSection = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-foreground/60">
               <div className="space-y-1">
                 <div className="font-medium text-purple-400">Araştırma Kurumları</div>
-                <div>eMarketer Research</div>
-                <div>PwC AI Survey</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.emarketer.com/content/study--ai-agents-hit-68--adoption-big-business',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  eMarketer Research
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  PwC AI Survey
+                </button>
                 <div>Capgemini Reports</div>
               </div>
               <div className="space-y-1">
                 <div className="font-medium text-purple-400">Teknoloji Medyası</div>
-                <div>ITProSource</div>
-                <div>Business Insider</div>
-                <div>CreoleStudios</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.itpro.com/technology/artificial-intelligence/humans-must-remain-at-the-center-of-the-story-marc-benioff-isnt-convinced-about-the-threat-of-ai-job-losses-and-salesforces-adoption-journey-might-just-prove-his-point',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  ITProSource
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.businessinsider.com/lowes-ai-retail-store-layout-product-trends-customer-experience-2025-7',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Business Insider
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  CreoleStudios
+                </button>
               </div>
               <div className="space-y-1">
                 <div className="font-medium text-purple-400">Kurumsal Case Studies</div>
-                <div>Salesforce Agentforce</div>
-                <div>IBM AIOps</div>
-                <div>Mass General Brigham</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.itpro.com/technology/artificial-intelligence/humans-must-remain-at-the-center-of-the-story-marc-benioff-isnt-convinced-about-the-threat-of-ai-job-losses-and-salesforces-adoption-journey-might-just-prove-his-point',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Salesforce Agentforce
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  IBM AIOps
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Mass General Brigham
+                </button>
               </div>
               <div className="space-y-1">
                 <div className="font-medium text-purple-400">Güvenlik Araştırmaları</div>
-                <div>Darktrace Security</div>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                      '_blank',
+                    )
+                  }
+                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
+                >
+                  Darktrace Security
+                </button>
                 <div>Cybersecurity Reports</div>
                 <div>Medical AI Cases</div>
               </div>

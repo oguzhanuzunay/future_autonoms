@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between w-full overflow-x-hidden pt-8">
+    <main className="flex min-h-screen flex-col items-center justify-between w-full overflow-x-hidden pt-16 sm:pt-14">
       <Navigation />
       <div className="w-full">
         <HeroSection />

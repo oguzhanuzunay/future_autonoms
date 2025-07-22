@@ -77,8 +77,8 @@ export function Navigation() {
         className={cn(
           'fixed w-full z-50 transition-all duration-300',
           isScrolled
-            ? 'top-8 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
-            : 'top-8 bg-transparent py-4',
+            ? 'top-16 sm:top-14 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
+            : 'top-16 sm:top-14 bg-transparent py-4',
         )}
       >
         <nav className="container flex items-center justify-between px-4 md:px-8">
