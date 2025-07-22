@@ -290,8 +290,8 @@ export default function FeaturesSection() {
               Geleceğin İş Gücü{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 Şimdi Hazır
-              </span>
-            </h2>
+            </span>
+          </h2>
 
             <div className="text-lg font-semibold text-purple-300 mb-6">
               7/24 Çalışan AI Asistanlarıyla İşletmenizi Zirveye Taşıyın
@@ -309,15 +309,15 @@ export default function FeaturesSection() {
                 rekabet avantajı
               </span>{' '}
               <span className="text-white">sağlar.</span>
-            </p>
-          </motion.div>
+          </p>
+        </motion.div>
 
           {/* DN.AI™ Process Grid */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-16">
             {transformationProcess.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -392,18 +392,18 @@ export default function FeaturesSection() {
                         {service.stats.value}
                       </div>
                       <div className="text-sm text-gray-400">{service.stats.label}</div>
-                    </div>
+                </div>
                     <ul className="space-y-3 mb-6">
                       {service.benefits.map((benefit, idx) => (
-                        <li
-                          key={idx}
+                    <li
+                      key={idx}
                           className="flex items-center text-gray-300"
-                        >
+                    >
                           <CheckCircle className="w-5 h-5 text-purple-400 mr-2 flex-shrink-0" />
                           <span className="text-sm">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    </li>
+                  ))}
+                </ul>
                     <div className="space-y-3 pt-4 border-t border-purple-500/10">
                       <div className="flex items-center justify-center text-sm text-gray-400">
                         <Users className="w-4 h-4 mr-2 text-purple-400" />
@@ -418,9 +418,9 @@ export default function FeaturesSection() {
                         </Badge>
                       </div>
                     </div>
-                  </Card>
-                </motion.div>
-              ))}
+              </Card>
+            </motion.div>
+          ))}
             </motion.div>
           </TabsContent>
         </Tabs>
@@ -549,7 +549,7 @@ export default function FeaturesSection() {
             >
               <span className="block sm:inline">AI Dönüşümünü Başlat</span>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform hidden sm:inline-block" />
-            </Button>
+          </Button>
           </motion.div>
         </motion.div>
       </div>

@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, Calculator, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,28 +25,18 @@ const menuItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-
-  // AI News carousel state
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
+  // AI İstatistik Haberleri
   const aiNews = [
-    "🔥 CANLI VERİ: AI pazarı 2025'te 47 milyar USD'ye ulaşacak",
-    "📊 Pazarlamacıların %88'i günlük olarak yapay zeka kullanıyor",
-    "💼 Yöneticilerin %88'i AI yatırımlarını artırmayı planlıyor",
-    "🤖 Şirketlerin %79'u AI agent'larını entegre etmiş durumda",
-    "⚡ 2028'de şirketlerin %38'inde AI agent'lar takım üyesi olacak",
-    "📈 KOBİ'lerin %75'i AI ile büyük şirketlerle rekabet ediyor",
-    "🎯 Salesforce AI Agent'ları %66 talep otomasyonu sağlıyor",
+    "🔥 AI pazarı 2025'te 47 milyar USD | %88 pazarlamacı günlük AI kullanıyor | %79 şirket AI Agent entegrasyonu tamamladı",
+    "⚡ Salesforce AI Agent'ları %66 talep otomasyonu sağlıyor | %84 destek sorgusu otomatik çözülüyor",
+    '🚀 IBM AIOps Agent ile false pozitifler %40 azaldı | MTTR %30 iyileşti | 200+ kurumsal müşteri',
+    "💼 Yöneticilerin %88'i AI yatırımlarını artırıyor | Mass General %60 belgeleme süresini kısalttı",
+    "📊 KOBİ'lerin %75'i AI ile büyük şirketlerle rekabet ediyor | Adobe reklamda %40 maliyet düşürdü",
+    "🎯 2028'de şirketlerin %38'inde AI Agent'lar takım üyesi olacak | Docket %83 operasyonel maliyet tasarrufu",
   ];
-
-  // Auto-rotate news every 4 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [aiNews.length]);
 
   // Scroll handler for navbar background
   useEffect(() => {
@@ -56,6 +46,17 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // News rotation
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length);
+    }, 4000); // Her 4 saniyede bir değişir
+
+    return () => clearInterval(interval);
+  }, [aiNews.length, isPaused]);
 
   // Intersection Observer for active section
   useEffect(() => {
@@ -92,89 +93,78 @@ export function Navigation() {
 
   return (
     <>
-      {/* AI İstatistik Alert Banner - Rotating News */}
+      {/* AI İstatistik Alert Banner */}
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="fixed top-0 w-full z-[60] bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white py-3 px-4 overflow-hidden group cursor-pointer"
-        onMouseEnter={() => setCurrentNewsIndex((prev) => (prev + 1) % aiNews.length)}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 w-full z-[60] overflow-hidden"
       >
-        <div className="container mx-auto text-center relative">
-          <div className="relative h-6 overflow-hidden">
-            {aiNews.map((news, index) => (
-              <motion.p
-                key={index}
-                initial={{ y: 50, opacity: 0 }}
-                animate={{
-                  y: index === currentNewsIndex ? 0 : index < currentNewsIndex ? -50 : 50,
-                  opacity: index === currentNewsIndex ? 1 : 0,
-                }}
-                transition={{
-                  duration: 0.6,
-                  ease: 'easeInOut',
-                }}
-                className="absolute inset-0 flex items-center justify-center text-xs sm:text-sm font-medium"
-              >
-                {news}
-              </motion.p>
-            ))}
-          </div>
+        {/* Animasyonlu Geçişli Arka Plan */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600"
+          animate={{
+            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{
+            backgroundSize: '200% 200%',
+          }}
+        />
 
-          {/* Progress indicators */}
-          <div className="flex justify-center mt-1 space-x-1">
-            {aiNews.map((_, index) => (
+        {/* İçerik */}
+        <div
+          className="relative z-10 py-2 px-4"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className="container mx-auto text-center">
+            <AnimatePresence mode="wait">
               <motion.div
-                key={index}
-                className={`h-1 w-6 rounded-full transition-all duration-300 cursor-pointer ${
-                  index === currentNewsIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'
-                }`}
-                animate={{
-                  scaleX: index === currentNewsIndex ? 1 : 0.5,
-                }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setCurrentNewsIndex(index)}
-                whileHover={{ scaleY: 1.5 }}
-                whileTap={{ scale: 0.9 }}
-              />
-            ))}
+                key={currentNewsIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-xs sm:text-sm font-medium text-white"
+              >
+                <strong>CANLI VERİ:</strong> {aiNews[currentNewsIndex]}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Progress Bar */}
+            <div className="mt-1 w-full max-w-md mx-auto">
+              <div className="h-0.5 bg-white/20 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-white rounded-full"
+                  initial={{ width: '0%' }}
+                  animate={{
+                    width: isPaused ? `${((currentNewsIndex + 1) / aiNews.length) * 100}%` : '100%',
+                  }}
+                  transition={{
+                    duration: isPaused ? 0.3 : 4,
+                    ease: isPaused ? 'easeOut' : 'linear',
+                    repeat: isPaused ? 0 : Infinity,
+                    repeatDelay: 0.5,
+                  }}
+                  key={`progress-${currentNewsIndex}`}
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Enhanced flowing background animation */}
-        <motion.div
-          animate={{
-            x: [-200, 200],
-            opacity: [0.05, 0.25, 0.05],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/20"
-          style={{ transform: 'skewX(-12deg)' }}
-        />
-
-        {/* Additional shimmer effect on hover */}
-        <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: '100%' }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        />
       </motion.div>
 
       <header
         className={cn(
           'fixed w-full z-50 transition-all duration-300',
           isScrolled
-            ? 'top-12 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
-            : 'top-12 bg-transparent py-4',
+            ? 'top-8 bg-background/80 backdrop-blur-md border-b border-blue-500/10 py-2'
+            : 'top-8 bg-transparent py-4',
         )}
       >
         <nav className="container flex items-center justify-between px-4 md:px-8">
