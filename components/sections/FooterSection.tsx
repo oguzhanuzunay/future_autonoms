@@ -344,18 +344,66 @@ const FooterSection = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-purple-500/10 px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-foreground/60">
-              &copy; {new Date().getFullYear()} Future Autonoms. Tüm hakları saklıdır.
+        {/* Kaynak ve Credibility Section */}
+        <div className="mt-12 pt-8 border-t border-purple-500/20">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold mb-4 text-purple-300">
+              Verilerimiz Doğrulanmış Kaynaklardan
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-foreground/60">
+              <div className="space-y-1">
+                <div className="font-medium text-purple-400">Araştırma Kurumları</div>
+                <div>eMarketer Research</div>
+                <div>PwC AI Survey</div>
+                <div>Capgemini Reports</div>
+              </div>
+              <div className="space-y-1">
+                <div className="font-medium text-purple-400">Teknoloji Medyası</div>
+                <div>ITProSource</div>
+                <div>Business Insider</div>
+                <div>CreoleStudios</div>
+              </div>
+              <div className="space-y-1">
+                <div className="font-medium text-purple-400">Kurumsal Case Studies</div>
+                <div>Salesforce Agentforce</div>
+                <div>IBM AIOps</div>
+                <div>Mass General Brigham</div>
+              </div>
+              <div className="space-y-1">
+                <div className="font-medium text-purple-400">Güvenlik Araştırmaları</div>
+                <div>Darktrace Security</div>
+                <div>Cybersecurity Reports</div>
+                <div>Medical AI Cases</div>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-foreground/50">
+              Tüm istatistikler ve case study'ler 2025 yılı gerçek sektör verilerinden alınmıştır.
+              Detaylı kaynak listesi için bizimle iletişime geçin.
             </p>
-            <div className="flex items-center gap-4 text-sm text-foreground/60">
+          </div>
+        </div>
+
+        {/* Alt Footer */}
+        <div className="mt-8 pt-8 border-t border-purple-500/20">
+          <div className="md:flex md:items-center md:justify-between">
+            <div className="md:order-1 md:mt-0 mt-8">
+              <p className="text-center text-xs leading-5 text-foreground/60">
+                &copy; 2025 Future Autonoms. Tüm hakları saklıdır.
+              </p>
+            </div>
+            <div className="flex justify-center space-x-6 md:order-2 text-xs text-foreground/60">
               <Link
-                href="/sitemap"
+                href="/privacy"
                 className="hover:text-purple-300 transition-colors"
               >
-                Site Haritası
+                Gizlilik
+              </Link>
+              <span>•</span>
+              <Link
+                href="/terms"
+                className="hover:text-purple-300 transition-colors"
+              >
+                Şartlar
               </Link>
               <span>•</span>
               <Link

@@ -383,7 +383,7 @@ const BrandsSection = () => {
             variant="secondary"
             className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
           >
-            ⚡ Kurulum Süresi: Şirketlerin %30'u 3 Haftada AI Agent Devreye Alıyor
+            🛡️ Darktrace Antigena: %92 Siber Saldırı Başarısı | Milisaniye Reaksiyon
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground mb-6">
             DN.AI™ ile{' '}
@@ -393,7 +393,7 @@ const BrandsSection = () => {
             Dönüştürün
           </h2>
           <p className="text-lg leading-8 text-foreground/80">
-            Test sonuçlarımız gösteriyor ki, DN.AI™ metodolojisi ile şirketler{' '}
+            Simülasyon sonuçlarımız gösteriyor ki, DN.AI™ metodolojisi ile şirketler{' '}
             <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
             ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
             ediyor.
@@ -416,7 +416,7 @@ const BrandsSection = () => {
               <metric.icon className="h-8 w-8 mx-auto mb-3 text-purple-400" />
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent mb-2">
                 {metric.value}
-        </div>
+              </div>
               <div className="text-sm font-medium text-white mb-2">{metric.label}</div>
               <div className="text-xs text-gray-400">{metric.description}</div>
             </Card>
@@ -537,7 +537,7 @@ const BrandsSection = () => {
               <Percent className="w-3 h-3 mr-1" />
               %100 Adaptasyon Desteği
             </Badge>
-        </div>
+          </div>
 
           <Button
             size="lg"

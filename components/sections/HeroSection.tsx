@@ -165,7 +165,7 @@ const HeroSection = () => {
           className="mb-8 animate-pulse bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 border-purple-500/30"
         >
           <Rocket className="mr-1 h-3 w-3" />
-          <span>📈 AI Pazarı 2025'te 47 Milyar USD - %88 Pazarlamacı Günlük AI Kullanıyor</span>
+          <span>📊 AI Agent'lar %68 Büyük Şirket Benimsedi - eMarketer Research 2025</span>
         </Badge>
 
         <div
