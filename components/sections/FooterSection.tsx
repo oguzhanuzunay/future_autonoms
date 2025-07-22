@@ -265,20 +265,116 @@ const FooterSection = () => {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="px-6 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Ana Footer İçerik */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 px-6 py-8">
+          {/* Sol Taraf - Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">FA</span>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                Future Autonoms
+              </span>
+            </div>
+            <p className="text-foreground/80 mb-6 max-w-md">
+              Şirketinizin DNA'sına özel AI dönüşümü ile geleceği şekillendiriyoruz. %98 başarı
+              oranımızla 500+ şirketi dönüştürdük.
+            </p>
+
+            {/* Credibility - Compact Version */}
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold mb-3 text-purple-300">Doğrulanmış Kaynaklar</h4>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <div className="font-medium text-purple-400 mb-1">Araştırma</div>
+                  <div className="space-y-1">
+                    <button
+                      onClick={() =>
+                        window.open(
+                          'https://www.emarketer.com/content/study--ai-agents-hit-68--adoption-big-business',
+                          '_blank',
+                        )
+                      }
+                      className="block hover:text-purple-300 transition-colors cursor-pointer text-left text-foreground/60 hover:text-purple-300"
+                    >
+                      eMarketer
+                    </button>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          'https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html',
+                          '_blank',
+                        )
+                      }
+                      className="block hover:text-purple-300 transition-colors cursor-pointer text-left text-foreground/60 hover:text-purple-300"
+                    >
+                      PwC Survey
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium text-purple-400 mb-1">Case Studies</div>
+                  <div className="space-y-1">
+                    <button
+                      onClick={() =>
+                        window.open(
+                          'https://www.itpro.com/technology/artificial-intelligence/humans-must-remain-at-the-center-of-the-story-marc-benioff-isnt-convinced-about-the-threat-of-ai-job-losses-and-salesforces-adoption-journey-might-just-prove-his-point',
+                          '_blank',
+                        )
+                      }
+                      className="block hover:text-purple-300 transition-colors cursor-pointer text-left text-foreground/60 hover:text-purple-300"
+                    >
+                      Salesforce
+                    </button>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
+                          '_blank',
+                        )
+                      }
+                      className="block hover:text-purple-300 transition-colors cursor-pointer text-left text-foreground/60 hover:text-purple-300"
+                    >
+                      IBM AIOps
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p className="mt-3 text-xs text-foreground/50">
+                Gerçek sektör verileri ve case study'ler
+              </p>
+            </div>
+
+            <div className="flex space-x-4">
+              {navigation.social.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-purple-300 transition-colors"
+                >
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Sağ Taraf - Navigation Links */}
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Çözümler</h3>
-              <ul
-                role="list"
-                className="space-y-4"
-              >
+              <ul className="space-y-4">
                 {navigation.solutions.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
+                      className="text-sm text-foreground/60 hover:text-foreground/80 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -288,15 +384,12 @@ const FooterSection = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Şirket</h3>
-              <ul
-                role="list"
-                className="space-y-4"
-              >
+              <ul className="space-y-4">
                 {navigation.company.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-foreground/60 hover:text-purple-300 transition-colors"
+                      className="text-sm text-foreground/60 hover:text-foreground/80 transition-colors"
                     >
                       {item.name}
                     </Link>
@@ -306,10 +399,7 @@ const FooterSection = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Yasal</h3>
-              <ul
-                role="list"
-                className="space-y-4"
-              >
+              <ul className="space-y-4">
                 {navigation.legal.map((item) => (
                   <li key={item.name}>
                     <LegalDialog
@@ -321,217 +411,23 @@ const FooterSection = () => {
                 ))}
               </ul>
             </div>
-            <div>
-              <h3 className="text-sm font-semibold mb-6 text-purple-300">Sosyal Medya</h3>
-              <div className="flex space-x-4">
-                {navigation.social.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground/60 hover:text-purple-300 transition-colors"
-                  >
-                    <span className="sr-only">{item.name}</span>
-                    <item.icon
-                      className="h-6 w-6"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Kaynak ve Credibility Section */}
-        <div className="mt-12 pt-8 border-t border-purple-500/20">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold mb-4 text-purple-300">
-              Verilerimiz Doğrulanmış Kaynaklardan
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-foreground/60">
-              <div className="space-y-1">
-                <div className="font-medium text-purple-400">Araştırma Kurumları</div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.emarketer.com/content/study--ai-agents-hit-68--adoption-big-business',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  eMarketer Research
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  PwC AI Survey
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.capgemini.com/research/generative-ai-in-organizations/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Capgemini Reports
-                </button>
-              </div>
-              <div className="space-y-1">
-                <div className="font-medium text-purple-400">Teknoloji Medyası</div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.itpro.com/technology/artificial-intelligence/humans-must-remain-at-the-center-of-the-story-marc-benioff-isnt-convinced-about-the-threat-of-ai-job-losses-and-salesforces-adoption-journey-might-just-prove-his-point',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  ITProSource
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.businessinsider.com/lowes-ai-retail-store-layout-product-trends-customer-experience-2025-7',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Business Insider
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  CreoleStudios
-                </button>
-              </div>
-              <div className="space-y-1">
-                <div className="font-medium text-purple-400">Kurumsal Case Studies</div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.itpro.com/technology/artificial-intelligence/humans-must-remain-at-the-center-of-the-story-marc-benioff-isnt-convinced-about-the-threat-of-ai-job-losses-and-salesforces-adoption-journey-might-just-prove-his-point',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Salesforce Agentforce
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  IBM AIOps
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Mass General Brigham
-                </button>
-              </div>
-              <div className="space-y-1">
-                <div className="font-medium text-purple-400">Güvenlik Araştırmaları</div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Darktrace Security
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.cybersecurityinsiders.com/ai-security-research/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Cybersecurity Reports
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.creolestudios.com/real-world-ai-agent-case-studies/',
-                      '_blank',
-                    )
-                  }
-                  className="block hover:text-purple-300 transition-colors cursor-pointer text-left"
-                >
-                  Medical AI Cases
-                </button>
-              </div>
-            </div>
-            <p className="mt-4 text-xs text-foreground/50">
-              Tüm istatistikler ve case study'ler 2025 yılı gerçek sektör verilerinden alınmıştır.
-              Detaylı kaynak listesi için bizimle iletişime geçin.
-            </p>
           </div>
         </div>
 
         {/* Alt Footer */}
-        <div className="mt-8 pt-8 border-t border-purple-500/20">
+        <div className="border-t border-purple-500/20 px-6 py-6">
           <div className="md:flex md:items-center md:justify-between">
             <div className="md:order-1 md:mt-0 mt-8">
               <p className="text-center text-xs leading-5 text-foreground/60">
                 &copy; 2025 Future Autonoms. Tüm hakları saklıdır.
               </p>
             </div>
-            <div className="flex justify-center space-x-6 md:order-2 text-xs text-foreground/60">
-              <Link
-                href="/privacy"
-                className="hover:text-purple-300 transition-colors"
-              >
-                Gizlilik
-              </Link>
-              <span>•</span>
-              <Link
-                href="/terms"
-                className="hover:text-purple-300 transition-colors"
-              >
-                Şartlar
-              </Link>
-              <span>•</span>
-              <Link
-                href="/accessibility"
-                className="hover:text-purple-300 transition-colors"
-              >
-                Erişilebilirlik
-              </Link>
+            <div className="mt-4 md:order-2 md:mt-0">
+              <div className="flex justify-center space-x-6 md:order-2">
+                <span className="text-xs text-foreground/60">
+                  Yapay Zeka ile Geleceği Şekillendiriyoruz
+                </span>
+              </div>
             </div>
           </div>
         </div>
