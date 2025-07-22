@@ -529,7 +529,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <CardContent className="space-y-6">
             {/* Özellikler */}
             <div className="space-y-4">
-              {product.features.map((feature, index) => (
+        {product.features.map((feature, index) => (
                 <HoverCard key={index}>
                   <HoverCardTrigger asChild>
                     <div className="flex items-center gap-3 cursor-help">
@@ -553,7 +553,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             <div className="space-y-2 pt-4">
               {product.benefits.map((benefit, index) => (
                 <div
-                  key={index}
+            key={index}
                   className="flex items-center gap-2 text-sm text-foreground/60"
                 >
                   <Shield className="h-4 w-4 text-purple-400" />
@@ -588,12 +588,12 @@ export default function ProductsSection() {
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
             <Badge
               variant="secondary"
               className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
@@ -611,18 +611,18 @@ export default function ProductsSection() {
               <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
               ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
               ediyor.
-            </p>
-          </motion.div>
+          </p>
+        </motion.div>
 
           {/* Ürün Kartları Grid */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((product) => (
-              <ProductCard
+            <ProductCard
                 key={product.id}
-                product={product}
-              />
-            ))}
-          </div>
+              product={product}
+            />
+          ))}
+        </div>
 
           {/* Alt CTA */}
           <motion.div
@@ -657,8 +657,8 @@ export default function ProductsSection() {
               Şirketinize en uygun çözüm için uzman ekibimiz 24 saat içinde size ulaşsın
             </p>
           </motion.div>
-        </div>
-      </section>
+      </div>
+    </section>
     </>
   );
 }
