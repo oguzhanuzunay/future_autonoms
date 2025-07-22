@@ -95,7 +95,7 @@ const CTASection = () => {
     } catch (error) {
       console.error('Submit error:', error);
       toast.error(
-        'Üzgünüz, bir hata oluştu. Lütfen bizi (555) 555-5555 numaralı telefondan arayın.',
+        'Üzgünüz, bir hata oluşturun.',
       );
     } finally {
       setLoading(false);

@@ -1,20 +1,11 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight,
   BarChart3,
   Brain,
   Calculator,
@@ -24,7 +15,6 @@ import {
   Info,
   LineChart,
   Network,
-  Percent,
   Shield,
   Sparkles,
   TrendingUp,
@@ -495,7 +485,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             product.id === 'enterprise'
               ? 'border-purple-500/45 hover:border-purple-500/65 bg-card/90'
               : 'border-purple-500/20 hover:border-purple-500/40 bg-card/80'
-          } transition-all duration-300 backdrop-blur-sm`}
+          } transition-all duration-300 backdrop-blur-sm flex flex-col`}
         >
           {product.badge && (
             <Badge
@@ -508,8 +498,8 @@ const ProductCard = ({ product }: { product: Product }) => {
               {product.id === 'enterprise' && <span className="ml-1 text-yellow-300">✨</span>}
             </Badge>
           )}
-          <CardHeader className={product.id === 'enterprise' ? 'pt-0' : ''}>
-            <CardTitle className="text-2xl flex items-center gap-2">
+          <CardHeader className={`${product.id === 'enterprise' ? 'pt-0' : ''} pb-4`}>
+            <CardTitle className="text-xl flex items-center gap-2">
               {product.title}
               <TooltipProvider>
                 <Tooltip>
@@ -522,18 +512,18 @@ const ProductCard = ({ product }: { product: Product }) => {
                 </Tooltip>
               </TooltipProvider>
             </CardTitle>
-            <CardDescription className="min-h-[3rem] text-foreground/80">
+            <CardDescription className="text-sm text-foreground/80 line-clamp-2">
               {product.description}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="flex-1 space-y-4">
             {/* Özellikler */}
-            <div className="space-y-4">
-        {product.features.map((feature, index) => (
+            <div className="space-y-3">
+              {product.features.slice(0, 3).map((feature, index) => (
                 <HoverCard key={index}>
                   <HoverCardTrigger asChild>
                     <div className="flex items-center gap-3 cursor-help">
-                      <feature.icon className="h-5 w-5 text-purple-400" />
+                      <feature.icon className="h-4 w-4 text-purple-400" />
                       <span className="text-sm text-foreground/80">{feature.text}</span>
                     </div>
                   </HoverCardTrigger>
@@ -547,30 +537,26 @@ const ProductCard = ({ product }: { product: Product }) => {
                   </HoverCardContent>
                 </HoverCard>
               ))}
+              {product.features.length > 3 && (
+                <div className="text-xs text-foreground/60 flex items-center gap-1">
+                  <span>+{product.features.length - 3} daha fazla özellik</span>
+                </div>
+              )}
             </div>
 
-            {/* Faydalar */}
-            <div className="space-y-2 pt-4">
-              {product.benefits.map((benefit, index) => (
+            {/* Faydalar - sadece ilk 3 tanesini göster */}
+            <div className="space-y-2 pt-2">
+              {product.benefits.slice(0, 3).map((benefit, index) => (
                 <div
-            key={index}
-                  className="flex items-center gap-2 text-sm text-foreground/60"
+                  key={index}
+                  className="flex items-center gap-2 text-xs text-foreground/60"
                 >
-                  <Shield className="h-4 w-4 text-purple-400" />
+                  <Shield className="h-3 w-3 text-purple-400" />
                   <span>{benefit}</span>
                 </div>
               ))}
             </div>
           </CardContent>
-          <CardFooter className={product.id === 'enterprise' ? 'pt-2' : 'pt-3'}>
-            <Button
-              className="w-full h-12 text-lg font-medium hover:scale-[1.02] transition-transform bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white"
-              size="lg"
-            >
-              {product.cta}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </CardFooter>
         </Card>
       </div>
     </motion.div>
@@ -581,19 +567,19 @@ export default function ProductsSection() {
   return (
     <>
       <style>{styles}</style>
-      <section className="py-20 relative overflow-hidden bg-background/95">
+      <section className="py-16 relative overflow-hidden bg-background/95">
         {/* Gradient Background */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="w-[500px] h-[500px] bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5 rounded-full blur-3xl animate-pulse" />
         </div>
 
         <div className="container mx-auto px-4 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
             <Badge
               variant="secondary"
               className="mb-4 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 text-purple-300 hover:bg-purple-500/20"
@@ -611,54 +597,33 @@ export default function ProductsSection() {
               <span className="font-semibold text-purple-300">ortalama %285 verimlilik artışı</span>{' '}
               ve <span className="font-semibold text-purple-300">%42 maliyet tasarrufu</span> elde
               ediyor.
-          </p>
-        </motion.div>
+            </p>
+          </motion.div>
 
           {/* Ürün Kartları Grid */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((product) => (
-            <ProductCard
+              <ProductCard
                 key={product.id}
-              product={product}
-            />
-          ))}
-        </div>
+                product={product}
+              />
+            ))}
+          </div>
 
-          {/* Alt CTA */}
+          {/* Alt açıklama */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mt-16"
           >
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <Badge
-                variant="outline"
-                className="border-green-500/30 text-green-400"
-              >
-                <Calculator className="w-3 h-3 mr-1" />
-                Ücretsiz ROI Analizi
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-blue-500/30 text-blue-400"
-              >
-                <Shield className="w-3 h-3 mr-1" />6 Ay Garanti
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-purple-500/30 text-purple-300"
-              >
-                <Percent className="w-3 h-3 mr-1" />
-                %100 Adaptasyon
-              </Badge>
-            </div>
             <p className="text-foreground/60 text-sm">
-              Şirketinize en uygun çözüm için uzman ekibimiz 24 saat içinde size ulaşsın
+              Her AI çözümümüz şirketinizin DNA'sına uygun olarak özelleştirilir ve %100 adaptasyon
+              garantisi ile sunulur
             </p>
           </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
     </>
   );
 }
