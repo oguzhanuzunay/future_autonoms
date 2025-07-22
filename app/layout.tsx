@@ -21,6 +21,29 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+  if (!clerkPublishableKey) {
+    // Fallback without Clerk for development/preview
+    return (
+      <html
+        lang="en"
+        suppressHydrationWarning
+      >
+        <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <ClerkProvider>
       <html

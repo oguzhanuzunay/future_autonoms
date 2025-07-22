@@ -4,9 +4,11 @@ import { AppSidebar } from '@/components/panel/app-sidebar';
 import { Button } from '@/components/ui/button';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
-import { Bell, Menu, Search } from 'lucide-react';
+import { Bell, Menu, Search, User } from 'lucide-react';
 
 export default function PanelLayout({ children }: { children: React.ReactNode }) {
+  const hasClerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -53,13 +55,23 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
 
                 {/* User Button */}
                 <div className="scale-90 sm:scale-100">
-                  <UserButton
-                    appearance={{
-                      elements: {
-                        avatarBox: 'h-8 w-8 sm:h-9 sm:w-9',
-                      },
-                    }}
-                  />
+                  {hasClerkKey ? (
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          avatarBox: 'h-8 w-8 sm:h-9 sm:w-9',
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 sm:h-9 sm:w-9 rounded-full"
+                    >
+                      <User className="h-4 w-4" />
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
