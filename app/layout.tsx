@@ -92,6 +92,17 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
     yandex: 'your-yandex-verification-code',
+    other: {
+      'msvalidate.01': 'your-bing-verification-code',
+      'baidu-site-verification': 'your-baidu-verification-code',
+      'naver-site-verification': 'your-naver-verification-code',
+    },
+  },
+  other: {
+    'msapplication-TileColor': '#9333ea',
+    'msapplication-config': '/browserconfig.xml',
+    'yandex-verification': 'your-yandex-verification-code',
+    alexaVerifyID: 'your-alexa-verification-code',
   },
 };
 
@@ -116,6 +127,100 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="dns-prefetch"
           href="https://www.google-analytics.com"
         />
+
+        {/* Search Engine Verification Tags */}
+        <meta
+          name="google-site-verification"
+          content="your-google-verification-code"
+        />
+        <meta
+          name="msvalidate.01"
+          content="your-bing-verification-code"
+        />
+        <meta
+          name="yandex-verification"
+          content="your-yandex-verification-code"
+        />
+        <meta
+          name="baidu-site-verification"
+          content="your-baidu-verification-code"
+        />
+        <meta
+          name="naver-site-verification"
+          content="your-naver-verification-code"
+        />
+        <meta
+          name="alexaVerifyID"
+          content="your-alexa-verification-code"
+        />
+
+        {/* Bing/Microsoft specific */}
+        <meta
+          name="msapplication-TileColor"
+          content="#9333ea"
+        />
+        <meta
+          name="msapplication-config"
+          content="/browserconfig.xml"
+        />
+        <meta
+          name="msapplication-square70x70logo"
+          content="/mstile-70x70.png"
+        />
+        <meta
+          name="msapplication-square150x150logo"
+          content="/mstile-150x150.png"
+        />
+        <meta
+          name="msapplication-wide310x150logo"
+          content="/mstile-310x150.png"
+        />
+        <meta
+          name="msapplication-square310x310logo"
+          content="/mstile-310x310.png"
+        />
+
+        {/* Yandex specific */}
+        <meta
+          name="yandex-verification"
+          content="your-yandex-verification-code"
+        />
+        <meta
+          property="ya:ovs:upload_date"
+          content="2025-01-01"
+        />
+        <meta
+          property="ya:ovs:adult"
+          content="false"
+        />
+
+        {/* DuckDuckGo and privacy-focused search engines */}
+        <meta
+          name="referrer"
+          content="origin-when-cross-origin"
+        />
+        <meta
+          name="robots"
+          content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
+        />
+
+        {/* International SEO */}
+        <link
+          rel="alternate"
+          hrefLang="tr"
+          href="https://futureautonoms.com/"
+        />
+        <link
+          rel="alternate"
+          hrefLang="en"
+          href="https://futureautonoms.com/en/"
+        />
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href="https://futureautonoms.com/"
+        />
+
         <meta
           name="theme-color"
           content="#9333ea"
