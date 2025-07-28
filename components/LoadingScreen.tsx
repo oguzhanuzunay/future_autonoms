@@ -24,11 +24,11 @@ export function LoadingScreen() {
         <div className="relative animate-pulse">
           {!logoError ? (
             <Image
-              src="/logo.png"
+              src="/images/logo/logo.png"
               alt="Future Autonoms"
               width={120}
               height={80}
-              className="object-contain"
+              className="object-contain invert"
               priority
               onError={() => setLogoError(true)}
             />
