@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { AlertBanner } from '@/components/ui/alert-banner';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -67,12 +68,32 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const GOOGLE_ADS_ID = 'AW-17405729324';
+
   return (
     <html
       lang="tr"
       className="dark"
       suppressHydrationWarning
     >
+      <head>
+        {/* Google Ads Tracking */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-ads-config"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ADS_ID}');
+          `}
+        </Script>
+      </head>
       <body className={`${inter.className} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
