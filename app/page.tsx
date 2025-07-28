@@ -14,11 +14,22 @@ import { useEffect } from 'react';
 
 export default function Home() {
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100, // Offset (in px) from the top of the page when calculating scroll position
-    });
+    // Delay AOS initialization to prevent loading issues
+    const timer = setTimeout(() => {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50,
+        easing: 'ease-out',
+        delay: 0,
+        disable: 'mobile', // Disable on mobile for better performance
+      });
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      AOS.refresh();
+    };
   }, []);
 
   const structuredData = {

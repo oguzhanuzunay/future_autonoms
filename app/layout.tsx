@@ -1,3 +1,4 @@
+import { LoadingScreen } from '@/components/LoadingScreen';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AlertBanner } from '@/components/ui/alert-banner';
 import type { Metadata } from 'next';
@@ -77,6 +78,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        {/* Prevent theme flicker */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('future-autonoms-theme') === 'light' || 
+                    (!localStorage.getItem('future-autonoms-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                  document.documentElement.classList.remove('dark')
+                } else {
+                  document.documentElement.classList.add('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+
         {/* Google Ads Tracking */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
@@ -94,16 +111,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className={`${inter.className} font-sans antialiased`}>
+      <body
+        className={`${inter.className} font-sans antialiased`}
+        style={{ visibility: 'visible' }}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+          enableSystem={false}
+          disableTransitionOnChange={true}
           storageKey="future-autonoms-theme"
         >
           <AlertBanner />
           {children}
+          <LoadingScreen />
         </ThemeProvider>
       </body>
     </html>

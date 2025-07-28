@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  /* Prevent flash of unstyled content */
+  html {
+    color-scheme: dark;
+  }
+
+  /* Smooth page transitions */
+  * {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  /* Prevent layout shift during loading */
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
