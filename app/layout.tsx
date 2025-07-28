@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/theme-provider';
 import { AlertBanner } from '@/components/ui/alert-banner';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -68,12 +69,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="tr"
+      className="dark"
       suppressHydrationWarning
     >
       <body className={`${inter.className} font-sans antialiased`}>
-        <AlertBanner />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="future-autonoms-theme"
+        >
+          <AlertBanner />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
