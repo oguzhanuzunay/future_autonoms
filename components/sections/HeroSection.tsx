@@ -35,6 +35,7 @@ const HeroSection = () => {
     phone: '+90', // Default to Turkey
   });
   const [loading, setLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
@@ -46,38 +47,80 @@ const HeroSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) return;
 
-    // Remove any spaces or special characters from phone number
+    // Form validation
+    if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) {
+      toast.error('Lütfen tüm alanları doldurun.');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Lütfen geçerli bir e-posta adresi girin.');
+      return;
+    }
+
+    // Phone validation (should have at least 10 digits)
     const cleanPhone = formData.phone.replace(/\D/g, '');
+    if (cleanPhone.length < 10) {
+      toast.error('Lütfen geçerli bir telefon numarası girin.');
+      return;
+    }
 
     setLoading(true);
+    setSubmitStatus('idle');
+
     try {
-      const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
+      console.log('Submitting form data:', { ...formData, phone: cleanPhone, type: 'individual' });
+
+      const response = await fetch('https://n8n.netfera.com/webhook-test/lead-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
-          phone: cleanPhone, // Send clean phone number
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: cleanPhone,
+          fullName: `${formData.firstName} ${formData.lastName}`,
           type: 'individual',
+          source: 'hero-form',
+          timestamp: new Date().toISOString(),
         }),
       });
 
+      console.log('Response status:', response.status);
+      const responseData = await response.text();
+      console.log('Response data:', responseData);
+
       if (response.ok) {
-        toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
+        setSubmitStatus('success');
+        toast.success('🎉 Başvurunuz başarıyla alındı! En kısa sürede size dönüş yapacağız.');
+
+        // Reset form
         setFormData({
           firstName: '',
           lastName: '',
           email: '',
           phone: '+90',
         });
+
+        // Reset status after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
       } else {
-        throw new Error('Bir hata oluştu');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
-      toast.error('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      toast.error(
+        '❌ Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya info@futureautonoms.com adresine e-posta gönderin.',
+      );
+
+      // Reset error status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     } finally {
       setLoading(false);
     }
@@ -404,9 +447,17 @@ const HeroSection = () => {
             type="submit"
             className={cn(
               'group relative w-full overflow-hidden rounded-lg',
-              'bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600',
-              'px-8 py-3 text-white transition-all',
-              'hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 hover:scale-105',
+              submitStatus === 'success'
+                ? 'bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600'
+                : submitStatus === 'error'
+                ? 'bg-gradient-to-r from-red-600 via-rose-600 to-pink-600'
+                : 'bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600',
+              'px-8 py-3 text-white transition-all duration-300',
+              submitStatus === 'success'
+                ? 'hover:from-green-700 hover:via-emerald-700 hover:to-teal-700'
+                : submitStatus === 'error'
+                ? 'hover:from-red-700 hover:via-rose-700 hover:to-pink-700'
+                : 'hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 hover:scale-105',
               'shadow-lg shadow-purple-500/25',
               'disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100',
             )}
@@ -414,7 +465,20 @@ const HeroSection = () => {
           >
             <span className="relative flex items-center justify-center">
               {loading ? (
-                'İşleniyor...'
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  İşleniyor...
+                </>
+              ) : submitStatus === 'success' ? (
+                <>
+                  <Check className="mr-2 h-4 w-4" />
+                  Başarıyla Gönderildi!
+                </>
+              ) : submitStatus === 'error' ? (
+                <>
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Tekrar Deneyin
+                </>
               ) : (
                 <>
                   Ücretsiz AI Dönüşüm Analizi
@@ -424,12 +488,39 @@ const HeroSection = () => {
             </span>
           </Button>
 
+          {/* Status Messages */}
           <div className="text-center space-y-2">
-            <p className="text-xs text-gray-400 flex items-center justify-center">
-              <Check className="mr-1 h-3 w-3 text-green-400" />
-              Ücretsiz analiz ve dönüşüm planı
-            </p>
-            <p className="text-xs text-purple-300 font-medium">⚡ Sadece 3 kontenjan kaldı</p>
+            {submitStatus === 'success' && (
+              <div className="animate-pulse bg-green-500/10 border border-green-500/30 rounded-lg p-3 text-green-300">
+                <div className="flex items-center justify-center space-x-2">
+                  <Check className="h-4 w-4" />
+                  <span className="text-sm font-medium">
+                    Form başarıyla gönderildi! 24 saat içinde dönüş yapacağız.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="animate-pulse bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-300">
+                <div className="flex items-center justify-center space-x-2">
+                  <span className="h-4 w-4">❌</span>
+                  <span className="text-sm font-medium">
+                    Bağlantı hatası. Tekrar deneyin veya info@futureautonoms.com
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {submitStatus === 'idle' && (
+              <>
+                <p className="text-xs text-gray-400 flex items-center justify-center">
+                  <Check className="mr-1 h-3 w-3 text-green-400" />
+                  Ücretsiz analiz ve dönüşüm planı
+                </p>
+                <p className="text-xs text-purple-300 font-medium">⚡ Sadece 3 kontenjan kaldı</p>
+              </>
+            )}
           </div>
         </form>
       </div>
