@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     console.log('API Route received:', body);
 
     // Forward request to N8N webhook
-    const response = await fetch('https://n8n.netfera.com/webhook-test/lead-form', {
+    const response = await fetch('https://n8n.netfera.com/webhook/lead-form', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
