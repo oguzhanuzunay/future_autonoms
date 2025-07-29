@@ -16,7 +16,7 @@ const CTASection = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    companyEmail: '',
+    email: '',
     phone: '+90', // Default to Turkey
   });
   const [loading, setLoading] = useState(false);
@@ -25,14 +25,14 @@ const CTASection = () => {
     e.preventDefault();
     console.log('Form submitted!', formData);
 
-    if (!formData.firstName || !formData.lastName || !formData.companyEmail || !formData.phone) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast.error('Lütfen tüm alanları doldurun.');
       return;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.companyEmail)) {
+    if (!emailRegex.test(formData.email)) {
       toast.error('Lütfen geçerli bir e-posta adresi girin.');
       return;
     }
@@ -81,7 +81,7 @@ const CTASection = () => {
           setFormData({
             firstName: '',
             lastName: '',
-            companyEmail: '',
+            email: '',
             phone: '+90',
           });
         } else {
@@ -195,16 +195,16 @@ const CTASection = () => {
               </div>
               <div>
                 <Label
-                  htmlFor="companyEmail"
+                  htmlFor="email"
                   className="text-base"
                 >
                   Kurumsal E-posta
                 </Label>
                 <Input
                   type="email"
-                  id="companyEmail"
-                  value={formData.companyEmail}
-                  onChange={(e) => setFormData({ ...formData, companyEmail: e.target.value })}
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                   placeholder="isim@sirket.com"
                   className="mt-2 h-12 bg-card border-purple-500/20 focus:border-purple-500/40"

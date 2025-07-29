@@ -1,6 +1,6 @@
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { ThemeProvider } from '@/components/theme-provider';
-import { AlertBanner } from '@/components/ui/alert-banner';
+import { Toaster } from '@/components/ui/sonner';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Şirketinizin DNA'sına özel AI dönüşümü ile %285 verimlilik artışı, %42 maliyet tasarrufu. Salesforce %84, IBM %40 başarı oranlarıyla kanıtlanmış DN.AI™ metodolojisi. Ücretsiz ROI analizi.",
   keywords:
     'AI dönüşümü, yapay zeka, dijital dönüşüm, AI agent, kurumsal AI, DN.AI, Future Autonoms, Salesforce AI, IBM AIOps, verimlilik artışı, maliyet tasarrufu',
-  authors: [{ name: 'Future Autonoms' }],
+  authors: [{ name: 'Future Autonoms', url: 'https://futureautonoms.com' }],
   creator: 'Future Autonoms',
   publisher: 'Future Autonoms',
   formatDetection: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Future Autonoms - Şirketinizin DNA'sına Özel AI Dönüşümü",
     description:
-      'Salesforce %84, IBM %40 başarı oranlarıyla kanıtlanmış DN.AI™ metodolojisi ile şirketinizi dönüştürün. %285 verimlilik artışı garantisi.',
+      'Salesforce %84, IBM %40 başarı oranlarıyla kanıtlanmış DN.AI™ metodolojisi ile %285 verimlilik artışı.',
     url: 'https://futureautonoms.com',
     siteName: 'Future Autonoms',
     images: [
@@ -122,9 +122,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange={true}
           storageKey="future-autonoms-theme"
         >
-          <AlertBanner />
           {children}
           <LoadingScreen />
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            duration={5000}
+          />
         </ThemeProvider>
       </body>
     </html>

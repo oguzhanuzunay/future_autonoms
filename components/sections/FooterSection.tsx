@@ -371,47 +371,47 @@ const FooterSection = () => {
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Çözümler</h3>
               <ul className="space-y-4">
-                {navigation.solutions.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
+              {navigation.solutions.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
                       className="text-sm text-foreground/60 hover:text-foreground/80 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Şirket</h3>
               <ul className="space-y-4">
-                {navigation.company.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
+              {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
                       className="text-sm text-foreground/60 hover:text-foreground/80 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
             <div>
               <h3 className="text-sm font-semibold mb-6 text-purple-300">Yasal</h3>
               <ul className="space-y-4">
-                {navigation.legal.map((item) => (
-                  <li key={item.name}>
+              {navigation.legal.map((item) => (
+                <li key={item.name}>
                     <LegalDialog
                       title={legalContent[item.content].title}
                       content={legalContent[item.content].content}
                       trigger={item.name}
                     />
-                  </li>
-                ))}
-              </ul>
-            </div>
+                </li>
+              ))}
+            </ul>
+          </div>
           </div>
         </div>
 

@@ -8,7 +8,6 @@ export function LoadingScreen() {
   const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
-    // Hide loading screen after initial render
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 500);
@@ -33,7 +32,6 @@ export function LoadingScreen() {
               onError={() => setLogoError(true)}
             />
           ) : (
-            // Fallback logo
             <div className="w-32 h-20 flex items-center justify-center">
               <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 FUTURE

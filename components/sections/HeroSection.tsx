@@ -46,7 +46,10 @@ const HeroSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) return;
+    if (!formData.email || !formData.firstName || !formData.lastName || !formData.phone) {
+      toast.error('Lütfen tüm alanları doldurun.');
+      return;
+    }
 
     // Remove any spaces or special characters from phone number
     const cleanPhone = formData.phone.replace(/\D/g, '');
@@ -68,7 +71,10 @@ const HeroSection = () => {
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success) {
-          toast.success('Başvurunuz alındı! Size en kısa sürede dönüş yapacağız.');
+          toast.success('Başvurunuz başarıyla alındı! Size en kısa sürede dönüş yapacağız.', {
+            description: 'AI dönüşüm analiziniz hazırlanıyor...',
+            duration: 5000,
+          });
           setFormData({
             firstName: '',
             lastName: '',
@@ -76,14 +82,23 @@ const HeroSection = () => {
             phone: '+90',
           });
         } else {
-          throw new Error(responseData.error || 'Submission failed');
+          toast.error('Başvuru gönderilemedi. Lütfen daha sonra tekrar deneyin.', {
+            description: responseData.error || 'Bir hata oluştu',
+            duration: 5000,
+          });
         }
       } else {
         const errorData = await response.json();
-        throw new Error(`HTTP ${response.status}: ${errorData.error || 'Unknown error'}`);
+        toast.error('Başvuru gönderilemedi. Lütfen daha sonra tekrar deneyin.', {
+          description: `HTTP ${response.status}: ${errorData.error || 'Bilinmeyen hata'}`,
+          duration: 5000,
+        });
       }
     } catch (error) {
-      toast.error('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+      toast.error('Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin.', {
+        description: 'Form gönderilemedi',
+        duration: 5000,
+      });
     } finally {
       setLoading(false);
     }

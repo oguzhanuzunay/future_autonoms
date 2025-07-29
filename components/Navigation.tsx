@@ -90,7 +90,7 @@ export function Navigation() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center"
-            >
+          >
               <Image
                 src="/images/logo/logo.png"
                 alt="Future Autonoms"
@@ -110,7 +110,7 @@ export function Navigation() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link
+          <Link
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
                   className={cn(
@@ -119,7 +119,7 @@ export function Navigation() {
                   )}
                 >
                   {item.label}
-                </Link>
+          </Link>
               </motion.div>
             ))}
 
@@ -137,7 +137,7 @@ export function Navigation() {
                   <Link href="#contact">
                     <Calculator className="mr-2 h-4 w-4" />
                     Ücretsiz Analiz
-                  </Link>
+          </Link>
                 </Button>
               </motion.div>
               <motion.div
@@ -159,7 +159,7 @@ export function Navigation() {
                 </Button>
               </motion.div>
             </div>
-          </div>
+      </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden">
@@ -186,7 +186,7 @@ export function Navigation() {
                       key={item.href}
                       asChild
                     >
-                      <Link
+            <Link
                         href={item.href}
                         onClick={(e) => handleScroll(e, item.href)}
                         className={cn(
@@ -197,7 +197,7 @@ export function Navigation() {
                         )}
                       >
                         {item.label}
-                      </Link>
+            </Link>
                     </SheetClose>
                   ))}
 
@@ -208,11 +208,11 @@ export function Navigation() {
                         asChild
                         variant="outline"
                         className="w-full border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5 text-blue-500"
-                      >
+            >
                         <Link href="#contact">
                           <Calculator className="mr-2 h-4 w-4" />
                           Ücretsiz Analiz
-                        </Link>
+            </Link>
                       </Button>
                     </SheetClose>
                     <SheetClose asChild>
@@ -223,7 +223,7 @@ export function Navigation() {
                         <Link href="#contact">
                           <Bot className="mr-2 h-4 w-4" />
                           Hemen Başlayın
-                        </Link>
+            </Link>
                       </Button>
                     </SheetClose>
                   </div>
@@ -231,7 +231,7 @@ export function Navigation() {
               </SheetContent>
             </Sheet>
           </div>
-        </nav>
+    </nav>
       </header>
     </>
   );
